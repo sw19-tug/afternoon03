@@ -11,7 +11,7 @@ public class Vocab
       english_translation = english;
     }
 
-    public String germanTranslation()
+    public String getGermanTranslation()
     {
        return german_translation;
     }
@@ -19,5 +19,13 @@ public class Vocab
     public String getEnglishTranslation()
     {
         return english_translation;
+    }
+
+    public int getRating() { return -1; }
+
+    public void setRating(int rating){}
+    public int changeRating()
+    {
+        return -1;
     }
 }
