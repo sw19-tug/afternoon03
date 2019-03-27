@@ -32,10 +32,15 @@ public class AddVocabActivity extends AppCompatActivity {
                 EditText first_language = (EditText) findViewById(R.id.et_first_lang);
                 EditText second_language = (EditText) findViewById(R.id.et_second_lang);
                 Vocab vocab = new Vocab(first_language.getText().toString(),second_language.getText().toString());
-                vocabulary.addVocab(vocab);
-                Toast.makeText(getApplicationContext(), "succeed: " + first_language.getText() + " " + second_language.getText(), Toast.LENGTH_LONG).show();
-                finish();
+                if(first_language.getText().toString().isEmpty() || second_language.getText().toString().isEmpty()){
+                    Toast.makeText(getApplicationContext(), "error: at least one input is empty!", Toast.LENGTH_LONG).show();
+                }
 
+                else{
+                Toast.makeText(getApplicationContext(), "succeed: " + first_language.getText() + " " + second_language.getText(), Toast.LENGTH_LONG).show();
+                vocabulary.addVocab(vocab);
+                finish();
+                }
             }
         });
     }
