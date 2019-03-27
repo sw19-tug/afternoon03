@@ -1,23 +1,27 @@
 package at.tugraz.ist.swe.teachingassistant;
 
+import java.util.Vector;
+
 public class Vocab
 {
-    private String german_translation;
-    private String english_translation;
+    //rating
+    private Vector<Word> translation_table;
 
-    public Vocab(String german, String english)
-    {
-      german_translation = german;
-      english_translation = english;
-    }
+    public Vocab()
+    { }
 
-    public String germanTranslation()
+    public String getTranslationByLanguage(String lang)
     {
-       return german_translation;
-    }
+        for (Word w : translation_table)
+        {
+            if (w.getLang().equals(lang.toLowerCase()))
+            {
+                return w.getText();
 
-    public String getEnglishTranslation()
-    {
-        return english_translation;
-    }
+            }
+        }
+        // // TODO: error, no translation found
+        return null;
+    };
 }
+
