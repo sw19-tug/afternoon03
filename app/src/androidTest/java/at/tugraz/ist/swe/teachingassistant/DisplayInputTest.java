@@ -1,14 +1,10 @@
 package at.tugraz.ist.swe.teachingassistant;
 
-import android.content.Context;
-import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-
-import static org.junit.Assert.*;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -34,7 +30,7 @@ public class DisplayInputTest {
 
     @Test
     public void testAddInterface() {
-        onView(withId(R.id.tv_add_head)).check(matches(isDisplayed()));
+        onView(withId(R.id.btn_listadd)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_first_lang)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_second_lang)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_save_translation)).check(matches(isDisplayed()));
