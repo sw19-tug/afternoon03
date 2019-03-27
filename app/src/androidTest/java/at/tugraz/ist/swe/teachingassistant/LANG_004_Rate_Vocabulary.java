@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 @RunWith(AndroidJUnit4.class)
 public class LANG_004_Rate_Vocabulary {
     @Test
-    public void testInputRating()
+    /*public void testInputRating()
     {
         int rating = 3;
         Vocab vocab = new Vocab("test","test");
@@ -42,7 +42,7 @@ public class LANG_004_Rate_Vocabulary {
     public void testFilterRating()
     {
 
-    }
+    }*/
 
 
 }
