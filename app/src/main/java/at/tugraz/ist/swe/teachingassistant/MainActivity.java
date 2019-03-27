@@ -21,8 +21,19 @@ public class MainActivity extends AppCompatActivity {
         AddListViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, AddListActivity.class));
+                Intent intent = new Intent(MainActivity.this, AddVocabActivity.class);
+                startActivity(intent);
             }
         });
+
     }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        Vocabulary vocabulary = Vocabulary.getInstance();
+        //vocabulary.printVocab();
+    }
+
 }
