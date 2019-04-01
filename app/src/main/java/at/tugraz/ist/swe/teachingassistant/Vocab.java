@@ -19,14 +19,20 @@ public class Vocab {
         return null;
     }
 
-    ;
-
     public Vector<Word> getTranslation_table() {
         return translation_table;
     }
 
     public void setTranslation_table(Vector<Word> translations) {
         translation_table = translations;
+    }
+
+    public int getRating() { return -1; }
+
+    public void setRating(int rating){}
+    public int changeRating()
+    {
+        return -1;
     }
 }
 
