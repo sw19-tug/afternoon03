@@ -25,17 +25,16 @@ public class AddVocabActivity extends AppCompatActivity {
         AddListViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
 
-            public void onClick(View v)
-            {
-                Vocabulary vocabulary = Vocabulary.getInstance();
+            public void onClick(View v) {
+                VocabularManger vocabulary = VocabularManger.getInstance();
 
                 EditText first_language = (EditText) findViewById(R.id.et_first_lang);
                 EditText second_language = (EditText) findViewById(R.id.et_second_lang);
-                Vocab vocab = new Vocab(first_language.getText().toString(),second_language.getText().toString());
-                vocabulary.addVocab(vocab);
+                Word word1 = new Word(first_language.getText().toString(), "en");
+                Word word2 = new Word(second_language.getText().toString(), "fi");
+                vocabulary.addVocab(word1, word2);
                 Toast.makeText(getApplicationContext(), "succeed: " + first_language.getText() + " " + second_language.getText(), Toast.LENGTH_LONG).show();
                 finish();
-
             }
         });
     }

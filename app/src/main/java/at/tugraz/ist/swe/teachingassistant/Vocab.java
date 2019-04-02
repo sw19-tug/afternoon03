@@ -1,24 +1,30 @@
 package at.tugraz.ist.swe.teachingassistant;
 
-public class Vocab
-{
-    private String german_translation;
-    private String english_translation;
+import java.util.Vector;
 
-    public Vocab(String german, String english)
-    {
-      german_translation = german;
-      english_translation = english;
+public class Vocab {
+    //rating
+    private Vector<Word> translation_table;
+
+    public Vocab() {
     }
 
-    public String getGermanTranslation()
-    {
-       return german_translation;
+    public String getTranslationByLanguage(String lang) {
+        for (Word w : translation_table) {
+            if (w.getLang().equals(lang.toLowerCase())) {
+                return w.getText();
+
+            }
+        }
+        return null;
     }
 
-    public String getEnglishTranslation()
-    {
-        return english_translation;
+    public Vector<Word> getTranslation_table() {
+        return translation_table;
+    }
+
+    public void setTranslation_table(Vector<Word> translations) {
+        translation_table = translations;
     }
 
     public int getRating() { return -1; }
@@ -29,3 +35,4 @@ public class Vocab
         return -1;
     }
 }
+
