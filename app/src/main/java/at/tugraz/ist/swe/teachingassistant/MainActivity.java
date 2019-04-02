@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         configureAddListViewButton();
+        configureExportDialog();
     }
 
     private void configureAddListViewButton() {
@@ -23,6 +24,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, AddVocabActivity.class);
                 startActivity(intent);
+            }
+        });
+
+    }
+
+    private void configureExportDialog() {
+        Button AddListViewButton = (Button) findViewById(R.id.btn_export);
+        AddListViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExportDialog exportDialog = new ExportDialog();
+                exportDialog.show(getSupportFragmentManager(), "Export Dialog");
             }
         });
 
