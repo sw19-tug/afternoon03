@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.lang.invoke.VolatileCallSite;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -34,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart()
     {
         super.onStart();
-        VocabularManger manager= VocabularManger.getInstance();
+        VocabularManager manager= VocabularManager.getInstance();
         //vocabulary.printVocab();
     }
 

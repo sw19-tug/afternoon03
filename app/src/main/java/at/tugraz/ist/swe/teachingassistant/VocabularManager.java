@@ -2,20 +2,19 @@ package at.tugraz.ist.swe.teachingassistant;
 
 import android.util.Log;
 
-import java.util.List;
 import java.util.Vector;
 
-public class VocabularManger {
-    private static VocabularManger instance;
+public class VocabularManager {
+    private static VocabularManager instance;
     private Vector<Vocab> vocabs;
 
-    private VocabularManger() {
+    private VocabularManager() {
         vocabs = new Vector<>();
     }
 
-    public static VocabularManger getInstance() {
+    public static VocabularManager getInstance() {
         if (instance == null) {
-            instance = new VocabularManger();
+            instance = new VocabularManager();
         }
         return instance;
     }
@@ -45,5 +44,9 @@ public class VocabularManger {
             }
         }
         return words;
+    }
+
+    public int export(String filename){
+        return 0;
     }
 }
