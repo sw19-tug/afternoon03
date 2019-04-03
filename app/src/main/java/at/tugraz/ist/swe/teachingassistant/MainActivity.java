@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.lang.invoke.VolatileCallSite;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -16,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         configureAddListViewButton();
+        configureExportDialog();
     }
 
     private void configureAddListViewButton() {
@@ -30,11 +29,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void configureExportDialog() {
+        Button AddListViewButton = (Button) findViewById(R.id.btn_export);
+        AddListViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ExportDialog exportDialog = new ExportDialog();
+                exportDialog.show(getSupportFragmentManager(), "Export Dialog");
+            }
+        });
+
+    }
+
     @Override
     protected void onStart()
     {
         super.onStart();
-        VocabularManger manager= VocabularManger.getInstance();
+        VocabularManager manager= VocabularManager.getInstance();
         //vocabulary.printVocab();
     }
 
