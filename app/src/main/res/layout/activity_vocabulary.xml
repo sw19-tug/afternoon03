@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Todo change the layout -->
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".VocabularyActivity">
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:text="Add Vocabulary"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="16dp" />
+
+
+    <ListView
+        android:id="@+id/first_language_list"
+        android:layout_width="191dp"
+        android:layout_height="573dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="58dp">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/second_language_list"
+        android:layout_width="wrap_content"
+        android:layout_height="542dp"
+        app:layout_constraintStart_toEndOf="@+id/first_language_list"
+        tools:layout_editor_absoluteY="60dp"></ListView>
+</android.support.constraint.ConstraintLayout>
