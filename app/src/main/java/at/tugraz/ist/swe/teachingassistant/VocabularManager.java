@@ -2,6 +2,7 @@ package at.tugraz.ist.swe.teachingassistant;
 
 import android.util.Log;
 
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class VocabularManager {
@@ -37,6 +38,17 @@ public class VocabularManager {
 
     public Vector<String> getWordsFromLanguage(String langCode) {
         Vector<String> words = new Vector<>();
+        for (Vocab vocab : vocabs) {
+            String word = vocab.getTranslationByLanguage(langCode);
+            if (word != null) {
+                words.add(word);
+            }
+        }
+        return words;
+    }
+
+    public ArrayList<String> getWordsFromLanguageString(String langCode) {
+        ArrayList<String> words = new ArrayList<>();
         for (Vocab vocab : vocabs) {
             String word = vocab.getTranslationByLanguage(langCode);
             if (word != null) {

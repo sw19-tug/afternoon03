@@ -38,8 +38,17 @@ public class LANG_002_Test {
     }
 
     @Test
-    public void buttonsAreVisible(){
+    public void testMainActivityButtonIsVisible(){
+        onView(withId(R.id.btn_learning)).check(matches(isDisplayed()));
+    }
+
+    @Test
+    public void testLearningInterfaceVisible(){
+        onView(withId(R.id.btn_learning)).perform(click());
+        onView(withId(R.id.vocabList)).check(matches(isDisplayed()));
+        onView(withId(R.id.learningTitle)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_changeLanguage)).check(matches(isDisplayed()));
+        onView(withId(R.id.languageTitle)).check(matches(isDisplayed()));
     }
 
     @Test
