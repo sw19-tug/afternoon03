@@ -59,6 +59,10 @@ public class LearningListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(LearningListActivity.this, LearningInterfaceActivity.class);
+                Bundle b = new Bundle();
+                b.putInt("position", position);
+                b.putString("current_lang", currentLang);
+                intent.putExtras(b);
                 startActivity(intent);
             }
         });
