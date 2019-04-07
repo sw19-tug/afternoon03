@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -23,6 +24,7 @@ public class LearningListActivity extends AppCompatActivity {
         TextView language_title = (TextView) findViewById(R.id.languageTitle);
         language_title.setText(currentLang != "en" ? "Finnish" : "English");
         configureAddListViewButton();
+        configureListViewItems();
     }
     @Override
     protected void onResume() {
@@ -30,10 +32,8 @@ public class LearningListActivity extends AppCompatActivity {
 
         VocabularManager vocabulary = VocabularManager.getInstance();
         ArrayAdapter adapter_language_list = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
-        Toast.makeText(getApplicationContext(), "size: " + adapter_language_list.getCount(), Toast.LENGTH_LONG).show();
         ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
         listView_first_language.setAdapter(adapter_language_list);
-
 
     }
 
@@ -48,13 +48,22 @@ public class LearningListActivity extends AppCompatActivity {
 
                 VocabularManager vocabulary = VocabularManager.getInstance();
                 ArrayAdapter adapter_language_list = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
-                Toast.makeText(getApplicationContext(), "size: " + adapter_language_list.getCount(), Toast.LENGTH_LONG).show();
                 ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
                 listView_first_language.setAdapter(adapter_language_list);
             }
         });
-
     }
+    private void configureListViewItems() {
+        ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
+        listView_first_language.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(LearningListActivity.this, LearningInterfaceActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
 
 
 }
