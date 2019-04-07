@@ -30,12 +30,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureExportDialog() {
-        Button AddListViewButton = (Button) findViewById(R.id.btn_export);
-        AddListViewButton.setOnClickListener(new View.OnClickListener() {
+        Button ExportViewButton = (Button) findViewById(R.id.btn_export);
+        ExportViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExportDialog exportDialog = new ExportDialog();
-                exportDialog.show(getSupportFragmentManager(), "Export Dialog");
+                Intent intent = new Intent(MainActivity.this, ExportDialog.class);
+                startActivity(intent);
             }
         });
 

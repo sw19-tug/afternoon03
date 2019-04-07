@@ -9,8 +9,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:theme="@android:style/Theme.Holo.Dialog" android:name=".ExportDialog">
-        </activity>
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,6 +18,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddVocabActivity">
+        </activity>
+        <activity android:name=".ExportDialog">
         </activity>
     </application>
 
