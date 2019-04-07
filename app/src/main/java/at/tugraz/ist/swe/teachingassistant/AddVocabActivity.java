@@ -25,7 +25,8 @@ public class AddVocabActivity extends AppCompatActivity {
         AddListViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
 
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 VocabularManager vocabulary = VocabularManager.getInstance();
 
                 EditText first_language = (EditText) findViewById(R.id.et_first_lang);
