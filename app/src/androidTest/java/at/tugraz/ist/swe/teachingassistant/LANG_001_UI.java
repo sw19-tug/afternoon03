@@ -75,8 +75,9 @@ public class LANG_001_UI {
         onView(withId(R.id.save_translation)).perform(click());
 
 
+
         //here the other activity should start !!
-        //onView(withId(R.id.button)).check(matches(isDisplayed()));
+        onView(withId(R.id.button)).check(matches(isDisplayed()));
 
        /* activityRule.finishActivity();
 
@@ -89,5 +90,25 @@ public class LANG_001_UI {
 
      */
 
+    }
+    @Test
+    public void emptyInput()
+    {
+
+        onView(withId(R.id.et_first_lang)).perform(typeText(""),closeSoftKeyboard());
+        onView(withId(R.id.et_second_lang)).perform(typeText(""),closeSoftKeyboard());
+
+
+        onView(withId(R.id.save_translation)).perform(click());
+
+        onView(withId(R.id.save_translation)).check(matches(isClickable()));
+
+    }
+    public void singleInput()
+    {
+
+        onView(withId(R.id.et_second_lang)).perform(typeText("input"),closeSoftKeyboard());
+        onView(withId(R.id.save_translation)).perform(click());
+        onView(withId(R.id.save_translation)).check(matches(isClickable()));
     }
 }
