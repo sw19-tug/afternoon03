@@ -29,7 +29,13 @@ public class ImportActivity extends Activity
         super.onCreate(savedInstanceState);
         mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
         fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
+
+        setTitle(R.string.import_title);
+        setTheme(android.R.style.Theme_DeviceDefault_Light_Dialog);
+
         setContentView(R.layout.import_activity);
+        this.setFinishOnTouchOutside(false);
+
         configureImportButton();
 
     }

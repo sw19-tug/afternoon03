@@ -22,9 +22,13 @@
         </activity>
         <activity android:name=".AddVocabActivity">
         </activity>
-        <activity android:name=".ExportActivity">
+        <activity android:name=".ImportActivity"
+                  android:excludeFromRecents="true">
         </activity>
-        <activity android:name=".ImportActivity">
+        <activity android:name=".ExportActivity"
+                  android:label="@string/export_title"
+                  android:theme="@style/Theme.AppCompat.DayNight.Dialog"
+                  android:excludeFromRecents="true">
         </activity>
     </application>
 

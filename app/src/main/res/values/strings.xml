@@ -7,6 +7,9 @@
     <string name="mimeType">text/tast</string>
     <string name="file_extension">.tast</string>
 
+    <string name="import_title">TA - Importer</string>
+    <string name="export_title">TA - Exporter</string>
+
     <string name="TOAST_EXPORT_SUCCESS">Export SUCCESS!</string>
     <string name="TOAST_EXPORT_CANCEL">Export canceled!</string>
     <string name="TOAST_IMPORT_SUCCESS">Import SUCCESS!</string>

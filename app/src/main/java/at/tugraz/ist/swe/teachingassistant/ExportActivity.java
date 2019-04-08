@@ -13,15 +13,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.Vector;
-
-import static android.app.PendingIntent.getActivity;
 
 public class ExportActivity extends AppCompatActivity
 {
@@ -32,7 +27,10 @@ public class ExportActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.export_activity);
+
+            this.setFinishOnTouchOutside(false);
         mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
         fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
 
