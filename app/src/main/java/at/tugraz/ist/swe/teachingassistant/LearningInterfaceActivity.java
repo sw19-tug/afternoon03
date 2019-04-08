@@ -11,21 +11,23 @@ import java.util.ArrayList;
 
 
 public class LearningInterfaceActivity extends AppCompatActivity {
-    private String current_lang;
+    private String currentLang;
     private Integer current_position;
+    private VocabularManager vocabulary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.learning_interface);
         Bundle b = getIntent().getExtras();
-        current_lang = b.getString("current_lang");
+        currentLang = b.getString("current_lang");
         current_position = b.getInt("position");
-        VocabularManager vocabulary = VocabularManager.getInstance();
-        ArrayList<String> words =  vocabulary.getWordsFromLanguageString(current_lang);
-        TextView language_title = (TextView) findViewById(R.id.currentWord);
-        language_title.setText(words.get(current_position));
         TextView current_language = (TextView) findViewById(R.id.currentLanguage);
-        current_language.setText(current_lang);
+        vocabulary = VocabularManager.getInstance();
+        current_language.setText(!currentLang.equals("en") ? "Finnish" : "English");
+        changeCurrentWord();
+        configureChangeLanguageButton();
+        configureNextButton();
+        configurePreviousButton();
     }
 
     private void configureChangeLanguageButton() {
@@ -33,10 +35,41 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                current_lang = current_lang == "en" ? "fi" : "en";
+                currentLang = currentLang.equals("en") ? "fi" : "en";
                 TextView language_title = (TextView) findViewById(R.id.currentLanguage);
-                language_title.setText(current_lang != "en" ? "Finnish" : "English");
+                language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
+                changeCurrentWord();
             }
         });
+    }
+    private void configureNextButton() {
+        Button buttonChangeLanguage = (Button) findViewById(R.id.btn_next);
+        buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
+                if(current_position != (words.size() - 1))
+                current_position += 1;
+                changeCurrentWord();
+            }
+        });
+    }
+
+    private void configurePreviousButton() {
+        Button buttonChangeLanguage = (Button) findViewById(R.id.btn_prev);
+        buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(current_position != 0)
+                current_position -= 1;
+                changeCurrentWord();
+            }
+        });
+    }
+
+    private void changeCurrentWord(){
+        TextView currentWord = (TextView) findViewById(R.id.currentWord);
+        ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
+        currentWord.setText(words.get(current_position));
     }
 }

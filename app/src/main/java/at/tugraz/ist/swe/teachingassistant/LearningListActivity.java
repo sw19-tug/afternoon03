@@ -20,7 +20,7 @@ public class LearningListActivity extends AppCompatActivity {
         setContentView(R.layout.learning_list);
         currentLang = "en";
         TextView language_title = (TextView) findViewById(R.id.languageTitle);
-        language_title.setText(currentLang != "en" ? "Finnish" : "English");
+        language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
         configureAddListViewButton();
         configureListViewItems();
     }
@@ -40,9 +40,9 @@ public class LearningListActivity extends AppCompatActivity {
         AddListViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentLang = currentLang == "en" ? "fi" : "en";
+                currentLang = currentLang.equals("en") ? "fi" : "en";
                 TextView language_title = (TextView) findViewById(R.id.languageTitle);
-                language_title.setText(currentLang != "en" ? "Finnish" : "English");
+                language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
 
                 VocabularManager vocabulary = VocabularManager.getInstance();
                 ArrayAdapter adapter_language_list = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
