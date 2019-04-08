@@ -29,7 +29,7 @@ public class LearningListActivity extends AppCompatActivity {
         super.onResume();
 
         VocabularManager vocabulary = VocabularManager.getInstance();
-        ArrayAdapter adapter_language_list = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
+        ArrayAdapter adapter_language_list = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
         ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
         listView_first_language.setAdapter(adapter_language_list);
 
@@ -45,7 +45,7 @@ public class LearningListActivity extends AppCompatActivity {
                 language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
 
                 VocabularManager vocabulary = VocabularManager.getInstance();
-                ArrayAdapter adapter_language_list = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
+                ArrayAdapter adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
                 ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
                 listView_first_language.setAdapter(adapter_language_list);
             }
