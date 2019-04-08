@@ -10,8 +10,7 @@
         android:id="@+id/currentLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DE"
-        android:layout_below="@+id/switch_lang"
+        android:layout_below="@+id/btn_changeLanguageInterface"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:textSize="25dp"
@@ -49,7 +48,16 @@
         android:textSize="15dp"
         android:paddingHorizontal="40dp"/>
 
-    <Switch
+    <Button
+        android:id="@+id/btn_changeLanguageInterface"
+        android:text="Change Language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:textSize="12dp"/>
+
+    <!--<Switch
         android:id="@+id/switch_lang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -58,6 +66,6 @@
         android:checked="true"
         android:gravity="center"
         android:switchMinWidth="70sp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="100dp" />-->
 
 </RelativeLayout>
