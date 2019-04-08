@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         configureAddListViewButton();
         configureExportDialog();
+        configureImportDialog();
     }
 
     private void configureAddListViewButton() {
@@ -34,7 +35,19 @@ public class MainActivity extends AppCompatActivity {
         ExportViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ExportDialog.class);
+                Intent intent = new Intent(MainActivity.this, ExportActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void configureImportDialog() {
+        Button ImportViewButton = (Button) findViewById(R.id.btn_import);
+        ImportViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ImportActivity.class);
                 startActivity(intent);
             }
         });

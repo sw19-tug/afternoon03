@@ -6,6 +6,7 @@ import java.util.Vector;
 
 public class VocabularManager {
     private static VocabularManager instance;
+
     private Vector<Vocab> vocabs;
 
     private VocabularManager() {
@@ -17,6 +18,11 @@ public class VocabularManager {
             instance = new VocabularManager();
         }
         return instance;
+    }
+
+    public void setVocabs(Vector<Vocab> vocabs)
+    {
+        this.vocabs = vocabs;
     }
 
     public void addVocab(Word word1, Word word2) {

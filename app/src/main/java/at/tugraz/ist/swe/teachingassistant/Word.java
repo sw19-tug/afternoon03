@@ -1,10 +1,6 @@
 package at.tugraz.ist.swe.teachingassistant;
 
 
-import android.support.annotation.RawRes;
-
-import com.google.gson.annotations.Expose;
-
 public class Word
 {
 
