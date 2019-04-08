@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content">
     <EditText
             android:id="@+id/export_filename"
             android:inputType="text"
-            android:layout_width="154dp"
+            android:layout_width="161dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginLeft="4dp"
@@ -19,15 +20,20 @@
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content">
 
-        <Button android:layout_width="wrap_content"
+        <android.support.v7.widget.AppCompatButton
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel"
                 android:id="@+id/export_cancel_btn"
                 android:layout_gravity="bottom"/>
-        <Button android:layout_width="78dp"
+        <android.support.v7.widget.AppCompatButton
+                android:layout_width="78dp"
                 android:layout_height="wrap_content"
                 android:text="@string/export"
                 android:id="@+id/export_ok_btn"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:textColor="@color/colorWhite"
+                app:backgroundTint="@color/colorBlue"/>
+
     </LinearLayout>
 </LinearLayout>

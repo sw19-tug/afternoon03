@@ -14,17 +14,20 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LANG_008_ExportDialogTest
+public class LANG_008_ExportTest
 {
 
     private String stringToBetyped;
 
     @Rule
-    public ActivityTestRule<ExportDialog> activityRule = new ActivityTestRule<>(ExportDialog.class);
+    public ActivityTestRule<ExportActivity> activityRule = new ActivityTestRule<>(ExportActivity.class);
 
     @Before
     public void initValidString() {
@@ -32,22 +35,28 @@ public class LANG_008_ExportDialogTest
         stringToBetyped = "test.txt";
     }
 
-    private ExportDialog exportDialog = null;
+    private ExportActivity exportActivity = null;
 
 
     @Before
     public void setup() {
-        exportDialog = activityRule.getActivity();
+        exportActivity = activityRule.getActivity();
     }
 
 
     @Test
-    public void changeText_sameActivity() {
+    public void checkExportInterface() {
 
         //button is clickable
         onView(withId(R.id.export_ok_btn)).check(matches(isClickable()));
         onView(withId(R.id.export_cancel_btn)).check(matches(isClickable()));
+        onView(withId(R.id.export_filename)).check(matches(isDisplayed()));
 
+    }
+
+    @Test
+    public void checkInputTextField()
+    {
         onView(withId(R.id.export_filename))
             .perform(typeText(stringToBetyped), closeSoftKeyboard());
         onView(withId(R.id.export_ok_btn)).perform(click());
@@ -55,5 +64,18 @@ public class LANG_008_ExportDialogTest
         // Check that the text was changed.
         onView(withId(R.id.export_filename))
             .check(matches(withText(stringToBetyped)));
+
+        onView(withText(R.string.TOAST_EXPORT_SUCCESS)).inRoot(withDecorView(not(is(exportActivity.getWindow().getDecorView())))).check(matches(isDisplayed()));
+
+
+    }
+
+    @Test
+    public void checkCancelImport()
+    {
+        onView(withId(R.id.import_cancel_btn))
+            .perform(click());
+
+        onView(withText(R.string.TOAST_EXPORT_CANCEL)).inRoot(withDecorView(not(is(exportActivity.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 }

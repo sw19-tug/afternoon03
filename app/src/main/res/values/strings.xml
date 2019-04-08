@@ -2,7 +2,15 @@
     <string name="app_name">TeachingAssistant</string>
     <string name="filename">File Name</string>
     <string name="export">Export</string>
+    <string name="import_string">Import</string>
     <string name="cancel">Cancel</string>
+    <string name="folder_symbol">&#x2709;</string>
+
+    <string name="TOAST_EXPORT_SUCCESS">Export SUCCESS!</string>
+    <string name="TOAST_EXPORT_CANCEL">Export canceled!</string>
+    <string name="TOAST_IMPORT_SUCCESS">Import SUCCESS!</string>
+    <string name="TOAST_IMPORT_CANCEL">Import canceled!</string>
+
 </resources>
 
 

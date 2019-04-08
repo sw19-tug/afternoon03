@@ -19,6 +19,8 @@ public class ExportDialog extends AppCompatActivity
         configureExportButton();
     }
 
+
+
     private void configureExportButton() {
         Button ExportButton = (Button) findViewById(R.id.export_ok_btn);
         Button CancelButton = (Button) findViewById(R.id.export_cancel_btn);
@@ -27,7 +29,16 @@ public class ExportDialog extends AppCompatActivity
 
             public void onClick(View v) {
                 EditText ExportFilename = (EditText) findViewById(R.id.export_filename);
-              Toast.makeText(getApplicationContext(), "Export to: " + ExportFilename.getText(), Toast.LENGTH_LONG).show();
+                FileHandler fileHandler = new FileHandler(getApplicationContext());
+
+                VocabularManager manager = VocabularManager.getInstance();
+                Word w1 = new Word("Hallo", "DE");
+                Word w2 = new Word("hello", "EN");
+                manager.addVocab(w1, w2);
+                manager.addVocab(w1, w2);
+
+                fileHandler.exportToFile(ExportFilename.getText().toString());
+                Toast.makeText(getApplicationContext(), "Export to " + ExportFilename.getText() + " - " + fileHandler.getStatusMessage(), Toast.LENGTH_LONG).show();
                 finish();
             }
         });
@@ -41,5 +52,6 @@ public class ExportDialog extends AppCompatActivity
             }
         });
     }
+
 }
 
