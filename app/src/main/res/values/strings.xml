@@ -4,7 +4,8 @@
     <string name="export">Export</string>
     <string name="import_string">Import</string>
     <string name="cancel">Cancel</string>
-    <string name="folder_symbol">&#x2709;</string>
+    <string name="mimeType">text/tast</string>
+    <string name="file_extension">.tast</string>
 
     <string name="TOAST_EXPORT_SUCCESS">Export SUCCESS!</string>
     <string name="TOAST_EXPORT_CANCEL">Export canceled!</string>

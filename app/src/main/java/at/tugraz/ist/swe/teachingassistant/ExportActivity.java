@@ -25,14 +25,16 @@ import static android.app.PendingIntent.getActivity;
 
 public class ExportActivity extends AppCompatActivity
 {
-    static private String mimeType = "text/tast";
-    static private String EXTENSION = ".tast";
+    static private String mimeType;
+    static private String fileExtension;
     private static final int WRITE_REQUEST_CODE = 43;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.export_activity);
+        mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
+        fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
 
         configureExportButton();
     }
@@ -55,7 +57,7 @@ public class ExportActivity extends AppCompatActivity
 
         // Create a file with the requested MIME type.
         intent.setType(mimeType);
-        intent.putExtra(Intent.EXTRA_TITLE, fileName + EXTENSION);
+        intent.putExtra(Intent.EXTRA_TITLE, fileName + fileExtension);
         startActivityForResult(intent, WRITE_REQUEST_CODE);
     }
 

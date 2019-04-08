@@ -49,21 +49,8 @@ public class LANG_008_ImportTest
         //button is clickable
         onView(withId(R.id.import_ok_btn)).check(matches(isClickable()));
         onView(withId(R.id.import_cancel_btn)).check(matches(isClickable()));
-        // field is visible
-        onView(withId(R.id.import_filename)).check(matches(isCompletelyDisplayed()));
     }
 
-    @Test
-    public void checkInputTextField()
-    {
-        onView(withId(R.id.import_filename))
-            .perform(typeText(stringToBetyped), closeSoftKeyboard());
-        onView(withId(R.id.import_ok_btn)).perform(click());
-
-        // Check that the text was changed.
-        onView(withId(R.id.import_filename))
-            .check(matches(withText(stringToBetyped)));
-    }
 
     @Test
     public void checkCancelImport()

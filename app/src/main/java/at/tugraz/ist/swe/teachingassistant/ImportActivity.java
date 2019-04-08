@@ -20,13 +20,15 @@ public class ImportActivity extends Activity
 
 
     private static final int READ_REQUEST_CODE = 42;
-    private static final String FILE_EXTENSION = ".tast";
-    private static final String mimeType = "text/tast";
+    private String fileExtension;
+    private String mimeType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
+        fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
         setContentView(R.layout.import_activity);
         configureImportButton();
 
@@ -86,7 +88,7 @@ public class ImportActivity extends Activity
         // If one wanted to search for ogg vorbis files, the type would be "audio/ogg".
         // To search for all documents available via installed storage providers,
         // it would be "*/*".
-        intent.setType("*/*");
+        intent.setType(mimeType);
 
         startActivityForResult(intent, READ_REQUEST_CODE);
     }
