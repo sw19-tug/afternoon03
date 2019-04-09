@@ -21,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddVocabActivity" />
+        <activity android:name=".AddVocabActivity"></activity>
+        <activity android:name=".VocabularyActivity"></activity>
     </application>
 
 </manifest>

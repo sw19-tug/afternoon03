@@ -35,18 +35,20 @@ public class VocabularManager {
             }
         }
     }
-
     public Vector<String> getWordsFromLanguage(String langCode) {
         Vector<String> words = new Vector<>();
         for (Vocab vocab : vocabs) {
             String word = vocab.getTranslationByLanguage(langCode);
-            if (word != null) {
+            if (word != null)
+            {
                 words.add(word);
             }
         }
         return words;
     }
 
+
+    // just for VocabularyAdapter
     public ArrayList<String> getWordsFromLanguageString(String langCode) {
         ArrayList<String> words = new ArrayList<>();
         for (Vocab vocab : vocabs) {
