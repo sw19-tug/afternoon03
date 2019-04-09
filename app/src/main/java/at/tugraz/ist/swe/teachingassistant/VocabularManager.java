@@ -47,6 +47,7 @@ public class VocabularManager {
         return words;
     }
 
+
     // just for VocabularyAdapter
     public ArrayList<String> getWordsFromLanguageString(String langCode) {
         ArrayList<String> words = new ArrayList<>();
@@ -58,6 +59,7 @@ public class VocabularManager {
         }
         return words;
     }
+
     public int export(String filename){
         return 0;
     }

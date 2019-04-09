@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         configureAddListViewButton();
         configureExportDialog();
+        configureLearningButton();
     }
 
     private void configureAddListViewButton() {
@@ -36,6 +37,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 ExportDialog exportDialog = new ExportDialog();
                 exportDialog.show(getSupportFragmentManager(), "Export Dialog");
+            }
+        });
+
+    }
+
+    private void configureLearningButton() {
+        Button AddListViewButton = (Button) findViewById(R.id.btn_learning);
+        AddListViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LearningListActivity.class);
+                startActivity(intent);
             }
         });
 

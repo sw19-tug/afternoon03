@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LearningInterfaceActivity">
+
+    <TextView
+        android:id="@+id/currentLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_changeLanguageInterface"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:textSize="25dp"
+        />
+
+    <TextView
+        android:id="@+id/currentWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Current word"
+        android:layout_below="@+id/currentLanguage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140dp"
+        android:textSize="30dp"/>
+
+    <Button
+        android:id="@+id/btn_prev"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="prev"
+        android:layout_marginBottom="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="30dp"
+        android:textSize="15dp"/>
+
+    <Button
+        android:id="@+id/btn_next"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="next"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:textSize="15dp"
+        android:paddingHorizontal="40dp"/>
+
+    <Button
+        android:id="@+id/btn_changeLanguageInterface"
+        android:text="Change Language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:textSize="12dp"/>
+
+    <!--<Switch
+        android:id="@+id/switch_lang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:checked="true"
+        android:gravity="center"
+        android:switchMinWidth="70sp"
+        android:layout_marginTop="100dp" />-->
+
+</RelativeLayout>
