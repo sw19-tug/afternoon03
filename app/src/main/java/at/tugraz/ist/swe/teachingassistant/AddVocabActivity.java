@@ -6,17 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import static java.lang.System.exit;
 
 public class AddVocabActivity extends AppCompatActivity {
-
+    VocabularManager vocabulary;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_vocab);
-
+        TextView first_language_tv = (TextView) findViewById(R.id.tv_first_lang);
+        first_language_tv.setText(vocabulary.getFirstLanguage());
+        TextView second_language_tv = (TextView) findViewById(R.id.tv_second_lang);
+        second_language_tv.setText(vocabulary.getFirstLanguage());
         addVocabViewButton();
     }
 
@@ -27,7 +31,7 @@ public class AddVocabActivity extends AppCompatActivity {
 
             public void onClick(View v)
             {
-                VocabularManager vocabulary = VocabularManager.getInstance();
+                vocabulary = VocabularManager.getInstance();
 
                 EditText first_language = (EditText) findViewById(R.id.et_first_lang);
                 EditText second_language = (EditText) findViewById(R.id.et_second_lang);

@@ -23,7 +23,7 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         current_position = b.getInt("position");
         TextView current_language = (TextView) findViewById(R.id.currentLanguage);
         vocabulary = VocabularManager.getInstance();
-        current_language.setText(!currentLang.equals("en") ? "Finnish" : "English");
+        current_language.setText(!currentLang.equals(vocabulary.getFirstLanguage()) ? vocabulary.getSecondLanguage() : vocabulary.getFirstLanguage());
         changeCurrentWord();
         configureChangeLanguageButton();
         configureNextButton();
@@ -35,9 +35,9 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentLang = currentLang.equals("en") ? "fi" : "en";
+                currentLang = currentLang.equals(vocabulary.getFirstLanguage()) ? vocabulary.getSecondLanguage() : vocabulary.getFirstLanguage();
                 TextView language_title = (TextView) findViewById(R.id.currentLanguage);
-                language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
+                language_title.setText(!currentLang.equals(vocabulary.getFirstLanguage()) ? vocabulary.getSecondLanguage() : vocabulary.getFirstLanguage());
                 changeCurrentWord();
             }
         });

@@ -14,22 +14,22 @@ import android.widget.Toast;
 public class LearningListActivity extends AppCompatActivity {
 
     private String currentLang = "";
+    private VocabularManager vocabulary;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.learning_list);
-        currentLang = "en";
+        vocabulary = VocabularManager.getInstance();
+        currentLang = vocabulary.getFirstLanguage();
         TextView language_title = (TextView) findViewById(R.id.languageTitle);
-        language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
+        language_title.setText(currentLang);
         configureAddListViewButton();
         configureListViewItems();
     }
     @Override
     protected void onResume() {
         super.onResume();
-
-        VocabularManager vocabulary = VocabularManager.getInstance();
         ArrayAdapter adapter_language_list = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
         ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
         listView_first_language.setAdapter(adapter_language_list);
@@ -41,11 +41,9 @@ public class LearningListActivity extends AppCompatActivity {
         AddListViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                currentLang = currentLang.equals("en") ? "fi" : "en";
+                currentLang = currentLang.equals(vocabulary.getFirstLanguage()) ? vocabulary.getSecondLanguage() : vocabulary.getFirstLanguage();
                 TextView language_title = (TextView) findViewById(R.id.languageTitle);
-                language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
-
-                VocabularManager vocabulary = VocabularManager.getInstance();
+                language_title.setText(currentLang);
                 ArrayAdapter adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
                 ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
                 listView_first_language.setAdapter(adapter_language_list);
