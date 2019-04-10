@@ -21,9 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Current word"
-        android:layout_below="@+id/currentLanguage"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="140dp"
+        android:layout_centerVertical="true"
         android:textSize="30dp"/>
 
     <Button
