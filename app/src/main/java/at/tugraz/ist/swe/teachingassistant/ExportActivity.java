@@ -37,23 +37,10 @@ public class ExportActivity extends AppCompatActivity
         configureExportButton();
     }
 
-    // Here are some examples of how you might call this method.
-    // The first parameter is the MIME type, and the second parameter is the name
-    // of the file you are creating:
-    //
-    // createFile("text/plain", "foobar.txt");
-    // createFile("image/png", "mypicture.png");
-
-    // Unique request code.
-
     private void createFile(String fileName) {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-
-        // Filter to only show results that can be "opened", such as
-        // a file (as opposed to a list of contacts or timezones).
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        // Create a file with the requested MIME type.
         intent.setType(mimeType);
         intent.putExtra(Intent.EXTRA_TITLE, fileName + fileExtension);
         startActivityForResult(intent, WRITE_REQUEST_CODE);
@@ -77,7 +64,6 @@ public class ExportActivity extends AppCompatActivity
             FileOutputStream fileOutputStream =
                 new FileOutputStream(pfd.getFileDescriptor());
             fileOutputStream.write(content_string.getBytes());
-            // Let the document provider know you're done by closing the stream.
             fileOutputStream.close();
             pfd.close();
             Toast.makeText(getApplicationContext(), "Export Success", Toast.LENGTH_LONG).show();
@@ -93,10 +79,6 @@ public class ExportActivity extends AppCompatActivity
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent resultData) {
 
-        // The ACTION_OPEN_DOCUMENT intent was sent with the request code
-        // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
-        // response to some other intent, and the code below shouldn't run at all.
-
         if (requestCode == WRITE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             Uri uri = null;
             if (resultData != null) {
@@ -110,6 +92,7 @@ public class ExportActivity extends AppCompatActivity
             {
                 Log.e("EXPORT", "Write REQUEST FAILED");
             }
+            finish();
             return;
         }
         Log.e("EXPORT", "end result");
@@ -122,16 +105,7 @@ public class ExportActivity extends AppCompatActivity
 
             public void onClick(View v) {
                 EditText ExportFilename = (EditText) findViewById(R.id.export_filename);
-
-              /*  VocabularManager manager = VocabularManager.getInstance();
-                Word w1 = new Word("Hallo", "DE");
-                Word w2 = new Word("hello", "EN");
-                manager.addVocab(w1, w2);
-                manager.addVocab(w1, w2);*/
                 createFile(ExportFilename.getText().toString());
-                //fileHandler.exportToFile(ExportFilename.getText().toString());
-              //  Toast.makeText(getApplicationContext(), "Export to " + ExportFilename.getText() + " - " + fileHandler.getStatusMessage(), Toast.LENGTH_LONG).show();
-              //  finish();
             }
         });
 

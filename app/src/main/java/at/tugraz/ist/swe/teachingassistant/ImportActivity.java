@@ -82,18 +82,10 @@ public class ImportActivity extends Activity
      */
     public void performFileSearch() {
 
-        // ACTION_OPEN_DOCUMENT is the intent to choose a file via the system's file
-        // browser.
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
-        // Filter to only show results that can be "opened", such as a
-        // file (as opposed to a list of contacts or timezones)
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
-        // Filter to show only images, using the image MIME data type.
-        // If one wanted to search for ogg vorbis files, the type would be "audio/ogg".
-        // To search for all documents available via installed storage providers,
-        // it would be "*/*".
         intent.setType(mimeType);
 
         startActivityForResult(intent, READ_REQUEST_CODE);
@@ -116,10 +108,6 @@ public class ImportActivity extends Activity
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent resultData) {
-
-        // The ACTION_OPEN_DOCUMENT intent was sent with the request code
-        // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
-        // response to some other intent, and the code below shouldn't run at all.
 
         if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             // The document selected by the user won't be returned in the intent.
