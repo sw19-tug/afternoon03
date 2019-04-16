@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TeachingAssistant</string>
+    <string name="filename">File Name</string>
+    <string name="export">Export</string>
+    <string name="cancel">Cancel</string>
+</resources>
+
+
