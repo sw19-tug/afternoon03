@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,10 +16,8 @@ import java.io.*;
 import java.lang.reflect.Type;
 import java.util.Vector;
 
-public class ImportActivity extends Activity
+public class ImportActivity extends AppCompatActivity
 {
-
-
     private static final int READ_REQUEST_CODE = 42;
     private String fileExtension;
     private String mimeType;
@@ -29,9 +28,6 @@ public class ImportActivity extends Activity
         super.onCreate(savedInstanceState);
         mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
         fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
-
-        setTitle(R.string.import_title);
-        setTheme(android.R.style.Theme_DeviceDefault_Light_Dialog);
 
         setContentView(R.layout.import_activity);
         this.setFinishOnTouchOutside(false);
@@ -117,7 +113,7 @@ public class ImportActivity extends Activity
             Uri uri = null;
             if (resultData != null) {
                 uri = resultData.getData();
-                Log.e("IMPORT", "Uri: " + uri.toString());
+                Log.d("IMPORT", "Uri: " + uri.toString());
                 try
                 {
                     String content = readTextFromUri(resultData.getData());

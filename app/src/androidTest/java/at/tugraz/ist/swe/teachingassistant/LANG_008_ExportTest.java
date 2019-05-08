@@ -70,8 +70,7 @@ public class LANG_008_ExportTest
         intending(toPackage(Intent.ACTION_CREATE_DOCUMENT)).respondWith(result);
 
         onView(withId(R.id.export_ok_btn)).perform(click());
-        assertEquals(stringToBetyped+extension, result.getResultData().getType());//.check(matches(withText(stringToBetyped + extension)));
-        //TODO:Figure this out
+        assertEquals(stringToBetyped+extension, result.getResultData().getType());
         assertTrue(activityRule.getActivity().isFinishing());
     }
 
