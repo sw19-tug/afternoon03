@@ -56,6 +56,17 @@
         android:layout_marginTop="100dp"
         android:textSize="12dp"/>
 
+    <SeekBar
+        android:id="@+id/seekBar"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="137dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="142dp"
+        android:max="4"
+        android:progress="1" />
+
     <!--<Switch
         android:id="@+id/switch_lang"
         android:layout_width="wrap_content"
