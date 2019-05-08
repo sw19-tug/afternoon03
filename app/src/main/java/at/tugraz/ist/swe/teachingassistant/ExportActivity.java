@@ -86,17 +86,16 @@ public class ExportActivity extends AppCompatActivity
                 Log.d("EXPORT", "Uri: " + uri.toString());
                 String content = vocabularToJsonString();
                 alterDocument(uri, content);
-
-                finish();
             } else
             {
                 Log.e("EXPORT", "Write REQUEST FAILED");
+
             }
-            finish();
             return;
         }
         Log.e("EXPORT", "end result");
     }
+
     private void configureExportButton() {
         Button ExportButton = (Button) findViewById(R.id.export_ok_btn);
         Button CancelButton = (Button) findViewById(R.id.export_cancel_btn);
@@ -106,6 +105,7 @@ public class ExportActivity extends AppCompatActivity
             public void onClick(View v) {
                 EditText ExportFilename = (EditText) findViewById(R.id.export_filename);
                 createFile(ExportFilename.getText().toString());
+                finish();
             }
         });
 
