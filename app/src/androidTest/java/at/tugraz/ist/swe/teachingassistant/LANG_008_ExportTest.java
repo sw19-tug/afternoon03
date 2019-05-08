@@ -67,8 +67,9 @@ public class LANG_008_ExportTest
         Instrumentation.ActivityResult result =
                 new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
 
-        intending(toPackage("at.tugraz.ist.swe.teachingassistant.ExportActivity")).respondWith(result);
+        intending(toPackage(Intent.ACTION_CREATE_DOCUMENT)).respondWith(result);
 
+        onView(withId(R.id.export_ok_btn)).perform(click());
         assertEquals(stringToBetyped+extension, result.getResultData().getType());//.check(matches(withText(stringToBetyped + extension)));
         //TODO:Figure this out
         assertTrue(activityRule.getActivity().isFinishing());
