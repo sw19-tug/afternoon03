@@ -60,6 +60,11 @@ public class VocabularManager {
         return words;
     }
 
+    public Vector<Vocab> getVocabs()
+    {
+        return vocabs;
+    }
+
     public int export(String filename){
         return 0;
     }

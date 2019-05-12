@@ -78,13 +78,12 @@ public class LANG_004_Test {
         // onView(withId(R.id.seekBar)).check(matches(isDisplayed()));
         onView(withId(R.id.seekBar)).perform(ViewActions.swipeRight());
         VocabularManager vocabulary = VocabularManager.getInstance();
-        /*vocabulary.getVocabs();
-        vocabs.at(0).getRating();
+        Vector<Vocab> vocabs = vocabulary.getVocabs();
+        int rating = vocabs.get(0).getRating();
         if(rating != 4)
         {
             assert(false);
-        }*/
-
+        }
     }
 
 

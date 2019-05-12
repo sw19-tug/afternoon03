@@ -2,12 +2,15 @@ package at.tugraz.ist.swe.teachingassistant;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-
+import java.util.Vector;
 
 
 public class LearningInterfaceActivity extends AppCompatActivity {
@@ -28,6 +31,7 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         configureChangeLanguageButton();
         configureNextButton();
         configurePreviousButton();
+        configureSeekBar();
     }
 
     private void configureChangeLanguageButton() {
@@ -71,5 +75,33 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         TextView currentWord = (TextView) findViewById(R.id.currentWord);
         ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
         currentWord.setText(words.get(current_position));
+    }
+
+    private void configureSeekBar()
+    {
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
+        {
+            int rating = 0;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+            {
+                rating = progress;
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
+                VocabularManager vocabulary = VocabularManager.getInstance();
+                Vector<Vocab> vocabs = vocabulary.getVocabs();
+                vocabs.get(current_position).setRating(rating);
+            }
+        });
+
     }
 }
