@@ -72,6 +72,21 @@ public class LANG_004_Test {
         onView(withId(R.id.seekBar)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.seekBar)).perform(ViewActions.click());
     }
+    @Test
+    public void testChangeRating()
+    {
+        // onView(withId(R.id.seekBar)).check(matches(isDisplayed()));
+        onView(withId(R.id.seekBar)).perform(ViewActions.swipeRight());
+        VocabularManager vocabulary = VocabularManager.getInstance();
+        /*vocabulary.getVocabs();
+        vocabs.at(0).getRating();
+        if(rating != 4)
+        {
+            assert(false);
+        }*/
+
+    }
+
 
 
     //@Test
