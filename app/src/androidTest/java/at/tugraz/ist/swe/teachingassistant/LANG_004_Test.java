@@ -38,28 +38,9 @@ import static org.junit.Assert.assertEquals;
 public class LANG_004_Test {
 
 
-    @Rule
-    public ActivityTestRule<LearningInterfaceActivity> activityRule = new ActivityTestRule<>(LearningInterfaceActivity.class);
-
-    public ActivityTestRule<LearningInterfaceActivity> getActivityRule()
-    {
-        return activityRule;
-    }
 
     @Rule
-    public ActivityTestRule<LearningInterfaceActivity> mActivityRule =
-            new ActivityTestRule<LearningInterfaceActivity>(LearningInterfaceActivity.class){
-
-                @Override
-                protected Intent getActivityIntent() {
-                    Intent intent = new Intent();
-                    intent.putExtra("current_lang", "English");
-                    intent.putExtra("position", 0);
-                    return intent;
-
-
-                }
-            };
+    public ActivityTestRule<LearningInterfaceActivity> mActivityRule = new ActivityTestRule<LearningInterfaceActivity>(LearningInterfaceActivity.class,false,false);
 
     @Before
     public void setUpList() {
@@ -68,6 +49,12 @@ public class LANG_004_Test {
         Word word1 = new Word("hello", "en");
         Word word2 = new Word("shppp", "fi");
         vocabulary.addVocab(word1, word2);
+
+        Intent intent = new Intent();
+        intent.putExtra("current_lang", "en");
+        intent.putExtra("position", 0);
+
+        mActivityRule.launchActivity(intent);
 
     }
 
@@ -84,8 +71,8 @@ public class LANG_004_Test {
         onView(withId(R.id.seekBar)).perform(ViewActions.swipeRight());
         onView(withId(R.id.seekBar)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.seekBar)).perform(ViewActions.click());
-
     }
+
 
     //@Test
     /*public void testInputRating()
