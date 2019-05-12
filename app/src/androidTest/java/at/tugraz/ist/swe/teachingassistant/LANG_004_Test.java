@@ -61,13 +61,11 @@ public class LANG_004_Test {
     @Test
     public void testSeekbarVisible()
     {
-       // onView(withId(R.id.seekBar)).check(matches(isDisplayed()));
         onView(withId(R.id.currentLanguage)).check(matches(isDisplayed()));
     }
     @Test
     public void testSeekbarMoving()
     {
-        // onView(withId(R.id.seekBar)).check(matches(isDisplayed()));
         onView(withId(R.id.seekBar)).perform(ViewActions.swipeRight());
         onView(withId(R.id.seekBar)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.seekBar)).perform(ViewActions.click());
@@ -75,44 +73,12 @@ public class LANG_004_Test {
     @Test
     public void testChangeRating()
     {
-        // onView(withId(R.id.seekBar)).check(matches(isDisplayed()));
         onView(withId(R.id.seekBar)).perform(ViewActions.swipeRight());
         VocabularManager vocabulary = VocabularManager.getInstance();
         Vector<Vocab> vocabs = vocabulary.getVocabs();
         int rating = vocabs.get(0).getRating();
-        if(rating != 4)
-        {
-            assert(false);
-        }
+        assertEquals(5, rating);
     }
 
-
-
-    //@Test
-    /*public void testInputRating()
-    {
-        int rating = 3;
-        Vocab vocab = new Vocab("test","test");
-        vocab.setRating(rating);
-        assertEquals(rating, vocab.getRating());
-    }
-    @Test
-    public void testRateChange()
-    {
-        int rating = 3;
-        Vocab vocab = new Vocab("test","test");
-        int change_rating = vocab.changeRating();
-        assertEquals(rating, change_rating);
-    }
-    @Test
-    public void testSortRating()
-    {
-
-    }
-    @Test
-    public void testFilterRating()
-    {
-
-    }*/
 
 }
