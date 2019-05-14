@@ -10,13 +10,8 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -30,7 +25,6 @@ public class LANG_008_ImportTest
 
     @Before
     public void initValidString() {
-        // Specify a valid string.
         stringToBetyped = "test";
     }
 
@@ -42,13 +36,12 @@ public class LANG_008_ImportTest
         importActivity = activityRule.getActivity();
     }
 
-
     @Test
     public void checkImportInterface() {
-
-        //button is clickable
         onView(withId(R.id.import_ok_btn)).check(matches(isClickable()));
+        onView(withId(R.id.import_ok_btn)).check(matches(withText("Import")));
         onView(withId(R.id.import_cancel_btn)).check(matches(isClickable()));
+        onView(withId(R.id.import_cancel_btn)).check(matches(withText("Cancel")));
     }
 
 
@@ -57,8 +50,6 @@ public class LANG_008_ImportTest
     {
         onView(withId(R.id.import_cancel_btn))
             .perform(click());
-
-        onView(withText(R.string.TOAST_IMPORT_CANCEL)).inRoot(withDecorView(not(is(importActivity.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 
     @Test
@@ -66,7 +57,5 @@ public class LANG_008_ImportTest
     {
         onView(withId(R.id.import_ok_btn))
             .perform(click());
-        //
-        onView(withText(R.string.TOAST_IMPORT_SUCCESS)).inRoot(withDecorView(not(is(importActivity.getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 }

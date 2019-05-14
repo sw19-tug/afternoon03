@@ -34,7 +34,6 @@ public class LANG_008_ExportTest
 
     @Before
     public void initValidString() {
-        // Specify a valid string.
         stringToBetyped = "test";
         extension = activityRule.getActivity().getString(R.string.file_extension);
     }
@@ -50,7 +49,6 @@ public class LANG_008_ExportTest
 
     @Test
     public void checkExportInterface() {
-        //button is clickable
         onView(withId(R.id.export_ok_btn)).check(matches(isClickable()));
         onView(withId(R.id.export_ok_btn)).check(matches(withText("Export")));
         onView(withId(R.id.export_cancel_btn)).check(matches(isClickable()));
@@ -60,7 +58,7 @@ public class LANG_008_ExportTest
     }
 
     @Test
-    public void checkInputTextField() throws InterruptedException {
+    public void checkInputTextField() {
         Intent resultData = new Intent(Intent.ACTION_CREATE_DOCUMENT);
         resultData.setType(stringToBetyped + extension);
         resultData.putExtra(EXTRA_TITLE, stringToBetyped + extension);
@@ -79,6 +77,12 @@ public class LANG_008_ExportTest
     {
         onView(withId(R.id.export_cancel_btn))
             .perform(click());
+    }
 
+    @Test
+    public void checkExportButton()
+    {
+        onView(withId(R.id.export_ok_btn))
+                .perform(click());
     }
 }
