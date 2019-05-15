@@ -6,6 +6,18 @@ public class Vocab {
     //rating
     private Vector<Word> translation_table;
 
+    private String tags;
+
+    public String getTags()
+    {
+        return tags;
+    }
+
+    public void setTags(String tags)
+    {
+        this.tags = tags;
+    }
+
     public Vocab() {
     }
 

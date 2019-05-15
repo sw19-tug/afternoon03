@@ -23,9 +23,9 @@
         android:id="@+id/vocabList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/languageTitle"
+        android:layout_below="@+id/input_tags"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:clickable="true"
         />
 
@@ -40,6 +40,39 @@
         android:textSize="20dp"
         />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@+id/languageTitle"
+        android:id="@+id/asc_dsc"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="20dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:layout_below="@+id/asc_dsc"
+        android:id="@+id/tv_tags_sort"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="20dp"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_tags_sort"
+        android:id="@+id/input_tags"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="20dp"
+        android:hint="Enter tag(s) spaced with commas"
+        />
+
     <Button
         android:id="@+id/btn_changeLanguage"
         android:layout_width="wrap_content"
@@ -50,6 +83,29 @@
         android:layout_marginTop="20dp"
         android:textSize="12dp"
         android:layout_marginRight="30dp"
+        />
+
+    <Button
+        android:id="@+id/btn_alphabetical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Change Alphabetical"
+        android:layout_alignRight="@id/learningTitle"
+        android:layout_below="@id/btn_changeLanguage"
+        android:layout_marginTop="20dp"
+        android:textSize="12dp"
+        android:layout_marginRight="30dp"
+        />
+
+    <Button
+        android:id="@+id/btn_tags_sort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btn_alphabetical"
+        android:layout_alignRight="@id/learningTitle"
+        android:layout_marginRight="30dp"
+        android:text="Tag Sort"
+        android:textSize="12dp"
         />
 
 
