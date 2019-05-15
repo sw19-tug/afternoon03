@@ -60,6 +60,26 @@ public class VocabularManager {
         return words;
     }
 
+    public ArrayList<String> getWordsFromLanguageRatingString(String langCode, int rating)
+    {
+        ArrayList<String> words = new ArrayList<>();
+        for (Vocab vocab : vocabs)
+        {
+            Log.e("HELP",String.valueOf(vocab.getRating()));
+            if(vocab.getRating() == rating)
+            {
+                Log.e("HELP","the rating was found");
+                String word = vocab.getTranslationByLanguage(langCode);
+                if (word != null) {
+                    words.add(word);
+                }
+            }
+        }
+        return words;
+    }
+
+
+
     public Vector<Vocab> getVocabs()
     {
         return vocabs;
