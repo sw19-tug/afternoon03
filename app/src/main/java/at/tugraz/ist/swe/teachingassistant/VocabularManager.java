@@ -8,10 +8,13 @@ import java.util.Vector;
 public class VocabularManager {
     private static VocabularManager instance;
     private Vector<Vocab> vocabs;
+    public ArrayList<String> words;
 
     private VocabularManager() {
         vocabs = new Vector<>();
     }
+
+
 
     public static VocabularManager getInstance() {
         if (instance == null) {
@@ -75,6 +78,23 @@ public class VocabularManager {
                 }
             }
         }
+        return words;
+    }
+
+    public ArrayList<String> getSortedWords(String langCode, int sort){
+        Vector<Vocab> vocabs = getVocabs();
+        ArrayList<String> words = new ArrayList<>();
+        for(int x = 0; x <= 2; x++)
+        {
+            for(Vocab vocab: vocabs)
+            {
+                if(vocab.getRating() == x)
+                {
+                    words.add(vocab.getTranslationByLanguage(langCode));
+                }
+            }
+        }
+
         return words;
     }
 

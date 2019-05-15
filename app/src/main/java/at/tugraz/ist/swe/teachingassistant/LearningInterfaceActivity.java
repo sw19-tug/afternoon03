@@ -2,12 +2,10 @@ package at.tugraz.ist.swe.teachingassistant;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Vector;
@@ -51,10 +49,11 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
+                ArrayList<String> words =  vocabulary.words;
                 if(current_position != (words.size() - 1))
                 current_position += 1;
                 changeCurrentWord();
+
             }
         });
     }
@@ -73,7 +72,7 @@ public class LearningInterfaceActivity extends AppCompatActivity {
 
     private void changeCurrentWord(){
         TextView currentWord = (TextView) findViewById(R.id.currentWord);
-        ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
+        ArrayList<String> words =  vocabulary.words;
         currentWord.setText(words.get(current_position));
     }
 
