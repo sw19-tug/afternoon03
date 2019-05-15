@@ -44,6 +44,7 @@ public class ImportActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 performFileSearch();
+                finish();
             }
         });
 
@@ -118,7 +119,6 @@ public class ImportActivity extends AppCompatActivity
                 {
                     String content = readTextFromUri(resultData.getData());
                     importVocabulary(content);
-                    finish();
                 }
                 catch (FileNotFoundException e)
                 {
