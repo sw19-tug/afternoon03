@@ -64,7 +64,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="142dp"
-        android:max="4"
+        android:max="2"
         android:progress="1" />
 
     <!--<Switch
