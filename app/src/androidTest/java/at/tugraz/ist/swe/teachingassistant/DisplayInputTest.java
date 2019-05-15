@@ -33,6 +33,7 @@ public class DisplayInputTest {
         onView(withId(R.id.btn_listadd)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_first_lang)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_second_lang)).check(matches(isDisplayed()));
+        onView(withId(R.id.save_translation)).check(matches(isDisplayed()));
         //onView(withId(R.id.btn_save_translation)).check(matches(isDisplayed()));
         onView(withId(R.id.et_first_lang)).check(matches(isDisplayed()));
         onView(withId(R.id.et_second_lang)).check(matches(isDisplayed()));

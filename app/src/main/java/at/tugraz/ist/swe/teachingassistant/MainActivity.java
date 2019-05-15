@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
         configureAddListViewButton();
         configureExportDialog();
+        configureImportDialog();
         configureLearningButton();
     }
 
@@ -31,12 +32,24 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void configureExportDialog() {
-        Button AddListViewButton = (Button) findViewById(R.id.btn_export);
-        AddListViewButton.setOnClickListener(new View.OnClickListener() {
+        Button ExportViewButton = (Button) findViewById(R.id.btn_export);
+        ExportViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ExportDialog exportDialog = new ExportDialog();
-                exportDialog.show(getSupportFragmentManager(), "Export Dialog");
+                Intent intent = new Intent(MainActivity.this, ExportActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void configureImportDialog() {
+        Button ImportViewButton = (Button) findViewById(R.id.btn_import);
+        ImportViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ImportActivity.class);
+                startActivity(intent);
             }
         });
 
