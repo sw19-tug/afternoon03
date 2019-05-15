@@ -68,9 +68,7 @@ public class ExportActivity extends AppCompatActivity
             pfd.close();
             Toast.makeText(getApplicationContext(), "Export Success", Toast.LENGTH_LONG).show();
 
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
@@ -83,7 +81,10 @@ public class ExportActivity extends AppCompatActivity
             Uri uri = null;
             if (resultData != null) {
                 uri = resultData.getData();
-                Log.d("EXPORT", "Uri: " + uri.toString());
+                if(uri != null)
+                {
+                    Log.d("EXPORT", "Uri: " + uri.toString());
+                }
                 String content = vocabularToJsonString();
                 alterDocument(uri, content);
             } else
@@ -101,7 +102,6 @@ public class ExportActivity extends AppCompatActivity
         Button CancelButton = (Button) findViewById(R.id.export_cancel_btn);
         ExportButton.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
                 EditText ExportFilename = (EditText) findViewById(R.id.export_filename);
                 createFile(ExportFilename.getText().toString());

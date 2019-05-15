@@ -8,6 +8,7 @@ import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,8 +18,10 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intending;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.isInternal;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -36,14 +39,6 @@ public class LANG_008_ExportTest
     public void initValidString() {
         stringToBetyped = "test";
         extension = activityRule.getActivity().getString(R.string.file_extension);
-    }
-
-    private ExportActivity exportActivity = null;
-
-
-    @Before
-    public void setup() {
-        exportActivity = activityRule.getActivity();
     }
 
 
@@ -65,7 +60,7 @@ public class LANG_008_ExportTest
         Instrumentation.ActivityResult result =
                 new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
 
-        intending(toPackage(Intent.ACTION_CREATE_DOCUMENT)).respondWith(result);
+        intending(not(isInternal())).respondWith(result);
 
         onView(withId(R.id.export_ok_btn)).perform(click());
         assertEquals(stringToBetyped+extension, result.getResultData().getType());
@@ -77,12 +72,6 @@ public class LANG_008_ExportTest
     {
         onView(withId(R.id.export_cancel_btn))
             .perform(click());
-    }
-
-    @Test
-    public void checkExportButton()
-    {
-        onView(withId(R.id.export_ok_btn))
-                .perform(click());
+        assertTrue(activityRule.getActivity().isFinishing());
     }
 }

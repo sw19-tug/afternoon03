@@ -17,8 +17,10 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intending;
+import static android.support.test.espresso.intent.matcher.IntentMatchers.isInternal;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.toPackage;
 import static android.support.test.espresso.matcher.ViewMatchers.*;
+import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -63,7 +65,7 @@ public class LANG_008_ImportTest
         Instrumentation.ActivityResult result =
             new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
 
-        intending(toPackage(Intent.ACTION_OPEN_DOCUMENT)).respondWith(result);
+        intending(not(isInternal())).respondWith(result);
 
         onView(withId(R.id.import_ok_btn)).perform(click());
         assertEquals(extension, result.getResultData().getType());
