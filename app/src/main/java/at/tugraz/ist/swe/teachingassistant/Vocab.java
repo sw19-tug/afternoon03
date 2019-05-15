@@ -5,7 +5,7 @@ import java.util.Vector;
 public class Vocab {
     //rating
     private Vector<Word> translation_table;
-    private int rating_ = 3;
+    private int rating_ = 2;
 
     public Vocab() {
     }

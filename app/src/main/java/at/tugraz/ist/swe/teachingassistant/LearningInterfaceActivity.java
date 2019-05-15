@@ -77,10 +77,12 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         currentWord.setText(words.get(current_position));
     }
 
+
+
     private void configureSeekBar()
     {
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
-
+        seekBar.setProgress(vocabulary.getVocabs().get(current_position).getRating());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
             int rating = 0;

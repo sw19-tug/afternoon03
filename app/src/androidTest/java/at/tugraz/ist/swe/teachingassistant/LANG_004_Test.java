@@ -77,7 +77,7 @@ public class LANG_004_Test {
         VocabularManager vocabulary = VocabularManager.getInstance();
         Vector<Vocab> vocabs = vocabulary.getVocabs();
         int rating = vocabs.get(0).getRating();
-        assertEquals(5, rating);
+        assertEquals(4, rating);
     }
 
 
