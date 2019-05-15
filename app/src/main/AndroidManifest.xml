@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="at.tugraz.ist.swe.teachingassistant">
+    package="at.tugraz.ist.swe.teachingassistant">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
@@ -11,13 +11,16 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
-
+            <activity android:name=".LearningInterfaceActivity" />
+            <activity android:name=".LearningListActivity" />
+            <activity
+               android:name=".ExportDialog"
+               android:theme="@android:style/Theme.Holo.Dialog" />
         <activity android:name=".MainActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".AddVocabActivity">
@@ -32,6 +35,7 @@
                   android:theme="@style/Theme.AppCompat.Dialog"
                   android:excludeFromRecents="true">
         </activity>
+        <activity android:name=".VocabularyActivity"></activity>
     </application>
 
 </manifest>

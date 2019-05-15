@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         configureAddListViewButton();
         configureExportDialog();
         configureImportDialog();
+        configureLearningButton();
     }
 
     private void configureAddListViewButton() {
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         AddListViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, AddVocabActivity.class);
+                Intent intent = new Intent(MainActivity.this, VocabularyActivity.class);
                 startActivity(intent);
             }
         });
@@ -48,6 +49,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ImportActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void configureLearningButton() {
+        Button AddListViewButton = (Button) findViewById(R.id.btn_learning);
+        AddListViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LearningListActivity.class);
                 startActivity(intent);
             }
         });
