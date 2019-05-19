@@ -66,12 +66,9 @@
         android:id="@+id/spinnerSort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_changeLanguage"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="278dp"
-        android:layout_marginBottom="-20dp"
-        android:entries="@array/spinnerItemsSort"
-    />
+        android:layout_alignStart="@+id/btn_changeLanguage"
+        android:layout_below="@+id/learningTitle"
+        android:entries="@array/spinnerItemsSort" />
 
 
 </RelativeLayout>

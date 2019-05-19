@@ -8,7 +8,6 @@ import java.util.Vector;
 public class VocabularManager {
     private static VocabularManager instance;
     private Vector<Vocab> vocabs;
-    public ArrayList<String> words;
 
     private VocabularManager() {
         vocabs = new Vector<>();
@@ -63,15 +62,37 @@ public class VocabularManager {
         return words;
     }
 
+
+    private void changeVocabOrder(String langCode, ArrayList<String> words)
+    {
+         Vector<Vocab> vocabs_new = new Vector<>();
+         ArrayList<String> words_tmp = new ArrayList<>(words);
+
+         while (!vocabs.isEmpty())
+         {
+             for (Vocab vocab : vocabs)
+             {
+                 if(vocab.getTranslationByLanguage(langCode).equals(words_tmp.get(0)))
+                 {
+
+                     vocabs_new.add(vocab);
+
+                     vocabs.remove(vocab);
+                     words_tmp.remove(0);
+                     break;
+                 }
+             }
+         }
+         vocabs = vocabs_new;
+    }
+
     public ArrayList<String> getWordsFromLanguageRatingString(String langCode, int rating)
     {
         ArrayList<String> words = new ArrayList<>();
         for (Vocab vocab : vocabs)
         {
-            Log.e("HELP",String.valueOf(vocab.getRating()));
             if(vocab.getRating() == rating)
             {
-                Log.e("HELP","the rating was found");
                 String word = vocab.getTranslationByLanguage(langCode);
                 if (word != null) {
                     words.add(word);
@@ -81,20 +102,37 @@ public class VocabularManager {
         return words;
     }
 
-    public ArrayList<String> getSortedWords(String langCode, int sort){
+    public ArrayList<String> getSortedWords(String langCode, int sort)
+    {
         Vector<Vocab> vocabs = getVocabs();
         ArrayList<String> words = new ArrayList<>();
-        for(int x = 0; x <= 2; x++)
+        if(sort == 1)
         {
-            for(Vocab vocab: vocabs)
+            for(int i = 0; i <= 2; i++)
             {
-                if(vocab.getRating() == x)
+                for(Vocab vocab: vocabs)
                 {
-                    words.add(vocab.getTranslationByLanguage(langCode));
+                    if(vocab.getRating() == i)
+                    {
+                        words.add(vocab.getTranslationByLanguage(langCode));
+                    }
                 }
             }
         }
-
+        else
+        {
+            for(int i = 2; i >= 0; i--)
+            {
+                for(Vocab vocab: vocabs)
+                {
+                    if(vocab.getRating() == i)
+                    {
+                        words.add(vocab.getTranslationByLanguage(langCode));
+                    }
+                }
+            }
+        }
+        changeVocabOrder(langCode,words);
         return words;
     }
 

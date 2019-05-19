@@ -49,7 +49,7 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> words =  vocabulary.words;
+                ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
                 if(current_position != (words.size() - 1))
                 current_position += 1;
                 changeCurrentWord();
@@ -71,8 +71,11 @@ public class LearningInterfaceActivity extends AppCompatActivity {
     }
 
     private void changeCurrentWord(){
+
+        SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
+        seekBar.setProgress(vocabulary.getVocabs().get(current_position).getRating());
         TextView currentWord = (TextView) findViewById(R.id.currentWord);
-        ArrayList<String> words =  vocabulary.words;
+        ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
         currentWord.setText(words.get(current_position));
     }
 

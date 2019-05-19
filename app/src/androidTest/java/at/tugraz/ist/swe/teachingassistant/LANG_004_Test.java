@@ -46,8 +46,8 @@ public class LANG_004_Test {
     public void setUpList() {
         //There seems to be an error
         VocabularManager vocabulary = VocabularManager.getInstance();
-        Word word1 = new Word("hello", "en");
-        Word word2 = new Word("shppp", "fi");
+        Word word1 = new Word("first", "en");
+        Word word2 = new Word("first_trans", "fi");
         vocabulary.addVocab(word1, word2);
 
         Intent intent = new Intent();
@@ -77,8 +77,9 @@ public class LANG_004_Test {
         VocabularManager vocabulary = VocabularManager.getInstance();
         Vector<Vocab> vocabs = vocabulary.getVocabs();
         int rating = vocabs.get(0).getRating();
-        assertEquals(4, rating);
+        assertEquals(2, rating);
     }
+
 
 
 }

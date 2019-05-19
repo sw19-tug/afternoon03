@@ -36,7 +36,6 @@ public class LearningListActivity extends AppCompatActivity  implements AdapterV
         adapter_language_list = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
         ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
         listView_first_language.setAdapter(adapter_language_list);
-        vocabulary.words = vocabulary.getWordsFromLanguageString(currentLang);
 
     }
     @Override
@@ -58,7 +57,6 @@ public class LearningListActivity extends AppCompatActivity  implements AdapterV
                 currentLang = currentLang.equals("en") ? "fi" : "en";
                 TextView language_title = (TextView) findViewById(R.id.languageTitle);
                 language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
-                Log.e("HELP", "somethiiiing");
                 if(position_ == 0)
                 {
                     VocabularManager vocabulary = VocabularManager.getInstance();
@@ -99,37 +97,34 @@ public class LearningListActivity extends AppCompatActivity  implements AdapterV
         {
             if(parent.getItemAtPosition(position).toString().equals("Sort"))
             {
-                /*VocabularManager vocabulary = VocabularManager.getInstance();
-                ArrayAdapter adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
+                adapter_language_list.clear();
+                VocabularManager vocabulary = VocabularManager.getInstance();
+                adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
                 ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
-                listView_first_language.setAdapter(adapter_language_list);*/
+                listView_first_language.setAdapter(adapter_language_list);
 
             }
 
             else
             {
                 adapter_language_list.clear();
-                Log.e("HELP", "in sorting spinner");
                 VocabularManager vocabulary = VocabularManager.getInstance();
-                adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getSortedWords(currentLang, 1));
+                adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getSortedWords(currentLang, position));
                 ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
                 listView_first_language.setAdapter(adapter_language_list);
-                vocabulary.words = vocabulary.getSortedWords(currentLang, 1);
             }
-
 
         }
 
         else
         {
-            Log.e("HELP", "in rating spinner");
             if(parent.getItemAtPosition(position).toString().equals("Filter"))
             {
-                /*VocabularManager vocabulary = VocabularManager.getInstance();
-                ArrayAdapter adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
+                adapter_language_list.clear();
+                VocabularManager vocabulary = VocabularManager.getInstance();
+                adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
                 ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
-                listView_first_language.setAdapter(adapter_language_list);*/
-
+                listView_first_language.setAdapter(adapter_language_list);
             }
             else
             {
@@ -138,12 +133,9 @@ public class LearningListActivity extends AppCompatActivity  implements AdapterV
                 adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageRatingString(currentLang, position -1));
                 ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
                 listView_first_language.setAdapter(adapter_language_list);
-                vocabulary.words = vocabulary.getWordsFromLanguageRatingString(currentLang, position -1);
-
             }
-            position_=position;
+            position_= position;
         }
-
     }
 
     public void onNothingSelected(AdapterView<?> arg0) {
