@@ -26,7 +26,7 @@ import static org.junit.Assert.assertTrue;
 public class LANG_009_ShareTest
 {
 
-    private String extension;
+    private String extension = ".tast";
 
     @Rule
     public IntentsTestRule<MainActivity> activityRule = new IntentsTestRule<>(MainActivity.class);
@@ -38,4 +38,21 @@ public class LANG_009_ShareTest
         onView(withId(R.id.share_button)).check(matches(isClickable()));
     }
 
+
+    @Test
+    public void checkShareActionClick()
+    {
+        onView(withId(R.id.share_button)).check(matches(isDisplayed()));
+
+        Intent resultData = new Intent(Intent.ACTION_SEND);
+        resultData.setType(extension);
+        Instrumentation.ActivityResult result =
+            new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
+
+        intending(not(isInternal())).respondWith(result);
+
+        onView(withId(R.id.share_button)).perform(click());
+        assertEquals(extension, result.getResultData().getType());
+        assertTrue(activityRule.getActivity().isFinishing());
+    }
 }
