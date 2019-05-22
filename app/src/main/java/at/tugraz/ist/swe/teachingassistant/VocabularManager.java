@@ -27,6 +27,10 @@ public class VocabularManager {
         return new ArrayList<Vocab> (vocabs);
     }
 
+    public void setVocabs(Vector<Vocab> input)  {
+        vocabs = input;
+    }
+
     public ArrayList<String> getWordsFromVocabs(ArrayList<Vocab> vocabs, String languageCode){
         ArrayList<String> oneLangList = new ArrayList<>();
         for (Vocab vocab: vocabs){
