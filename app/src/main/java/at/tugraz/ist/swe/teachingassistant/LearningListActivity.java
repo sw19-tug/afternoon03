@@ -71,51 +71,7 @@ public class LearningListActivity extends AppCompatActivity {
         AlphaSortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VocabularManager vocabulary = VocabularManager.getInstance();
-                ArrayList<String> tagsList = new ArrayList<>();
-                for (Vocab vocab : vocabulary.getVocabs()) {
-                    String[] tags = vocab.getTags().split(",");
-                    for (String tag : tags) {
-                        if (!tagsList.contains(tag)) {
-                            tagsList.add(tag);
-                        }
-                    }
-                }
-
-                ArrayList<Vocab> allVocab = (ArrayList) vocabulary.getVocabs().clone();
-                ArrayList<Vocab> sortedVocab = new ArrayList<>();
-                ArrayList<String> sortedVocabString = new ArrayList<>();
-                if (sortingStateTags.isEmpty()) {
-                    sortingStateTags = "ASC";
-                    Collections.sort(tagsList);
-                    for (String tag : tagsList) {
-                        ArrayList<Vocab> locatedVocabs = new ArrayList<>();
-                        for (Vocab vocab : allVocab) {
-                            String[] vocabTags = vocab.getTags().split(",");
-                            if (vocabTags.length > 0 && vocabTags[0].equals(tag)) {
-                                sortedVocab.add(vocab);
-                            }
-                        }
-                    }
-                    sortedVocabString = vocabulary.getWordsFromVocabs(sortedVocab, currentLang);
-                } else if (sortingStateTags.equals("ASC")) {
-                    sortingStateTags = "DSC";
-                    Collections.sort(tagsList);
-                    Collections.reverse(tagsList);
-                    for (String tag : tagsList) {
-                        ArrayList<Vocab> locatedVocabs = new ArrayList<>();
-                        for (Vocab vocab : allVocab) {
-                            String[] vocabTags = vocab.getTags().split(",");
-                            if (vocabTags.length > 0 && vocabTags[0].equals(tag)) {
-                                sortedVocab.add(vocab);
-                            }
-                        }
-                    }
-                    sortedVocabString = vocabulary.getWordsFromVocabs(sortedVocab, currentLang);
-                } else if (sortingStateTags.equals("DSC")) {
-                    sortingStateTags = "";
-                    sortedVocabString = vocabulary.getWordsFromLanguageString(currentLang);
-                }
+                ArrayList<String> sortedVocabString = sortByTags();
                 Button tags = (Button) findViewById(R.id.btn_tags_sort);
                 tags.setText("Tag Sort " + sortingStateTags);
                 ArrayAdapter adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, sortedVocabString);
@@ -125,24 +81,62 @@ public class LearningListActivity extends AppCompatActivity {
         });
     }
 
+    public ArrayList<String> sortByTags()
+    {
+        VocabularManager vocabulary = VocabularManager.getInstance();
+        ArrayList<String> tagsList = new ArrayList<>();
+        for (Vocab vocab : vocabulary.getVocabs()) {
+            String[] tags = vocab.getTags().split(",");
+            for (String tag : tags) {
+                if (!tagsList.contains(tag)) {
+                    tagsList.add(tag);
+                }
+            }
+        }
+
+        ArrayList<Vocab> allVocab = (ArrayList) vocabulary.getVocabs().clone();
+        ArrayList<Vocab> sortedVocab = new ArrayList<>();
+        ArrayList<String> sortedVocabString = new ArrayList<>();
+        if (sortingStateTags.isEmpty()) {
+            sortingStateTags = "ASC";
+            Collections.sort(tagsList);
+            for (String tag : tagsList) {
+                ArrayList<Vocab> locatedVocabs = new ArrayList<>();
+                for (Vocab vocab : allVocab) {
+                    String[] vocabTags = vocab.getTags().split(",");
+                    if (vocabTags.length > 0 && vocabTags[0].equals(tag)) {
+                        sortedVocab.add(vocab);
+                    }
+                }
+            }
+            sortedVocabString = vocabulary.getWordsFromVocabs(sortedVocab, currentLang);
+        } else if (sortingStateTags.equals("ASC")) {
+            sortingStateTags = "DSC";
+            Collections.sort(tagsList);
+            Collections.reverse(tagsList);
+            for (String tag : tagsList) {
+                ArrayList<Vocab> locatedVocabs = new ArrayList<>();
+                for (Vocab vocab : allVocab) {
+                    String[] vocabTags = vocab.getTags().split(",");
+                    if (vocabTags.length > 0 && vocabTags[0].equals(tag)) {
+                        sortedVocab.add(vocab);
+                    }
+                }
+            }
+            sortedVocabString = vocabulary.getWordsFromVocabs(sortedVocab, currentLang);
+        } else if (sortingStateTags.equals("DSC")) {
+            sortingStateTags = "";
+            sortedVocabString = vocabulary.getWordsFromLanguageString(currentLang);
+        }
+        return sortedVocabString;
+    }
+
     private void changeAlphabeticalSortingOrder() {
         Button TagsSortButton = (Button) findViewById(R.id.btn_alphabetical);
         TagsSortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VocabularManager vocabulary = VocabularManager.getInstance();
-                ArrayList<String> sortedVocab = (ArrayList) (vocabulary.getWordsFromLanguageString(currentLang)).clone();
-                if (sortingState.isEmpty()) {
-                    sortingState = "ASC";
-                    Collections.sort(sortedVocab);
-                } else if (sortingState.equals("ASC")) {
-                    sortingState = "DSC";
-                    Collections.sort(sortedVocab);
-                    Collections.reverse(sortedVocab);
-                } else if (sortingState.equals("DSC")) {
-                    sortingState = "";
-                    sortedVocab = vocabulary.getWordsFromLanguageString(currentLang);
-                }
+                ArrayList<String> sortedVocab = sortByAlphabetical();
                 Button asc_dsc = (Button) findViewById(R.id.btn_alphabetical);
                 asc_dsc.setText("Alphabetical Sort " + sortingState);
                 ArrayAdapter adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, sortedVocab);
@@ -150,6 +144,23 @@ public class LearningListActivity extends AppCompatActivity {
                 listView_first_language.setAdapter(adapter_language_list);
             }
         });
+    }
+
+    public ArrayList<String> sortByAlphabetical(){
+        VocabularManager vocabulary = VocabularManager.getInstance();
+        ArrayList<String> sortedVocab = (ArrayList) (vocabulary.getWordsFromLanguageString(currentLang)).clone();
+        if (sortingState.isEmpty()) {
+            sortingState = "ASC";
+            Collections.sort(sortedVocab);
+        } else if (sortingState.equals("ASC")) {
+            sortingState = "DSC";
+            Collections.sort(sortedVocab);
+            Collections.reverse(sortedVocab);
+        } else if (sortingState.equals("DSC")) {
+            sortingState = "";
+            sortedVocab = vocabulary.getWordsFromLanguageString(currentLang);
+        }
+        return sortedVocab;
     }
 
     private void filterTags() {
@@ -161,40 +172,7 @@ public class LearningListActivity extends AppCompatActivity {
                 Log.e("Action ID ", Integer.toString(actionId));
                 if (actionId == KeyEvent.KEYCODE_ENDCALL) {
                     Log.e("Button hit", filterTagsInput.toString());
-                    VocabularManager vocabulary = VocabularManager.getInstance();
-                    ArrayList<String> tagsList = new ArrayList<>();
-                    for (Vocab vocab : vocabulary.getVocabs()) {
-                        String[] tags = vocab.getTags().split(",");
-                        for (String tag : tags) {
-                            if (!tagsList.contains(tag)) {
-                                tagsList.add(tag);
-                            }
-                        }
-                    }
-                    ArrayList<String> filteredTagsList = new ArrayList<>();
-                    String filterInput = filterTagsInput.getText().toString();
-                    ArrayList<Vocab> allVocabs = (ArrayList) vocabulary.getVocabs().clone();
-                    ArrayList<String> filteredVocabs = new ArrayList<>();
-                    if (filterInput.isEmpty()) {
-                        filteredVocabs = vocabulary.getWordsFromLanguageString(currentLang);
-                    } else {
-                        for (String tag : tagsList) {
-                            if (tag.contains(filterInput)) {
-                                filteredTagsList.add(tag);
-                            }
-                        }
-                        Log.e("Tags List: ", filteredTagsList.toString());
-                        for (Vocab vocab : allVocabs) {
-                            if (vocab.getTags().length() > 0) {
-                                for (String tag : filteredTagsList) {
-                                    if (vocab.getTags().contains(tag)) {
-                                        String selectedWord = vocab.getTranslationByLanguage(currentLang);
-                                        filteredVocabs.add(selectedWord);
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    ArrayList<String> filteredVocabs = filterByTags(filterTagsInput.getText().toString());
                     filterTagsInput.clearFocus();
                     ArrayAdapter adapter_language_list = new ArrayAdapter<String>(LearningListActivity.this, android.R.layout.simple_list_item_1, filteredVocabs);
                     ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
@@ -204,6 +182,44 @@ public class LearningListActivity extends AppCompatActivity {
             return false;
             }
         });
+    }
+
+    public ArrayList<String> filterByTags(String filterTagsInput)  {
+        VocabularManager vocabulary = VocabularManager.getInstance();
+        ArrayList<String> tagsList = new ArrayList<>();
+        for (Vocab vocab : vocabulary.getVocabs()) {
+            String[] tags = vocab.getTags().split(",");
+            for (String tag : tags) {
+                if (!tagsList.contains(tag)) {
+                    tagsList.add(tag);
+                }
+            }
+        }
+        ArrayList<String> filteredTagsList = new ArrayList<>();
+        String filterInput = filterTagsInput;
+        ArrayList<Vocab> allVocabs = (ArrayList) vocabulary.getVocabs().clone();
+        ArrayList<String> filteredVocabs = new ArrayList<>();
+        if (filterInput.isEmpty()) {
+            filteredVocabs = vocabulary.getWordsFromLanguageString(currentLang);
+        } else {
+            for (String tag : tagsList) {
+                if (tag.contains(filterInput)) {
+                    filteredTagsList.add(tag);
+                }
+            }
+            Log.e("Tags List: ", filteredTagsList.toString());
+            for (Vocab vocab : allVocabs) {
+                if (vocab.getTags().length() > 0) {
+                    for (String tag : filteredTagsList) {
+                        if (vocab.getTags().contains(tag)) {
+                            String selectedWord = vocab.getTranslationByLanguage(currentLang);
+                            filteredVocabs.add(selectedWord);
+                        }
+                    }
+                }
+            }
+        }
+        return filteredVocabs;
     }
 
 

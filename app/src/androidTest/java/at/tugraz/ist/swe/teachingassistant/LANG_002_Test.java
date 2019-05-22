@@ -51,8 +51,8 @@ View child0;
         Word word2 = new Word("fi_test", "fi");
         Word word3 = new Word("en_test2","en");
         Word word4 = new Word("fi_test2","fi");
-        vocabulary.addVocab(word1, word2);
-        vocabulary.addVocab(word3, word4);
+        vocabulary.addVocab(word1, word2, null);
+        vocabulary.addVocab(word3, word4, null);
     }
 
     @Test

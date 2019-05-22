@@ -15,7 +15,9 @@ public class Vocab {
 
     public void setTags(String tags)
     {
-        this.tags = tags;
+        if (tags != null) {
+            this.tags = tags;
+        }
     }
 
     public Vocab() {

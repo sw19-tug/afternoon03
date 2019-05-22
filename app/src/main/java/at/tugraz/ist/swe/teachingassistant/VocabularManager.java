@@ -1,5 +1,6 @@
 package at.tugraz.ist.swe.teachingassistant;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.lang.reflect.Array;
@@ -10,7 +11,7 @@ public class VocabularManager {
     private static VocabularManager instance;
     private Vector<Vocab> vocabs;
 
-    private VocabularManager() {
+    public VocabularManager() {
         vocabs = new Vector<>();
     }
 
@@ -33,7 +34,7 @@ public class VocabularManager {
         return oneLangList;
     }
 
-    public void addVocab(Word word1, Word word2, String tags) {
+    public void addVocab(Word word1, Word word2, @Nullable String tags) {
         Vocab vocab = new Vocab();
         vocab.setTags(tags);
         Vector<Word> words = new Vector<Word>();
@@ -45,7 +46,6 @@ public class VocabularManager {
         for (Vocab vocab1 : vocabs) {
             for (Word word3 : vocab1.getTranslation_table()) {
 
-                Log.e("Blabla ", word3.getText());
             }
         }
     }
@@ -72,6 +72,10 @@ public class VocabularManager {
             }
         }
         return words;
+    }
+
+    public void clearVocabs(){
+        vocabs.clear();
     }
 
     public int export(String filename){
