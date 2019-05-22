@@ -8,6 +8,7 @@ import java.util.Vector;
 public class VocabularManager {
     private static VocabularManager instance;
     private Vector<Vocab> vocabs;
+    private Vector<Vocab> vocabs_changed;
 
     private VocabularManager() {
         vocabs = new Vector<>();
@@ -37,7 +38,9 @@ public class VocabularManager {
             }
         }
     }
-    public Vector<String> getWordsFromLanguage(String langCode) {
+    public Vector<String> getWordsFromLanguage(String langCode)
+    {
+
         Vector<String> words = new Vector<>();
         for (Vocab vocab : vocabs) {
             String word = vocab.getTranslationByLanguage(langCode);
@@ -50,10 +53,10 @@ public class VocabularManager {
     }
 
 
-    // just for VocabularyAdapter
-    public ArrayList<String> getWordsFromLanguageString(String langCode) {
+
+    public ArrayList<String> getWordsFromChangedLanguageString(String langCode) {
         ArrayList<String> words = new ArrayList<>();
-        for (Vocab vocab : vocabs) {
+        for (Vocab vocab : vocabs_changed) {
             String word = vocab.getTranslationByLanguage(langCode);
             if (word != null) {
                 words.add(word);
@@ -63,27 +66,45 @@ public class VocabularManager {
     }
 
 
+
+    // just for VocabularyAdapter
+    public ArrayList<String> getWordsFromLanguageString(String langCode) {
+        ArrayList<String> words = new ArrayList<>();
+        for (Vocab vocab : vocabs) {
+            String word = vocab.getTranslationByLanguage(langCode);
+            if (word != null) {
+                words.add(word);
+            }
+        }
+        changeVocabOrder(langCode,words);
+        return words;
+    }
+
+
     private void changeVocabOrder(String langCode, ArrayList<String> words)
     {
          Vector<Vocab> vocabs_new = new Vector<>();
+        Vector<Vocab> vocabs_tmp = new Vector<>(vocabs);
          ArrayList<String> words_tmp = new ArrayList<>(words);
-
-         while (!vocabs.isEmpty())
+         while (!vocabs_tmp.isEmpty())
          {
-             for (Vocab vocab : vocabs)
+             for (Vocab vocab : vocabs_tmp)
              {
-                 if(vocab.getTranslationByLanguage(langCode).equals(words_tmp.get(0)))
+                 if(words_tmp.isEmpty())
                  {
-
-                     vocabs_new.add(vocab);
-
-                     vocabs.remove(vocab);
-                     words_tmp.remove(0);
-                     break;
-                 }
+                     vocabs_changed = vocabs_new;
+                     return;
+                     }
+                     if(vocab.getTranslationByLanguage(langCode).equals(words_tmp.get(0)))
+                     {
+                         vocabs_new.add(vocab);
+                         vocabs_tmp.remove(vocab);
+                         words_tmp.remove(0);
+                         break;
+                     }
              }
          }
-         vocabs = vocabs_new;
+         vocabs_changed = vocabs_new;
     }
 
     public ArrayList<String> getWordsFromLanguageRatingString(String langCode, int rating)
@@ -99,6 +120,8 @@ public class VocabularManager {
                 }
             }
         }
+
+        changeVocabOrder(langCode,words);
         return words;
     }
 
@@ -141,6 +164,23 @@ public class VocabularManager {
     public Vector<Vocab> getVocabs()
     {
         return vocabs;
+    }
+    public Vector<Vocab> getChangedVocabs()
+    {
+        return vocabs_changed;
+    }
+
+    public void changeRatingOfVocabInVocabs(Vocab voc, int rating)
+    {
+        for(Vocab vocab : vocabs)
+        {
+            if(vocab.hashCode() == voc.hashCode())
+            {
+                Log.e("TEST","FOUND THE VOCAB");
+
+                vocab.setRating(rating);
+            }
+        }
     }
 
     public int export(String filename){

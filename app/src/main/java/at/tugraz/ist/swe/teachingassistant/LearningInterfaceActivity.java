@@ -49,7 +49,7 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
+                ArrayList<String> words =  vocabulary.getWordsFromChangedLanguageString(currentLang);
                 if(current_position != (words.size() - 1))
                 current_position += 1;
                 changeCurrentWord();
@@ -73,9 +73,10 @@ public class LearningInterfaceActivity extends AppCompatActivity {
     private void changeCurrentWord(){
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBar.setProgress(vocabulary.getVocabs().get(current_position).getRating());
+        seekBar.setProgress(vocabulary.getChangedVocabs().get(current_position).getRating());
+
         TextView currentWord = (TextView) findViewById(R.id.currentWord);
-        ArrayList<String> words =  vocabulary.getWordsFromLanguageString(currentLang);
+        ArrayList<String> words =  vocabulary.getWordsFromChangedLanguageString(currentLang);
         currentWord.setText(words.get(current_position));
     }
 
@@ -84,7 +85,7 @@ public class LearningInterfaceActivity extends AppCompatActivity {
     private void configureSeekBar()
     {
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
-        seekBar.setProgress(vocabulary.getVocabs().get(current_position).getRating());
+        seekBar.setProgress(vocabulary.getChangedVocabs().get(current_position).getRating());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
         {
             int rating = 0;
@@ -102,7 +103,9 @@ public class LearningInterfaceActivity extends AppCompatActivity {
             public void onStopTrackingTouch(SeekBar seekBar)
             {
                 VocabularManager vocabulary = VocabularManager.getInstance();
-                Vector<Vocab> vocabs = vocabulary.getVocabs();
+                Vector<Vocab> vocabs = vocabulary.getChangedVocabs();
+
+                vocabulary.changeRatingOfVocabInVocabs(vocabs.get(current_position),rating);
                 vocabs.get(current_position).setRating(rating);
             }
         });

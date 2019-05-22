@@ -18,6 +18,9 @@ public class LearningListActivity extends AppCompatActivity  implements AdapterV
     private String currentLang = "";
     private int position_ = 0;
     private ArrayAdapter adapter_language_list;
+    private Spinner spinner;
+    private Spinner spinner2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +31,13 @@ public class LearningListActivity extends AppCompatActivity  implements AdapterV
         language_title.setText(!currentLang.equals("en") ? "Finnish" : "English");
         configureAddListViewButton();
         configureListViewItems();
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setOnItemSelectedListener(this);
-        Spinner spinner2 = (Spinner) findViewById(R.id.spinnerSort);
+        spinner2 = (Spinner) findViewById(R.id.spinnerSort);
         spinner2.setOnItemSelectedListener(this);
+
         VocabularManager vocabulary = VocabularManager.getInstance();
+
         adapter_language_list = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
         ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
         listView_first_language.setAdapter(adapter_language_list);
@@ -41,7 +46,8 @@ public class LearningListActivity extends AppCompatActivity  implements AdapterV
     @Override
     protected void onResume() {
         super.onResume();
-
+        spinner.setSelection(0);
+        spinner2.setSelection(0);
         /*VocabularManager vocabulary = VocabularManager.getInstance();
         ArrayAdapter adapter_language_list = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
         ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
