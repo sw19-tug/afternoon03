@@ -40,37 +40,19 @@
         android:textSize="20dp"
         />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_below="@+id/languageTitle"
-        android:id="@+id/asc_dsc"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
-        android:textSize="20dp"
-        />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=""
-        android:layout_below="@+id/asc_dsc"
-        android:id="@+id/tv_tags_sort"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="30dp"
-        android:textSize="20dp"
-        />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_tags_sort"
+        android:layout_below="@+id/btn_alphabetical"
         android:id="@+id/input_tags"
         android:layout_marginTop="30dp"
         android:layout_marginLeft="30dp"
         android:textSize="20dp"
         android:hint="Enter tag(s) spaced with commas"
+        android:maxLines="1"
+        android:inputType="text"
+        android:imeOptions="actionDone"
         />
 
     <Button
@@ -89,7 +71,7 @@
         android:id="@+id/btn_alphabetical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Change Alphabetical"
+        android:text="Alphabetical Sort"
         android:layout_alignRight="@id/learningTitle"
         android:layout_below="@id/btn_changeLanguage"
         android:layout_marginTop="20dp"
@@ -101,7 +83,7 @@
         android:id="@+id/btn_tags_sort"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/btn_alphabetical"
+        android:layout_below="@id/languageTitle"
         android:layout_alignRight="@id/learningTitle"
         android:layout_marginRight="30dp"
         android:text="Tag Sort"
