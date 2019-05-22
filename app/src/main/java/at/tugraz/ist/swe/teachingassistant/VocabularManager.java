@@ -182,6 +182,11 @@ public class VocabularManager {
         }
     }
 
+    public void clear()
+    {
+        vocabs = new Vector<>();
+    }
+
     public int export(String filename){
         return 0;
     }
