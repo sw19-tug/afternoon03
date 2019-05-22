@@ -9,6 +9,7 @@ import java.util.Vector;
 
 public class VocabularManager {
     private static VocabularManager instance;
+
     private Vector<Vocab> vocabs;
 
     public VocabularManager() {
@@ -49,9 +50,11 @@ public class VocabularManager {
             }
         }
     }
+      
     public Vector<String> getWordsFromLanguage(String langCode) {
         Vector<String> words = new Vector<>();
         for (Vocab vocab : vocabs) {
+
             String word = vocab.getTranslationByLanguage(langCode);
             if (word != null)
             {
