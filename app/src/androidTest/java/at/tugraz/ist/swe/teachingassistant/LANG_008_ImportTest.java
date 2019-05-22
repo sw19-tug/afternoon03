@@ -41,17 +41,10 @@ public class LANG_008_ImportTest
         extension =  activityRule.getActivity().getString(R.string.file_extension);
     }
 
-    private ImportActivity importActivity = null;
-
-
-    @Before
-    public void setup() {
-        importActivity = activityRule.getActivity();
-    }
 
     @Test
     public void checkImportInterface() {
-        onView(withId(R.id.import_ok_btn)).check(matches(isClickable()));
+        onView(withId(R.id.import_ok_btn)).check(matches(isDisplayed()));
         onView(withId(R.id.import_ok_btn)).check(matches(withText("Import")));
         onView(withId(R.id.import_cancel_btn)).check(matches(isClickable()));
         onView(withId(R.id.import_cancel_btn)).check(matches(withText("Cancel")));
