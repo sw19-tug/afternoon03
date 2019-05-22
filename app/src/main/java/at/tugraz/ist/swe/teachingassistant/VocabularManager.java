@@ -165,6 +165,7 @@ public class VocabularManager {
     {
         return vocabs;
     }
+
     public Vector<Vocab> getChangedVocabs()
     {
         return vocabs_changed;
@@ -176,8 +177,6 @@ public class VocabularManager {
         {
             if(vocab.hashCode() == voc.hashCode())
             {
-                Log.e("TEST","FOUND THE VOCAB");
-
                 vocab.setRating(rating);
             }
         }
