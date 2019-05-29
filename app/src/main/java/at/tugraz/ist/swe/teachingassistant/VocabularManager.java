@@ -7,6 +7,7 @@ import java.util.Vector;
 
 public class VocabularManager {
     private static VocabularManager instance;
+
     private Vector<Vocab> vocabs;
     private Vector<Vocab> vocabs_changed;
 
@@ -23,6 +24,11 @@ public class VocabularManager {
         return instance;
     }
 
+    public void setVocabs(Vector<Vocab> vocabs)
+    {
+        this.vocabs = vocabs;
+    }
+
     public void addVocab(Word word1, Word word2) {
         Vocab vocab = new Vocab();
         Vector<Word> words = new Vector<Word>();
@@ -30,19 +36,13 @@ public class VocabularManager {
         words.add(word2);
         vocab.setTranslation_table(words);
         vocabs.add(vocab);
-
-        for (Vocab vocab1 : vocabs) {
-            for (Word word3 : vocab1.getTranslation_table()) {
-
-                Log.e("Blabla ", word3.getText());
-            }
-        }
     }
     public Vector<String> getWordsFromLanguage(String langCode)
     {
 
         Vector<String> words = new Vector<>();
         for (Vocab vocab : vocabs) {
+
             String word = vocab.getTranslationByLanguage(langCode);
             if (word != null)
             {
@@ -124,7 +124,7 @@ public class VocabularManager {
         changeVocabOrder(langCode,words);
         return words;
     }
-
+  
     public ArrayList<String> getSortedWords(String langCode, int sort)
     {
         Vector<Vocab> vocabs = getVocabs();
@@ -158,14 +158,12 @@ public class VocabularManager {
         changeVocabOrder(langCode,words);
         return words;
     }
-
-
-
+  
     public Vector<Vocab> getVocabs()
     {
         return vocabs;
     }
-
+  
     public Vector<Vocab> getChangedVocabs()
     {
         return vocabs_changed;
