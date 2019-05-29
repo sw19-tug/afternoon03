@@ -78,7 +78,7 @@ public class LANG_003 {
         Assert.assertEquals("t", sortedVocabs.get(0));
         Assert.assertEquals( "a", sortedVocabs.get(1));
         Assert.assertEquals( "z", sortedVocabs.get(2));
-    }
+
 
     @Test
     public void sortTagsTest() throws Exception {
