@@ -65,6 +65,11 @@ public class VocabularManager {
         return vocabs;
     }
 
+    public void clearVocabs()
+    {
+        vocabs.clear();
+    }
+
     public int export(String filename){
         return 0;
     }

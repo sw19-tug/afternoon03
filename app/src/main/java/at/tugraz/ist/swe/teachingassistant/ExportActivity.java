@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,11 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.gson.Gson;
-
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 public class ExportActivity extends AppCompatActivity
 {
@@ -39,6 +36,7 @@ public class ExportActivity extends AppCompatActivity
 
     private void createFile(String fileName) {
         Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+     //   String path = Environment.get().getPath()
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         intent.setType(mimeType);
@@ -46,16 +44,6 @@ public class ExportActivity extends AppCompatActivity
         startActivityForResult(intent, WRITE_REQUEST_CODE);
     }
 
-
-
-    public String vocabularToJsonString()
-    {
-        Gson gson = new Gson();
-        VocabularManager manager = VocabularManager.getInstance();
-        String jsonString = gson.toJson(manager.getVocabs());
-        Log.e("JSON", jsonString);
-        return jsonString;
-    }
 
     private void alterDocument(Uri uri, String content_string) {
         try {
@@ -78,6 +66,7 @@ public class ExportActivity extends AppCompatActivity
                                  Intent resultData) {
 
         if (requestCode == WRITE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            JsonHandler jsonHandler = new JsonHandler();
             Uri uri = null;
             if (resultData != null) {
                 uri = resultData.getData();
@@ -85,7 +74,7 @@ public class ExportActivity extends AppCompatActivity
                 {
                     Log.d("EXPORT", "Uri: " + uri.toString());
                 }
-                String content = vocabularToJsonString();
+                String content = jsonHandler.vocabularToJsonString();
                 alterDocument(uri, content);
             } else
             {

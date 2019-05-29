@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -98,5 +99,12 @@ View child0;
                 mActivePosition,
                 listview.getAdapter().getItemId(mActivePosition));
         onView(withId(R.id.btn_changeLanguageInterface)).check(matches(isDisplayed()));
+    }
+
+    @After
+    public void clearVocab()
+    {
+        VocabularManager vocabulary = VocabularManager.getInstance();
+        vocabulary.clearVocabs();
     }
 }

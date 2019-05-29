@@ -3,6 +3,8 @@ package at.tugraz.ist.swe.teachingassistant;
 import android.support.test.runner.AndroidJUnit4;
 
 
+import android.util.Log;
+import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -35,6 +37,7 @@ public class LANG_001 {
         assertTrue(vocabulary.getWordsFromLanguage("en").contains("en_test"));
         assertTrue(vocabulary.getWordsFromLanguage("fi").contains("fi_test"));
     }
+
     @Test
     public void addVocabIncorrect() throws Exception
     {
@@ -45,6 +48,7 @@ public class LANG_001 {
 
         assertTrue(vocabulary.getWordsFromLanguage("en").contains("en_test"));
         assertFalse(vocabulary.getWordsFromLanguage("fi").contains("fi_test"));
+
     }
     @Test
     public void addVocabWrongLanguageCode() throws Exception
@@ -56,6 +60,14 @@ public class LANG_001 {
 
         assertFalse(vocabulary.getWordsFromLanguage("f").contains("fi_test"));
         assertFalse(vocabulary.getWordsFromLanguage("e").contains("en_test"));
+        vocabulary.clearVocabs();
+    }
+
+    @After
+    public  void clearVocab()
+    {
+        VocabularManager vocabulary = VocabularManager.getInstance();
+        vocabulary.clearVocabs();
     }
 
 }

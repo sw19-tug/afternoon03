@@ -9,11 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.util.Vector;
 
 public class ImportActivity extends AppCompatActivity
@@ -60,11 +57,9 @@ public class ImportActivity extends AppCompatActivity
 
     public void importVocabulary(String jsonString)
     {
-        Gson gson = new Gson();
-        Type vocabVector = new TypeToken<Vector<Vocab>>() {
-        }.getType();
+        JsonHandler jsonHandler = new JsonHandler();
+        Vector<Vocab> vocabs = jsonHandler.vocabularyFromJsonString(jsonString);
 
-        Vector<Vocab> vocabs = gson.fromJson(jsonString, vocabVector);
         if(vocabs != null)
         {
             VocabularManager manager = VocabularManager.getInstance();
