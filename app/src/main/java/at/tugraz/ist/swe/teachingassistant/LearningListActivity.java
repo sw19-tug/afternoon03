@@ -121,7 +121,8 @@ public class LearningListActivity extends AppCompatActivity implements AdapterVi
             }
         }
 
-        ArrayList<Vocab> allVocab = (ArrayList) vocabulary.getVocabs().clone();
+        Vector<Vocab> allVocabVector= vocabulary.getVocabs();
+        ArrayList<Vocab> allVocab = new ArrayList<Vocab>(allVocabVector);
         ArrayList<Vocab> sortedVocab = new ArrayList<>();
         ArrayList<String> sortedVocabString = new ArrayList<>();
         if (sortingStateTags.isEmpty()) {
@@ -224,7 +225,7 @@ public class LearningListActivity extends AppCompatActivity implements AdapterVi
         }
         ArrayList<String> filteredTagsList = new ArrayList<>();
         String filterInput = filterTagsInput;
-        ArrayList<Vocab> allVocabs = (ArrayList) vocabulary.getVocabs().clone();
+        ArrayList<Vocab> allVocabs = new ArrayList<Vocab>(vocabulary.getVocabs());
         ArrayList<String> filteredVocabs = new ArrayList<>();
         if (filterInput.isEmpty()) {
             filteredVocabs = vocabulary.getWordsFromLanguageString(currentLang);

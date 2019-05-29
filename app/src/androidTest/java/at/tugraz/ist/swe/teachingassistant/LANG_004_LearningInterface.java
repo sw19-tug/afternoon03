@@ -43,9 +43,9 @@ public class LANG_004_LearningInterface {
         Word word4 = new Word("second_trans", "fi");
         Word word5 = new Word("third", "en");
         Word word6 = new Word("third_trans", "fi");
-        vocabulary.addVocab(word1, word2);
-        vocabulary.addVocab(word3, word4);
-        vocabulary.addVocab(word5, word6);
+        vocabulary.addVocab(word1, word2,null);
+        vocabulary.addVocab(word3, word4,null);
+        vocabulary.addVocab(word5, word6,null);
 
         vocabulary.getWordsFromLanguageRatingString("en",1);
 

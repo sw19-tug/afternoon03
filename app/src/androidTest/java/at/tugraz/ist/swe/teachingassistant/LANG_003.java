@@ -43,6 +43,7 @@ public class LANG_003 {
     public void setUp()
     {
         VocabularManager vocabularManager = VocabularManager.getInstance();
+        vocabularManager.clearVocabs();
         Word word1 = new Word("t", "en");
         Word word2 = new Word("t", "fi");
         vocabularManager.addVocab(word1, word2, "a");

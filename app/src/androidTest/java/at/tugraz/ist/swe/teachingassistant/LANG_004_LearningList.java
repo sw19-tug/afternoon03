@@ -33,15 +33,16 @@ public class LANG_004_LearningList {
     @Before
     public void setUp() {
         VocabularManager vocabulary = VocabularManager.getInstance();
+        vocabulary.clearVocabs();
         Word word1 = new Word("first", "en");
         Word word2 = new Word("first_trans", "fi");
         Word word3 = new Word("second", "en");
         Word word4 = new Word("second_trans", "fi");
         Word word5 = new Word("third", "en");
         Word word6 = new Word("third_trans", "fi");
-        vocabulary.addVocab(word1, word2);
-        vocabulary.addVocab(word3, word4);
-        vocabulary.addVocab(word5, word6);
+        vocabulary.addVocab(word1, word2,null);
+        vocabulary.addVocab(word3, word4,null);
+        vocabulary.addVocab(word5, word6,null);
 
         Intent intent = new Intent();
         intent.putExtra("current_lang", "en");

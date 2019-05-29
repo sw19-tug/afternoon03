@@ -26,7 +26,7 @@ public class VocabularManager {
         return instance;
     }
 
-    public ArrayList<Vocab> getVocabs() {
+    public ArrayList<Vocab> getVocabsArrayList() {
         return new ArrayList<Vocab> (vocabs);
     }
 
