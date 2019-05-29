@@ -1,7 +1,9 @@
 package at.tugraz.ist.swe.teachingassistant;
 
+import android.support.annotation.Nullable;
 import android.util.Log;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Vector;
 
@@ -11,7 +13,7 @@ public class VocabularManager {
     private Vector<Vocab> vocabs;
     private Vector<Vocab> vocabs_changed;
 
-    private VocabularManager() {
+    public VocabularManager() {
         vocabs = new Vector<>();
     }
 
@@ -24,19 +26,38 @@ public class VocabularManager {
         return instance;
     }
 
-    public void setVocabs(Vector<Vocab> vocabs)
-    {
-        this.vocabs = vocabs;
+    public ArrayList<Vocab> getVocabsArrayList() {
+        return new ArrayList<Vocab> (vocabs);
     }
 
-    public void addVocab(Word word1, Word word2) {
+    public void setVocabs(Vector<Vocab> input)  {
+        vocabs = input;
+    }
+
+    public ArrayList<String> getWordsFromVocabs(ArrayList<Vocab> vocabs, String languageCode){
+        ArrayList<String> oneLangList = new ArrayList<>();
+        for (Vocab vocab: vocabs){
+            oneLangList.add(vocab.getTranslationByLanguage(languageCode));
+        }
+        return oneLangList;
+    }
+
+    public void addVocab(Word word1, Word word2, @Nullable String tags) {
         Vocab vocab = new Vocab();
+        vocab.setTags(tags);
         Vector<Word> words = new Vector<Word>();
         words.add(word1);
         words.add(word2);
         vocab.setTranslation_table(words);
         vocabs.add(vocab);
+
+        for (Vocab vocab1 : vocabs) {
+            for (Word word3 : vocab1.getTranslation_table()) {
+
+            }
+        }
     }
+
     public Vector<String> getWordsFromLanguage(String langCode)
     {
 
@@ -79,6 +100,10 @@ public class VocabularManager {
         changeVocabOrder(langCode,words);
         return words;
     }
+
+    public void clearVocabs(){
+        vocabs.clear();
+}
 
 
     private void changeVocabOrder(String langCode, ArrayList<String> words)

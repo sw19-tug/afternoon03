@@ -7,6 +7,20 @@ public class Vocab {
     private Vector<Word> translation_table;
     private int rating_ = 1;
 
+    private String tags;
+
+    public String getTags()
+    {
+        return tags;
+    }
+
+    public void setTags(String tags)
+    {
+        if (tags != null) {
+            this.tags = tags;
+        }
+    }
+
     public Vocab() {
     }
 

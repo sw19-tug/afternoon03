@@ -31,11 +31,12 @@ public class AddVocabActivity extends AppCompatActivity {
 
                 EditText first_language = (EditText) findViewById(R.id.et_first_lang);
                 EditText second_language = (EditText) findViewById(R.id.et_second_lang);
+                EditText tags = (EditText) findViewById(R.id.et_tags);
                 if(!(first_language.getText().toString().isEmpty() || second_language.getText().toString().isEmpty()))
                 {
                     Word word1 = new Word(first_language.getText().toString(), "en");
                     Word word2 = new Word(second_language.getText().toString(), "fi");
-                    vocabulary.addVocab(word1, word2);
+                    vocabulary.addVocab(word1, word2, tags.getText().toString());
                     Toast.makeText(getApplicationContext(), "succeed: " + first_language.getText() + " " + second_language.getText(), Toast.LENGTH_LONG).show();
                     finish();
                 }
