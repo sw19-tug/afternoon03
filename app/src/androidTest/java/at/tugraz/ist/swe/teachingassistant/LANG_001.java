@@ -34,6 +34,7 @@ public class LANG_001 {
 
         assertTrue(vocabulary.getWordsFromLanguage("en").contains("en_test"));
         assertTrue(vocabulary.getWordsFromLanguage("fi").contains("fi_test"));
+        vocabulary.clear();
     }
     @Test
     public void addVocabIncorrect() throws Exception
@@ -45,6 +46,7 @@ public class LANG_001 {
 
         assertTrue(vocabulary.getWordsFromLanguage("en").contains("en_test"));
         assertFalse(vocabulary.getWordsFromLanguage("fi").contains("fi_test"));
+        vocabulary.clear();
     }
     @Test
     public void addVocabWrongLanguageCode() throws Exception
@@ -56,6 +58,7 @@ public class LANG_001 {
 
         assertFalse(vocabulary.getWordsFromLanguage("f").contains("fi_test"));
         assertFalse(vocabulary.getWordsFromLanguage("e").contains("en_test"));
+        vocabulary.clear();
     }
 
 }
