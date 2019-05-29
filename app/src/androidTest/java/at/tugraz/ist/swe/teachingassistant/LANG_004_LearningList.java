@@ -26,7 +26,7 @@ import static org.junit.Assert.assertNotSame;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class LANG_004_Test2 {
+public class LANG_004_LearningList {
     @Rule
     public ActivityTestRule<LearningListActivity> mActivityRule = new ActivityTestRule<LearningListActivity>(LearningListActivity.class,false,false);
 

@@ -28,7 +28,7 @@ import static org.junit.Assert.assertNotSame;
  */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LANG_004_Test {
+public class LANG_004_LearningInterface {
 
     @Rule
     public ActivityTestRule<LearningInterfaceActivity> mActivityRule = new ActivityTestRule<LearningInterfaceActivity>(LearningInterfaceActivity.class,false,false);
@@ -46,6 +46,8 @@ public class LANG_004_Test {
         vocabulary.addVocab(word1, word2);
         vocabulary.addVocab(word3, word4);
         vocabulary.addVocab(word5, word6);
+
+        vocabulary.getWordsFromLanguageRatingString("en",1);
 
         Intent intent = new Intent();
         intent.putExtra("current_lang", "en");
