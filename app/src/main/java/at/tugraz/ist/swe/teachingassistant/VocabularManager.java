@@ -71,7 +71,7 @@ public class VocabularManager {
     }
 
     public void deleteVocabByWord(String wordString) {
-        Vector<Vocab> vocabsToDelete = new Vector<Vocab>;
+        Vector<Vocab> vocabsToDelete = new Vector<Vocab>();
         for (Vocab vocab : vocabs) {
             Vector<Word> words = vocab.getTranslation_table();
             for (Word word : words) {
