@@ -33,7 +33,7 @@ public class VocabularyActivity extends AppCompatActivity
     {
         super.onResume();
         VocabularManager vocabulary = VocabularManager.getInstance();
-        MainAdapter mainAdapter = new MainAdapter(this,vocabulary.getWordsFromLanguageString("en"),vocabulary.getWordsFromLanguageString("fi"));
+        VocabularyListAdapter mainAdapter = new VocabularyListAdapter(this,vocabulary.getWordsFromLanguageString("en"),vocabulary.getWordsFromLanguageString("fi"));
         ListView listView = (ListView) findViewById(R.id.first_language_list);
         listView.setAdapter(mainAdapter);
     }

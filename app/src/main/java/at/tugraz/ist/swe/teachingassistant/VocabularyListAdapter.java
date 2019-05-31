@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 
 
-public class MainAdapter extends ArrayAdapter<String>
+public class VocabularyListAdapter extends ArrayAdapter<String>
 {
     private final static String TAG = "MainAdapter";
     private final ArrayList<String> first_lang;
     private final ArrayList<String> second_lang;
-    public MainAdapter(@NonNull Context context, ArrayList<String> first_lang,  ArrayList<String> second_lang)
+    public VocabularyListAdapter(@NonNull Context context, ArrayList<String> first_lang,  ArrayList<String> second_lang)
     {
         super(context, R.layout.custom_list,first_lang);
         this.first_lang = first_lang;
