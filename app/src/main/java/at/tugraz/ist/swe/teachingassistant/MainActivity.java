@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,10 +13,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
+
+import static android.support.v4.content.FileProvider.getUriForFile;
+import static at.tugraz.ist.swe.teachingassistant.Globals.FILE_EXTENSION;
+import static at.tugraz.ist.swe.teachingassistant.Globals.FILE_PROVIDER_AUTHORITY;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -78,55 +80,42 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void configureShareButton() {
-        Button ShareButton = (Button) findViewById(R.id.share_button);
-        ShareButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                shareVocabulary();
-            }
-        });
-    }
-
     private void shareVocabulary()
     {
         Intent intent = new Intent(Intent.ACTION_SEND);
-        String mimeType = getApplicationContext().getResources().getText(R.string.mimeType).toString();
+        String mimeType = "*/*";
         intent.setType(mimeType);
         JsonHandler jsonHandler = new JsonHandler();
 
         String string_to_share = jsonHandler.vocabularToJsonString();
-        String file_name = ".__sharing" + getApplicationContext().getResources().getText(R.string.file_extension).toString();
-        String file_path = getApplication().getFilesDir() + File.separator + file_name;
+        String file_name = "__sharing" + FILE_EXTENSION;
+        File file_path = new File(this.getFilesDir(), "share");
         try
         {
-            File file = new File(file_path);
-            file.createNewFile();
-            if(file.exists())
+            if(!file_path.exists())
             {
-                OutputStream os = new FileOutputStream(file);
-                os.flush();
-                os.write(string_to_share.getBytes());
-                os.close();
-                Log.e("SHARE", "TMP file ćreated ... " + file_name);
+                file_path.mkdir();
             }
-            Log.e("SHARE", "Start Create TMP file - " + file_name);
+            File file = new File(file_path, file_name);
+            if(!file.exists())
+            {
+                file.createNewFile();
+            }
+            OutputStream os = new FileOutputStream(file);
+            os.flush();
+            os.write(string_to_share.getBytes());
+            os.close();
+            Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), FILE_PROVIDER_AUTHORITY, file);
 
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://"+ file_path));
+            Log.d("SHARE", "TMP file created ... " + contentUri.getPath());
 
-            intent.putExtra(Intent.EXTRA_SUBJECT,
-                "Sharing File...");
-            intent.putExtra(Intent.EXTRA_TEXT, "Sharing File...");
+            intent.putExtra(Intent.EXTRA_STREAM, contentUri);
 
             startActivity(Intent.createChooser(intent, "Share File"));
 
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
 
     }
 
@@ -141,14 +130,18 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
-        menu.getItem(R.id.share_button);
-        configureShareButton();
-        return true;
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        
+        switch (item.getItemId())
+        {
+            case R.id.share_button:
+                shareVocabulary();
+                break;
+        }
         return super.onOptionsItemSelected(item);
     }
 }

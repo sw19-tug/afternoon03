@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +13,10 @@ import android.widget.Toast;
 
 import java.io.*;
 import java.util.Vector;
+
+import static android.provider.DocumentsContract.EXTRA_INITIAL_URI;
+import static at.tugraz.ist.swe.teachingassistant.Globals.FILE_PROVIDER_AUTHORITY;
+import static at.tugraz.ist.swe.teachingassistant.Globals.MIME_TYPE;
 
 public class ImportActivity extends AppCompatActivity
 {
@@ -76,9 +81,12 @@ public class ImportActivity extends AppCompatActivity
 
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
+        File dir = new File(getApplication().getFilesDir(), "data");
+        Uri pathUri = FileProvider.getUriForFile(getApplicationContext(), FILE_PROVIDER_AUTHORITY, dir);
+        //intent.setData(pathUri);
         intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        intent.setType(mimeType);
+        intent.setType(MIME_TYPE);
+        //intent.putExtra(Intent.EXTRA_INITIAL_INTENTS, pathUri);
 
         startActivityForResult(intent, READ_REQUEST_CODE);
     }

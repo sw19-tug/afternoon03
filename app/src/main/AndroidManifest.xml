@@ -11,28 +11,37 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+
+            <provider
+                android:name="android.support.v4.content.FileProvider"
+                android:authorities="${applicationId}.file_provider"
+                android:exported="false"
+                android:grantUriPermissions="true">
+                <meta-data
+                        android:name="android.support.FILE_PROVIDER_PATHS"
+                        android:resource="@xml/shared_file_paths" />
+            </provider>
+
             <activity android:name=".LearningInterfaceActivity" />
             <activity android:name=".LearningListActivity" />
-        <activity android:name=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".AddVocabActivity">
-        </activity>
-        <activity android:name=".ImportActivity"
-            android:label="TA - Importer"
-            android:theme="@style/Theme.AppCompat.Dialog"
-                  android:excludeFromRecents="true">
-        </activity>
-        <activity android:name=".ExportActivity"
-                  android:label="@string/export_title"
-                  android:theme="@style/Theme.AppCompat.Dialog"
-                  android:excludeFromRecents="true">
-        </activity>
-        <activity android:name=".VocabularyActivity"></activity>
+            <activity android:name=".MainActivity">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+            <activity android:name=".AddVocabActivity"/>
+            <activity android:name=".ImportActivity"
+                      android:label="TA - Importer"
+                      android:theme="@style/Theme.AppCompat.Dialog"
+                      android:excludeFromRecents="true">
+            </activity>
+            <activity android:name=".ExportActivity"
+                      android:label="@string/export_title"
+                      android:theme="@style/Theme.AppCompat.Dialog"
+                      android:excludeFromRecents="true">
+            </activity>
+            <activity android:name=".VocabularyActivity"></activity>
     </application>
 
 </manifest>
