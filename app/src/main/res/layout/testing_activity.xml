@@ -6,61 +6,63 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/Accuracy"
+        android:id="@+id/tv_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="56dp"
-        android:text="Accuracy:"
+        android:text="Progress:"
         android:layout_alignParentTop="true"
         android:layout_margin="20dp"
         />
 
     <TextView
-        android:id="@+id/fractionCorrectTests"
+        android:id="@+id/tv_fraction_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:text="X / 10"
-        android:layout_alignBottom="@id/Accuracy"
-        android:layout_toEndOf="@id/Accuracy"
+        android:layout_alignBottom="@id/tv_progress"
+        android:layout_toEndOf="@id/tv_progress"
     />
 
     <TextView
-        android:id="@+id/providedLanguage"
+        android:id="@+id/tv_providedLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="EN"
         android:textSize="28dp"
-        android:layout_above="@id/questionLanguage"
+        android:layout_above="@id/tv_questionLanguage"
         android:maxLines="1"
         android:layout_alignParentStart="true"
         android:layout_marginHorizontal="10dp"
-        android:layout_alignBottom="@id/providedWord"
+        android:layout_alignBottom="@id/tv_providedWord"
 
 
         />
 
     <TextView
-        android:id="@+id/providedWord"
+        android:id="@+id/tv_providedWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/requestedWord"
-        android:layout_alignStart="@id/requestedWord"
+        android:layout_above="@id/et_requestedWord"
+        android:layout_alignStart="@id/et_requestedWord"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="66dp"
-        android:layout_marginBottom="364dp"
-        android:layout_toEndOf="@id/providedLanguage"
+        android:layout_marginTop="345dp"
+        android:layout_marginBottom="200dp"
+        android:layout_toEndOf="@id/tv_providedLanguage"
         android:text="question"
         android:textSize="28dp" />
 
     <TextView
-        android:id="@+id/questionLanguage"
+        android:id="@+id/tv_questionLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FI"
         android:textSize="28dp"
-        android:layout_toStartOf="@id/requestedWord"
-        android:layout_alignBottom="@+id/requestedWord"
+        android:layout_toStartOf="@id/et_requestedWord"
+        android:layout_alignBottom="@+id/et_requestedWord"
         android:layout_marginHorizontal="10dp"
         android:maxLines="1"
         android:layout_alignParentStart="true"
@@ -70,10 +72,10 @@
         />
 
     <EditText
-        android:id="@+id/requestedWord"
+        android:id="@+id/et_requestedWord"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_above="@id/submitQuestion"
+        android:layout_above="@id/btn_testing_next"
         android:layout_centerHorizontal="true"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
@@ -83,7 +85,7 @@
         android:textSize="28dp" />
 
     <Button
-        android:id="@+id/submitQuestion"
+        android:id="@+id/btn_testing_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
