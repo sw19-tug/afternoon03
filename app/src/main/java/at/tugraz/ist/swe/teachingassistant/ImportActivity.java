@@ -2,6 +2,7 @@ package at.tugraz.ist.swe.teachingassistant;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.support.v4.content.FileProvider;
@@ -12,6 +13,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.*;
+import java.net.URI;
 import java.util.Vector;
 
 import static android.provider.DocumentsContract.EXTRA_INITIAL_URI;
@@ -80,14 +82,23 @@ public class ImportActivity extends AppCompatActivity
     public void performFileSearch() {
 
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-
         File dir = new File(getApplication().getFilesDir(), "data");
-        Uri pathUri = FileProvider.getUriForFile(getApplicationContext(), FILE_PROVIDER_AUTHORITY, dir);
-        //intent.setData(pathUri);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType(MIME_TYPE);
-        //intent.putExtra(Intent.EXTRA_INITIAL_INTENTS, pathUri);
 
+        if(!dir.exists())
+        {
+            dir.mkdir();
+        }
+
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        if(android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+         //   intent.putExtra(EXTRA_INITIAL_URI, dir.toURI());//"android.provider.extra.INITIAL_URI", dir.toURI());
+        }
+
+        intent.setType(mimeType);
+        //Intent intent2 = Intent.createChooser(intent, "Choose  a file");
+        //startActivityForResult(intent2, 3);
         startActivityForResult(intent, READ_REQUEST_CODE);
     }
 
