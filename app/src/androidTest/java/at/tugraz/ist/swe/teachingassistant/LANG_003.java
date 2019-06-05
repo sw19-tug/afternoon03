@@ -63,23 +63,24 @@ public class LANG_003 {
     }
 
     @Test
-    public void sortAlphabeticalTest() throws Exception {
+    public void sortAlphabeticalTest() throws Exception
+    {
         ArrayList<String> sortedVocabs = activityRule.getActivity().sortByAlphabetical();
         Assert.assertEquals("a", sortedVocabs.get(0));
-        Assert.assertEquals( "t", sortedVocabs.get(1));
-        Assert.assertEquals( "z", sortedVocabs.get(2));
+        Assert.assertEquals("t", sortedVocabs.get(1));
+        Assert.assertEquals("z", sortedVocabs.get(2));
 
         sortedVocabs = activityRule.getActivity().sortByAlphabetical();
-        Assert.assertEquals( "z", sortedVocabs.get(0));
-        Assert.assertEquals( "t", sortedVocabs.get(1));
-        Assert.assertEquals( "a", sortedVocabs.get(2));
+        Assert.assertEquals("z", sortedVocabs.get(0));
+        Assert.assertEquals("t", sortedVocabs.get(1));
+        Assert.assertEquals("a", sortedVocabs.get(2));
 
         sortedVocabs = activityRule.getActivity().sortByAlphabetical();
         Assert.assertEquals("t", sortedVocabs.get(0));
-        Assert.assertEquals( "a", sortedVocabs.get(1));
-        Assert.assertEquals( "z", sortedVocabs.get(2));
+        Assert.assertEquals("a", sortedVocabs.get(1));
+        Assert.assertEquals("z", sortedVocabs.get(2));
 
-
+    }
     @Test
     public void sortTagsTest() throws Exception {
         ArrayList<String> sortedVocabs = activityRule.getActivity().sortByTags();

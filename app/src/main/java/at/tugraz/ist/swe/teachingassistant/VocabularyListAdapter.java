@@ -56,11 +56,7 @@ public class VocabularyListAdapter extends ArrayAdapter<String>
               {
                   VocabularManager vocabulary = VocabularManager.getInstance();
                   vocabulary.deleteVocabByWord(first_lang.get(position));
-
-                  //temporary
-                  textView1.setText("");
-                  textView2.setText("");
-                  delete_btn.setVisibility(View.GONE);
+                  remove(first_lang.get(position));
               }
 
           }

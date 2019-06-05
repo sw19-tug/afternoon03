@@ -46,8 +46,8 @@ public class LANG_017 {
 
         Assert.assertEquals(vocabs.size(), 2);
         Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("en"), "first");
-        Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("fi"), "firstTrans");
+        Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("fi"), "first_trans");
         Assert.assertEquals(vocabs.elementAt(1).getTranslationByLanguage("en"), "third");
-        Assert.assertEquals(vocabs.elementAt(1).getTranslationByLanguage("en"), "third_trans");
+        Assert.assertEquals(vocabs.elementAt(1).getTranslationByLanguage("fi"), "third_trans");
     }
 }
