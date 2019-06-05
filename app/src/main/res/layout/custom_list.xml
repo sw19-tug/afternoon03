@@ -30,6 +30,15 @@
         android:layout_alignParentTop="true"
         android:textSize="8sp"
         android:text="x" />
+    <Button
+        android:id="@+id/edit_btn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_toStartOf="@+id/delete_btn"
+        android:layout_alignParentTop="true"
+        android:textSize="8sp"
+        android:text="e" />
+
 
 
 

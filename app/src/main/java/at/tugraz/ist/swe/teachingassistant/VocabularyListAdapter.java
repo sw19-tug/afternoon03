@@ -1,6 +1,8 @@
 package at.tugraz.ist.swe.teachingassistant;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -62,6 +64,36 @@ public class VocabularyListAdapter extends ArrayAdapter<String>
           }
 
         );
+        final Button edit_btn = (Button) view.findViewById(R.id.edit_btn);
+
+        edit_btn.setOnClickListener(new View.OnClickListener()
+
+                                      {
+                                          @Override
+                                          public void onClick(View v)
+                                          {
+                                              VocabularManager vocabulary = VocabularManager.getInstance();
+
+                                              Intent intent = new Intent(getContext(), EditActivity.class);
+
+                                              Bundle b = new Bundle();
+                                              //                b.putInt("position", position);
+                                              //                b.putString("current_lang", currentLang);
+                                              //                intent.putExtras(b);
+
+                                              intent.putExtra("first_lang",first_lang.get(position));
+                                              intent.putExtra("second_lang",second_lang.get(position));
+
+                                              getContext().startActivity(intent);
+                                              //start new indent here
+                                              /*vocabulary.deleteVocabByWord(first_lang.get(position));
+                                              remove(first_lang.get(position));*/
+                                          }
+
+                                      }
+
+        );
+
 
         return view;
     }
