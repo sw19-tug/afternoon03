@@ -1,7 +1,6 @@
 package at.tugraz.ist.swe.teachingassistant;
 
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -15,6 +14,7 @@ public class TestingManager {
     private Vector<Vocab> rootVocabs;
 
     private int score;
+    private int current_position;
 
     private TestingManager() {
         testingVocabs = new Vector<>();
@@ -34,6 +34,8 @@ public class TestingManager {
     }
 
     public void buildRandomTest(){
+        score = 0;
+        current_position = 0;
         testingVocabs = rootVocabs;
         Collections.shuffle(testingVocabs);
     }
@@ -44,5 +46,17 @@ public class TestingManager {
 
     public int getActiveSize(){
         return testingVocabs.size();
+    }
+
+    public boolean checkResult(String requested_Word){
+
+        if(requested_Word.equals(testingVocabs.elementAt(current_position).getTranslationByLanguage("fi"))){
+            score++;
+            current_position++;
+            return true;
+        }
+        //incorrectVocabs.add(testingVocabs.elementAt(current_position-1));
+        current_position++;
+        return false;
     }
 }
