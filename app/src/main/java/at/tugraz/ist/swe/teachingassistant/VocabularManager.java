@@ -193,6 +193,9 @@ public class VocabularManager {
         }
     }
 
+    public void editVocabByWord(String word, String new_word1, String new_word2)
+    {}
+
     public void clear() {
         vocabs = new Vector<>();
     }
