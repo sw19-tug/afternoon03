@@ -13,6 +13,7 @@
             android:theme="@style/AppTheme">
             <activity android:name=".LearningInterfaceActivity" />
             <activity android:name=".LearningListActivity" />
+            <activity android:name=".TestingActivity"/>
             <activity
                android:name=".ExportDialog"
                android:theme="@android:style/Theme.Holo.Dialog" />

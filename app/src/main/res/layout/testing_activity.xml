@@ -45,11 +45,13 @@
         android:id="@+id/providedWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="question"
-        android:textSize="28dp"
         android:layout_above="@id/requestedWord"
+        android:layout_alignStart="@id/requestedWord"
+        android:layout_marginStart="66dp"
+        android:layout_marginBottom="364dp"
         android:layout_toEndOf="@id/providedLanguage"
-        android:layout_alignStart="@id/requestedWord"/>
+        android:text="question"
+        android:textSize="28dp" />
 
     <TextView
         android:id="@+id/questionLanguage"
@@ -77,7 +79,7 @@
         android:layout_marginBottom="16dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="answer"
+        android:hint="answer"
         android:textSize="28dp" />
 
     <Button
