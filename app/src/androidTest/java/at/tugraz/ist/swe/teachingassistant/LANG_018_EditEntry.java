@@ -12,7 +12,8 @@ import org.junit.runner.RunWith;
 import java.util.Vector;
 
 @RunWith(AndroidJUnit4.class)
-public class LANG_017 {
+public class LANG_018_EditEntry
+{
     @Rule
     public ActivityTestRule<LearningListActivity> learingListActivity = new ActivityTestRule<LearningListActivity>(LearningListActivity.class, false, false);
 
@@ -32,22 +33,26 @@ public class LANG_017 {
     }
 
     @Test
-    public void testDeleteAll() {
+    public void EditVocab()
+    {
         VocabularManager manager = VocabularManager.getInstance();
-        manager.clear();
-        Assert.assertEquals(manager.getVocabs().size(), 0);
-    }
-
-    @Test
-    public void testDeleteOneWord() {
-        VocabularManager manager = VocabularManager.getInstance();
-        manager.deleteVocabByWord("second");
+        Word word1 = new Word("first_changed", "en");
+        Word word2 = new Word("trans_changed", "fi");
+        manager.editVocabByWord("first","first_trans",word1,word2,null);
         Vector<Vocab> vocabs = manager.getVocabs();
+        Assert.assertEquals(vocabs.elementAt(vocabs.size()-1).getTranslationByLanguage("en"), "first_changed");
+        Assert.assertEquals(vocabs.elementAt(vocabs.size()-1).getTranslationByLanguage("fi"), "trans_changed");
 
-        Assert.assertEquals(vocabs.size(), 2);
+    }
+    @Test
+    public void EditVocabNotInList()
+    {
+        VocabularManager manager = VocabularManager.getInstance();
+        Word word1 = new Word("first_changed", "en");
+        Word word2 = new Word("trans_changed", "fi");
+        manager.editVocabByWord("NOT_IN","NOT_IN",word1,word2,"null");
+        Vector<Vocab> vocabs = manager.getVocabs();
         Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("en"), "first");
         Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("fi"), "first_trans");
-        Assert.assertEquals(vocabs.elementAt(1).getTranslationByLanguage("en"), "third");
-        Assert.assertEquals(vocabs.elementAt(1).getTranslationByLanguage("fi"), "third_trans");
     }
 }

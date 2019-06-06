@@ -70,15 +70,14 @@ public class VocabularManager {
         return words;
     }
 
-    public void deleteVocabByWord(String wordString) {
+    public void deleteVocabByWord(String first_lang, String second_lang)
+    {
         Vector<Vocab> vocabsToDelete = new Vector<Vocab>();
         for (Vocab vocab : vocabs) {
             Vector<Word> words = vocab.getTranslation_table();
-            for (Word word : words) {
-                if (word.getText() == wordString) {
-                    vocabsToDelete.add(vocab);
-                    break;
-                }
+            if(words.get(0).getText().equals(first_lang) && words.get(1).getText().equals(second_lang))
+            {
+                vocabsToDelete.add(vocab);
             }
         }
         for (Vocab vocab : vocabsToDelete) {
@@ -99,7 +98,6 @@ public class VocabularManager {
     }
 
 
-    // just for VocabularyAdapter
     public ArrayList<String> getWordsFromLanguageString(String langCode) {
         ArrayList<String> words = new ArrayList<>();
         for (Vocab vocab : vocabs) {
@@ -193,8 +191,11 @@ public class VocabularManager {
         }
     }
 
-    public void editVocabByWord(String word, String new_word1, String new_word2)
-    {}
+    public void editVocabByWord(String first_lang, String second_lang, Word new_word1, Word new_word2, String tag)
+    {
+        this.deleteVocabByWord(first_lang,second_lang);
+        this.addVocab(new_word1, new_word2, tag);
+    }
 
     public void clear() {
         vocabs = new Vector<>();

@@ -2,7 +2,6 @@ package at.tugraz.ist.swe.teachingassistant;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import java.util.ArrayList;
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 public class VocabularyListAdapter extends ArrayAdapter<String>
 {
-    private final static String TAG = "MainAdapter";
     private final ArrayList<String> first_lang;
     private final ArrayList<String> second_lang;
     public VocabularyListAdapter(@NonNull Context context, ArrayList<String> first_lang,  ArrayList<String> second_lang)
@@ -57,8 +56,11 @@ public class VocabularyListAdapter extends ArrayAdapter<String>
               public void onClick(View v)
               {
                   VocabularManager vocabulary = VocabularManager.getInstance();
-                  vocabulary.deleteVocabByWord(first_lang.get(position));
+                  String first_word_delete = first_lang.get(position);
+                  String second_word_delete = second_lang.get(position);
+                  vocabulary.deleteVocabByWord(first_word_delete,second_word_delete);
                   remove(first_lang.get(position));
+                  Toast.makeText(getContext(),first_word_delete + " " +  second_word_delete + " deleted", Toast.LENGTH_LONG).show();
               }
 
           }
@@ -72,22 +74,12 @@ public class VocabularyListAdapter extends ArrayAdapter<String>
                                           @Override
                                           public void onClick(View v)
                                           {
-                                              VocabularManager vocabulary = VocabularManager.getInstance();
 
                                               Intent intent = new Intent(getContext(), EditActivity.class);
-
-                                              Bundle b = new Bundle();
-                                              //                b.putInt("position", position);
-                                              //                b.putString("current_lang", currentLang);
-                                              //                intent.putExtras(b);
-
                                               intent.putExtra("first_lang",first_lang.get(position));
                                               intent.putExtra("second_lang",second_lang.get(position));
 
                                               getContext().startActivity(intent);
-                                              //start new indent here
-                                              /*vocabulary.deleteVocabByWord(first_lang.get(position));
-                                              remove(first_lang.get(position));*/
                                           }
 
                                       }

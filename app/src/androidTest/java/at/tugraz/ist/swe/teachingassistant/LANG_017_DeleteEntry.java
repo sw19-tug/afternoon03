@@ -12,8 +12,7 @@ import org.junit.runner.RunWith;
 import java.util.Vector;
 
 @RunWith(AndroidJUnit4.class)
-public class LANG_018_EditEntity
-{
+public class LANG_017_DeleteEntry {
     @Rule
     public ActivityTestRule<LearningListActivity> learingListActivity = new ActivityTestRule<LearningListActivity>(LearningListActivity.class, false, false);
 
@@ -32,21 +31,23 @@ public class LANG_018_EditEntity
         vocabularManager.addVocab(word5, word6, null);
     }
 
-    @Test void EditVocab()
-    {
+    @Test
+    public void testDeleteAll() {
         VocabularManager manager = VocabularManager.getInstance();
-        manager.editVocabByWord("first","first_changed","trans_changed");
-        Vector<Vocab> vocabs = manager.getVocabs();
-        Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("en"), "first_changed");
-        Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("fi"), "trans_changed");
-
+        manager.clear();
+        Assert.assertEquals(manager.getVocabs().size(), 0);
     }
-    @Test void EditVocabNotInList()
-    {
+
+    @Test
+    public void testDeleteOneWord() {
         VocabularManager manager = VocabularManager.getInstance();
-        manager.editVocabByWord("NOT_IN","first_changed","second_changed");
+        manager.deleteVocabByWord("second","second_trans");
         Vector<Vocab> vocabs = manager.getVocabs();
+
+        Assert.assertEquals(vocabs.size(), 2);
         Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("en"), "first");
         Assert.assertEquals(vocabs.elementAt(0).getTranslationByLanguage("fi"), "first_trans");
+        Assert.assertEquals(vocabs.elementAt(1).getTranslationByLanguage("en"), "third");
+        Assert.assertEquals(vocabs.elementAt(1).getTranslationByLanguage("fi"), "third_trans");
     }
 }
