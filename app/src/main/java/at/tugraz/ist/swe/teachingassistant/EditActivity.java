@@ -51,7 +51,7 @@ public class EditActivity extends AppCompatActivity
                     Word word1 = new Word(first_language.getText().toString(), "en");
                     Word word2 = new Word(second_language.getText().toString(), "fi");
                     vocabulary.editVocabByWord(first_lang,second_lang,word1,word2,tags.getText().toString());
-                    Toast.makeText(getApplicationContext(), "succeed: " + first_language.getText() + " " + second_language.getText(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "edit: " + first_language.getText() + " " + second_language.getText(), Toast.LENGTH_LONG).show();
                     finish();
                 } else
                 {
