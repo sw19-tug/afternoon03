@@ -56,7 +56,7 @@ public class FileSelectActivity extends AppCompatActivity
         {
             for (File file : shareFiles)
             {
-                shareFilenames.add(file.getAbsolutePath());
+                shareFilenames.add(file.getName());
             }
         }
 
@@ -77,7 +77,8 @@ public class FileSelectActivity extends AppCompatActivity
                // b.putInt("position", position);
                // b.putString("file_name", shareFilenames.get(position));
                // data.putExtras(b);
-                data.putExtra("file_name", shareFilenames.get(position));
+
+                data.putExtra("file_name", shareFiles != null ? shareFiles[position].getAbsolutePath() : "");
                 setResult(RESULT_OK, data);
                 finish();
             }

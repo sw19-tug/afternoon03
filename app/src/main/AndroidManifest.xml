@@ -13,7 +13,7 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".FileSelectActivity"
-                android:label="FileSelector">
+                android:label="File Selector">
             <intent-filter>
                 <action android:name="android.intent.action.PICK"/>
 
