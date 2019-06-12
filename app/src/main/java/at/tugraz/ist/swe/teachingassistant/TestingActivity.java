@@ -32,6 +32,11 @@ public class TestingActivity extends Activity {
         updateInterface();
 
 
+        nextButton();
+
+    }
+
+    private void nextButton(){
         final Button button = (Button) findViewById(R.id.btn_testing_next);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -48,16 +53,44 @@ public class TestingActivity extends Activity {
                             updateInterface();
                             break;
                         case 2:
-                        //show score
+                            //show score
+                            setContentView(R.layout.test_feedback_interface);
+                            exitTestingButton();
+                            continueTestingButton();
+                            TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
+                            progressCounter.setText(Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
+
                             Toast.makeText(getApplicationContext(), "Its over!", Toast.LENGTH_LONG).show();
-                            finish();
                             break;
                     }
                 }
 
             }
         });
+    }
 
+    private void exitTestingButton(){
+        Button exitButton = (Button) findViewById(R.id.btn_exit_testing);
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    private void continueTestingButton(){
+        Button continueButton = (Button) findViewById(R.id.btn_continue_testing);
+        continueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TestingManager testingManager = TestingManager.getInstance();
+                testingManager.setContinueTesting();
+
+                setContentView(R.layout.testing_activity);
+                updateInterface();
+            }
+        });
     }
 
     private void updateInterface(){
@@ -71,5 +104,11 @@ public class TestingActivity extends Activity {
         progressCounter.setText(Integer.toString(testingManager.getCurrentPosition() + 1) + "/" + testingManager.getActiveSize());
 
     }
+
+//    private void goToFeedbackInterface(){
+//        setContentView(R.layout.test_feedback_interface);
+//        TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
+//        progressCounter.setText(Integer.toString(testingManager.getScore() + 1) + "/" + testingManager.getActiveSize());
+//    }
 }
 

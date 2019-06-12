@@ -38,6 +38,7 @@ public class TestingManager {
         current_position = 0;
         testingVocabs = rootVocabs;
         Collections.shuffle(testingVocabs);
+        incorrectVocabs = new Vector<>();
     }
 
     public Vocab getCurrentVocab() {
@@ -50,17 +51,28 @@ public class TestingManager {
 
     public int getCurrentPosition() {return current_position;}
 
+    public int getScore() {return score;}
+
+    public void setContinueTesting() {
+        score = 0;
+        current_position = 0;
+        testingVocabs = incorrectVocabs;
+    }
+
     public int checkResult(String requested_Word){
         current_position++;
         if(requested_Word.equals(testingVocabs.elementAt(current_position-1).getTranslationByLanguage("fi"))){
             score++;
             if(current_position == testingVocabs.size())
                 return 2;
+
             return 1;
         }
-        //incorrectVocabs.add(testingVocabs.elementAt(current_position-1));
-        if(current_position == testingVocabs.size())
+        if(current_position == testingVocabs.size()) {
             return 2;
+        }
+        incorrectVocabs.add(testingVocabs.elementAt(current_position-1));
+
         return 0;
     }
 }

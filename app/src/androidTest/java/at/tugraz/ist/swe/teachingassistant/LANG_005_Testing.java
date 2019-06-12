@@ -41,7 +41,7 @@ public class LANG_005_Testing {
         return activityRule;
     }
 
-    @Test
+    @Before
     public void setupTest() throws Exception {
         VocabularManager vocabulary = VocabularManager.getInstance();
         Word word1 = new Word("first", "en");
@@ -69,6 +69,19 @@ public class LANG_005_Testing {
         onView(withId(R.id.btn_testing_next)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_testing_next)).check(matches((isClickable())));
 
+    }
+
+    @Test
+    public void checkTestFeedbackInterface() throws Exception {
+
+
+        onView(withId(R.id.btn_testing_next)).perform(click());
+
+
+        onView(withId(R.id.tv_test_result)).check(matches(isDisplayed()));
+        onView(withId(R.id.tv_user_info)).check(matches(isDisplayed()));
+        onView(withId(R.id.btn_exit_testing)).check(matches(isClickable()));
+        onView(withId(R.id.btn_continue_testing)).check(matches((isClickable())));
     }
 
     @Test
