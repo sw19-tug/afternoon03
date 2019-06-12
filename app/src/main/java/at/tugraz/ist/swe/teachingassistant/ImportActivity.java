@@ -75,13 +75,14 @@ public class ImportActivity extends AppCompatActivity
      */
     public void performFileSearch() {
 
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+      /*  Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         intent.setType(mimeType);
 
-        startActivityForResult(intent, READ_REQUEST_CODE);
+        startActivityForResult(intent, READ_REQUEST_CODE);*/
+        Intent intent = new Intent(this, FileSelectActivity.class);
     }
 
     private String readTextFromUri(Uri uri) throws IOException {

@@ -5,9 +5,7 @@
     <root-path name="root" path="" />
 
     <!-- Share folder under internal file folder. The base folder is context.getFilesDir() -->
-    <files-path name="data" path="data/" />
-    <files-path name="backup" path="backup/" />
-    <files-path name="share" path="share/" />
+    <files-path name="files" path="files/" />
 
     <files-path name="restart" path="restart/" />
 
