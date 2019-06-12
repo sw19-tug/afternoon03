@@ -9,6 +9,8 @@
     <files-path name="backup" path="backup/" />
     <files-path name="share" path="share/" />
 
+    <files-path name="restart" path="restart/" />
+
     <!-- Share folder under internal cache folder. The base folder is context.getCacheDir() -->
     <cache-path name="internal_cache" path="cache/" />
 
@@ -20,4 +22,6 @@
 
     <!-- Share folder under app specific external cache folder.The base folder is context.getExternalCacheDirs()-->
     <external-cache-path name="external_cache" path="external_cache/" />
+
+    <external-path name="Download" path="Download/"/>
 </paths>
