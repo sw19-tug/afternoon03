@@ -59,8 +59,6 @@ public class TestingActivity extends Activity {
                             continueTestingButton();
                             TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
                             progressCounter.setText(Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
-
-                            Toast.makeText(getApplicationContext(), "Its over!", Toast.LENGTH_LONG).show();
                             break;
                     }
                 }
@@ -85,16 +83,21 @@ public class TestingActivity extends Activity {
             @Override
             public void onClick(View v) {
                 TestingManager testingManager = TestingManager.getInstance();
-                testingManager.setContinueTesting();
-
-                setContentView(R.layout.testing_activity);
-                updateInterface();
+                if(testingManager.getSizeOfIncorrectVocabs() != 0) {
+                    testingManager.setContinueTesting();
+                    setContentView(R.layout.testing_activity);
+                    updateInterface();
+                    nextButton();
+                }
+                else
+                    finish();
             }
         });
     }
 
     private void updateInterface(){
         TestingManager testingManager = TestingManager.getInstance();
+        Log.e("Testing", "current_position: "+ testingManager.getCurrentPosition()+ "actual size: " + testingManager.getActiveSize());
         Vocab currentVocab = testingManager.getCurrentVocab();
 
         TextView providedWord = (TextView) findViewById(R.id.tv_providedWord);
@@ -103,6 +106,8 @@ public class TestingActivity extends Activity {
         TextView progressCounter = (TextView) findViewById(R.id.tv_fraction_progress);
         progressCounter.setText(Integer.toString(testingManager.getCurrentPosition() + 1) + "/" + testingManager.getActiveSize());
 
+        EditText request_word = (EditText) findViewById(R.id.et_requestedWord);
+        request_word.setText("");
     }
 
 //    private void goToFeedbackInterface(){

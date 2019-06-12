@@ -56,7 +56,13 @@ public class TestingManager {
     public void setContinueTesting() {
         score = 0;
         current_position = 0;
-        testingVocabs = incorrectVocabs;
+        testingVocabs.clear();
+        Collections.shuffle(incorrectVocabs);
+        for (int iterator = 0; iterator < incorrectVocabs.size(); iterator++)
+        {
+            testingVocabs.add(incorrectVocabs.elementAt(iterator));
+        }
+        incorrectVocabs.clear();
     }
 
     public int checkResult(String requested_Word){
@@ -68,11 +74,12 @@ public class TestingManager {
 
             return 1;
         }
+        incorrectVocabs.add(testingVocabs.elementAt(current_position-1));
+
         if(current_position == testingVocabs.size()) {
             return 2;
         }
-        incorrectVocabs.add(testingVocabs.elementAt(current_position-1));
-
         return 0;
     }
+    public int getSizeOfIncorrectVocabs(){return incorrectVocabs.size();}
 }
