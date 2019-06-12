@@ -30,31 +30,32 @@
         android:id="@+id/tv_providedLanguage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EN"
-        android:textSize="28dp"
         android:layout_above="@id/tv_questionLanguage"
-        android:maxLines="1"
-        android:layout_alignParentStart="true"
-        android:layout_marginHorizontal="10dp"
         android:layout_alignBottom="@id/tv_providedWord"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="300dp"
+        android:maxLines="1"
 
-
-        />
+        android:text="EN"
+        android:textSize="28dp" />
 
     <TextView
         android:id="@+id/tv_providedWord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@id/et_requestedWord"
-        android:layout_alignStart="@id/et_requestedWord"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="66dp"
-        android:layout_marginTop="345dp"
-        android:layout_marginBottom="200dp"
-        android:layout_toEndOf="@id/tv_providedLanguage"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="135dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="167dp"
+        android:layout_marginBottom="100dp"
         android:text="question"
-        android:textSize="28dp"
-        android:textColor="@color/colorBlack"/>
+        android:textColor="@color/colorBlack"
+        android:textSize="28dp" />
 
     <TextView
         android:id="@+id/tv_questionLanguage"
