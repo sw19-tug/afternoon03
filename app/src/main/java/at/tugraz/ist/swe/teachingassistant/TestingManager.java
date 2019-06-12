@@ -40,23 +40,27 @@ public class TestingManager {
         Collections.shuffle(testingVocabs);
     }
 
-    public Vocab getVocabByPosition(int position) {
-        return testingVocabs.elementAt(position);
+    public Vocab getCurrentVocab() {
+        return testingVocabs.elementAt(current_position);
     }
 
     public int getActiveSize(){
         return testingVocabs.size();
     }
 
-    public boolean checkResult(String requested_Word){
+    public int getCurrentPosition() {return current_position;}
 
-        if(requested_Word.equals(testingVocabs.elementAt(current_position).getTranslationByLanguage("fi"))){
+    public int checkResult(String requested_Word){
+        current_position++;
+        if(requested_Word.equals(testingVocabs.elementAt(current_position-1).getTranslationByLanguage("fi"))){
             score++;
-            current_position++;
-            return true;
+            if(current_position == testingVocabs.size())
+                return 2;
+            return 1;
         }
         //incorrectVocabs.add(testingVocabs.elementAt(current_position-1));
-        current_position++;
-        return false;
+        if(current_position == testingVocabs.size())
+            return 2;
+        return 0;
     }
 }
