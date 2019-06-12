@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import java.util.Vector;
 
 @RunWith(AndroidJUnit4.class)
-public class LANG_017 {
+public class LANG_017_DeleteEntry {
     @Rule
     public ActivityTestRule<LearningListActivity> learingListActivity = new ActivityTestRule<LearningListActivity>(LearningListActivity.class, false, false);
 
@@ -41,7 +41,7 @@ public class LANG_017 {
     @Test
     public void testDeleteOneWord() {
         VocabularManager manager = VocabularManager.getInstance();
-        manager.deleteVocabByWord("second");
+        manager.deleteVocabByWord("second","second_trans");
         Vector<Vocab> vocabs = manager.getVocabs();
 
         Assert.assertEquals(vocabs.size(), 2);
