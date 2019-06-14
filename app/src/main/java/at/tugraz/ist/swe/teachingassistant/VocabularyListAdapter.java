@@ -60,6 +60,7 @@ public class VocabularyListAdapter extends ArrayAdapter<String>
                   String second_word_delete = second_lang.get(position);
                   vocabulary.deleteVocabByWord(first_word_delete,second_word_delete);
                   remove(first_lang.get(position));
+                  second_lang.remove(position);
                   Toast.makeText(getContext(),first_word_delete + " " +  second_word_delete + " deleted", Toast.LENGTH_LONG).show();
               }
 
