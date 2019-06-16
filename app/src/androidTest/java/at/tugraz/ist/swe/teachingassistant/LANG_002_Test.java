@@ -44,14 +44,15 @@ public class LANG_002_Test {
     @Before
     public void setUpList() {
         VocabularManager vocabulary = VocabularManager.getInstance();
+        vocabulary.clearVocabs();
         Word word1 = new Word("en_test", "en");
         Word word2 = new Word("fi_test", "fi");
         Word word3 = new Word("en_test2", "en");
         Word word4 = new Word("fi_test2", "fi");
         vocabulary.getWordsFromLanguageRatingString("en", 1);
 
-        vocabulary.addVocab(word1, word2);
-        vocabulary.addVocab(word3, word4);
+        vocabulary.addVocab(word1, word2,null);
+        vocabulary.addVocab(word3, word4,null);
 
         Intent intent = new Intent();
         intent.putExtra("current_lang", "en");

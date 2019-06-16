@@ -30,7 +30,7 @@ public class LANG_001 {
         VocabularManager vocabulary = VocabularManager.getInstance();
         Word word1 = new Word("en_test", "en");
         Word word2 = new Word("fi_test", "fi");
-        vocabulary.addVocab(word1, word2);
+        vocabulary.addVocab(word1, word2, null);
 
         assertTrue(vocabulary.getWordsFromLanguage("en").contains("en_test"));
         assertTrue(vocabulary.getWordsFromLanguage("fi").contains("fi_test"));
@@ -42,7 +42,7 @@ public class LANG_001 {
         VocabularManager vocabulary = VocabularManager.getInstance();
         Word word1 = new Word("en_test", "en");
         Word word2 = new Word("fi_te", "fi");
-        vocabulary.addVocab(word1, word2);
+        vocabulary.addVocab(word1, word2, null);
 
         assertTrue(vocabulary.getWordsFromLanguage("en").contains("en_test"));
         assertFalse(vocabulary.getWordsFromLanguage("fi").contains("fi_test"));
@@ -54,7 +54,7 @@ public class LANG_001 {
         VocabularManager vocabulary = VocabularManager.getInstance();
         Word word1 = new Word("en_test", "en");
         Word word2 = new Word("fi_test", "fi");
-        vocabulary.addVocab(word1, word2);
+        vocabulary.addVocab(word1, word2, null);
 
         assertFalse(vocabulary.getWordsFromLanguage("f").contains("fi_test"));
         assertFalse(vocabulary.getWordsFromLanguage("e").contains("en_test"));
