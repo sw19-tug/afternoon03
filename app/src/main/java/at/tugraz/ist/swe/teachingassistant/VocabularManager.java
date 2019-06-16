@@ -201,7 +201,14 @@ public class VocabularManager {
         vocabs = new Vector<>();
     }
 
-    public int export(String filename) {
+    public boolean emptyVocabCheck() {
+        if(vocabs.size() == 0){
+            return true;
+        }
+        return false;
+    }
+
+    public int export(String filename){
         return 0;
     }
 }
