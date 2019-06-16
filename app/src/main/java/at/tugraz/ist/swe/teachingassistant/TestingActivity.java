@@ -1,7 +1,6 @@
 package at.tugraz.ist.swe.teachingassistant;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,8 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Vector;
 
 public class TestingActivity extends Activity {
 
@@ -45,11 +42,11 @@ public class TestingActivity extends Activity {
                 if (!request_word.equals("")) {
                     switch(testingManager.checkResult(request_word.getText().toString())) {
                         case 0:
-                            Toast.makeText(getApplicationContext(), "Dumbass", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_LONG).show();
                             updateInterface();
                             break;
                         case 1:
-                            Toast.makeText(getApplicationContext(), "Succeed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_LONG).show();
                             updateInterface();
                             break;
                         case 2:
