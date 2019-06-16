@@ -12,11 +12,10 @@ import android.widget.Toast;
 public class TestingActivity extends Activity {
 
     public Vocab currentVocab = null;
-
+    public int hintCounter = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testing_activity);
 
@@ -28,19 +27,19 @@ public class TestingActivity extends Activity {
         testingManager.buildRandomTest();
         updateInterface();
 
-
+        hintButton();
         nextButton();
 
     }
 
-    private void nextButton(){
+    private void nextButton() {
         final Button button = (Button) findViewById(R.id.btn_testing_next);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 TestingManager testingManager = TestingManager.getInstance();
                 EditText request_word = (EditText) findViewById(R.id.et_requestedWord);
                 if (!request_word.equals("")) {
-                    switch(testingManager.checkResult(request_word.getText().toString())) {
+                    switch (testingManager.checkResult(request_word.getText().toString())) {
                         case 0:
                             Toast.makeText(getApplicationContext(), "Incorrect", Toast.LENGTH_LONG).show();
                             updateInterface();
@@ -64,7 +63,21 @@ public class TestingActivity extends Activity {
         });
     }
 
-    private void exitTestingButton(){
+    private void hintButton() {
+        final Button button = (Button) findViewById(R.id.btn_testing_hint);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                EditText text = (EditText) findViewById(R.id.et_requestedWord);
+                if (hintCounter + 1 < currentVocab.getTranslationByLanguage("fi").length()){
+                    text.setText(text.getText().toString()+currentVocab.getTranslationByLanguage("fi").substring(hintCounter, hintCounter + 1));
+                }
+                hintCounter++;
+            }
+        });
+    }
+
+    private void exitTestingButton() {
         Button exitButton = (Button) findViewById(R.id.btn_exit_testing);
         exitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,28 +87,27 @@ public class TestingActivity extends Activity {
         });
     }
 
-    private void continueTestingButton(){
+    private void continueTestingButton() {
         Button continueButton = (Button) findViewById(R.id.btn_continue_testing);
         continueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TestingManager testingManager = TestingManager.getInstance();
-                if(testingManager.getSizeOfIncorrectVocabs() != 0) {
+                if (testingManager.getSizeOfIncorrectVocabs() != 0) {
                     testingManager.setContinueTesting();
                     setContentView(R.layout.testing_activity);
                     updateInterface();
                     nextButton();
-                }
-                else
+                } else
                     finish();
             }
         });
     }
 
-    private void updateInterface(){
+    private void updateInterface() {
         TestingManager testingManager = TestingManager.getInstance();
-        Log.e("Testing", "current_position: "+ testingManager.getCurrentPosition()+ "actual size: " + testingManager.getActiveSize());
-        Vocab currentVocab = testingManager.getCurrentVocab();
+        Log.e("Testing", "current_position: " + testingManager.getCurrentPosition() + "actual size: " + testingManager.getActiveSize());
+        currentVocab = testingManager.getCurrentVocab();
 
         TextView providedWord = (TextView) findViewById(R.id.tv_providedWord);
         providedWord.setText(currentVocab.getTranslationByLanguage("en"));
@@ -105,6 +117,7 @@ public class TestingActivity extends Activity {
 
         EditText request_word = (EditText) findViewById(R.id.et_requestedWord);
         request_word.setText("");
+        hintCounter = 0;
     }
 
 //    private void goToFeedbackInterface(){
