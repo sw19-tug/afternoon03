@@ -60,7 +60,12 @@ public class TestingActivity extends Activity {
                             exitTestingButton();
                             continueTestingButton();
                             TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
-                            progressCounter.setText(Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
+                            TextView pointsText = (TextView) findViewById(R.id.tv_test_points);
+                            progressCounter.setText("Answers: "+Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
+                            float score = testingManager.getScore();
+                            float testSize = testingManager.getActiveSize();
+                            float percentage = score / testSize * 100;
+                            pointsText.setText("Points: "+Float.toString(percentage)+ "/100");
                             break;
                     }
                 }
