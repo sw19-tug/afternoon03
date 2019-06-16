@@ -8,17 +8,18 @@
 
     <TextView
         android:id="@+id/btn_listadd"
+        android:text="Edit Vocabulary"
         android:layout_width="215dp"
-        android:layout_height="51dp"
+        android:layout_height="30dp"
         android:layout_marginEnd="98dp"
         android:layout_marginStart="98dp"
         android:layout_marginTop="24dp"
-        android:text="Edit Vocabulary"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <EditText
         android:id="@+id/et_second_lang"
@@ -26,45 +27,47 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="99dp"
         android:layout_marginStart="99dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/tv_tags"
         app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_second_lang" />
+
 
     <EditText
         android:id="@+id/et_first_lang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginEnd="99dp"
         android:layout_marginStart="99dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
+        android:textAlignment="center"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/tv_second_lang"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_first_lang"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_first_lang" />
 
     <EditText
         android:id="@+id/et_tags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="5dp"
         android:layout_marginEnd="99dp"
         android:layout_marginStart="99dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="5dp"
         android:ems="10"
+        android:textAlignment="center"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@+id/save_translation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_tags"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_tags" />
 
     <TextView
         android:id="@+id/tv_first_lang"
