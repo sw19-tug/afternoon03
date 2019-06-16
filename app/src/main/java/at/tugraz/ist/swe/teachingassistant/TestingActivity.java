@@ -51,6 +51,12 @@ public class TestingActivity extends Activity {
                         case 2:
                             //show score
                             setContentView(R.layout.test_feedback_interface);
+                            Button continueButton = (Button) findViewById(R.id.btn_continue_testing);
+                            TextView continueText = (TextView) findViewById(R.id.tv_user_info);
+                            if (testingManager.getScore() == testingManager.getActiveSize()) {
+                                continueButton.setVisibility(View.INVISIBLE);
+                                continueText.setVisibility(View.INVISIBLE);
+                            }
                             exitTestingButton();
                             continueTestingButton();
                             TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
@@ -69,8 +75,8 @@ public class TestingActivity extends Activity {
             public void onClick(View v) {
 
                 EditText text = (EditText) findViewById(R.id.et_requestedWord);
-                if (hintCounter + 1 < currentVocab.getTranslationByLanguage("fi").length()){
-                    text.setText(text.getText().toString()+currentVocab.getTranslationByLanguage("fi").substring(hintCounter, hintCounter + 1));
+                if (hintCounter + 1 < currentVocab.getTranslationByLanguage("fi").length()) {
+                    text.setText(text.getText().toString() + currentVocab.getTranslationByLanguage("fi").substring(hintCounter, hintCounter + 1));
                 }
                 hintCounter++;
             }
