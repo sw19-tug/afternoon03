@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TeachingAssistant</string>
+    <string name="app_name">Vocabulary</string>
     <string name="filename">File Name</string>
     <string name="export">Export</string>
     <string name="import_string">Import</string>
