@@ -5,7 +5,7 @@
     android:id="@+id/share_button"
     android:title="Share"
     app:showAsAction="ifRoom"
-    android:actionProviderClass="android.widget.ShareActionProvider"
+    app:actionProviderClass="android.support.v7.widget.ShareActionProvider"
     android:icon="@drawable/ic_share_black_24dp"/>
 
 

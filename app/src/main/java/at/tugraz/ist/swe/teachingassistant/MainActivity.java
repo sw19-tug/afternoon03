@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity
         if (requestCode == SHARE_RETURN_CODE && resultCode == RESULT_OK)
         {
             String file_path = resultData.getStringExtra("file_name");
-            Toast.makeText(getApplicationContext(), "!!!!!!!!1 " + file_path, Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), file_path, Toast.LENGTH_LONG).show();
             shareVocabulary(resultData.getStringExtra("file_name"));
         }
     }
@@ -175,7 +175,25 @@ public class MainActivity extends AppCompatActivity
             Log.e("SHARE", "FILE DOESNT EXISTS, should not happen");
             return;
         }
-        Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), FILE_PROVIDER_AUTHORITY, fileToShare);
-
+        /*
+         * Most file-related method calls need to be in
+         * try-catch blocks.
+         */
+        // Use the FileProvider to get a content URI
+        try {
+            Uri fileUri = FileProvider.getUriForFile(MainActivity.this, FILE_PROVIDER_AUTHORITY, fileToShare);
+            if (fileUri != null) {
+                // Grant temporary read permission to the content URI
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);
+                shareIntent.setType("text/plain");
+                shareIntent.addFlags(
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                startActivity(Intent.createChooser(shareIntent, "Share File"));
+            }
+        } catch (IllegalArgumentException e) {
+            Log.e("File Selector", "The selected file can't be shared: " + fileToShare.toString());
+        }
     }
 }

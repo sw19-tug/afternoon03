@@ -56,7 +56,7 @@ public class FileSelectActivity extends AppCompatActivity
         {
             for (File file : shareFiles)
             {
-                shareFilenames.add(file.getName());
+                shareFilenames.add(shareDir.getName() + "/" + file.getName());
             }
         }
 
@@ -73,10 +73,6 @@ public class FileSelectActivity extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent data = new Intent();
-               // Bundle b = new Bundle();
-               // b.putInt("position", position);
-               // b.putString("file_name", shareFilenames.get(position));
-               // data.putExtras(b);
 
                 data.putExtra("file_name", shareFiles != null ? shareFiles[position].getAbsolutePath() : "");
                 setResult(RESULT_OK, data);
