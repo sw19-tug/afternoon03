@@ -13,7 +13,6 @@ public class TestingActivity extends Activity {
 
     public Vocab currentVocab = null;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -28,7 +27,7 @@ public class TestingActivity extends Activity {
         testingManager.buildRandomTest();
         updateInterface();
 
-
+        hintButton();
         nextButton();
 
     }
@@ -64,6 +63,16 @@ public class TestingActivity extends Activity {
         });
     }
 
+    private void hintButton(){
+        final Button button = (Button) findViewById(R.id.btn_testing_hint);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               EditText text = (EditText) findViewById(R.id.et_requestedWord);
+               text.setText(currentVocab.getTranslationByLanguage("fi").substring(0,1));
+            }
+        });
+    }
+
     private void exitTestingButton(){
         Button exitButton = (Button) findViewById(R.id.btn_exit_testing);
         exitButton.setOnClickListener(new View.OnClickListener() {
@@ -95,7 +104,7 @@ public class TestingActivity extends Activity {
     private void updateInterface(){
         TestingManager testingManager = TestingManager.getInstance();
         Log.e("Testing", "current_position: "+ testingManager.getCurrentPosition()+ "actual size: " + testingManager.getActiveSize());
-        Vocab currentVocab = testingManager.getCurrentVocab();
+        currentVocab = testingManager.getCurrentVocab();
 
         TextView providedWord = (TextView) findViewById(R.id.tv_providedWord);
         providedWord.setText(currentVocab.getTranslationByLanguage("en"));

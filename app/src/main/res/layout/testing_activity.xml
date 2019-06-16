@@ -71,7 +71,7 @@
 
     <EditText
         android:id="@+id/et_requestedWord"
-        android:layout_above="@id/btn_testing_next"
+        android:layout_above="@id/btn_testing_hint"
         android:hint="answer"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
@@ -88,13 +88,26 @@
         android:id="@+id/btn_testing_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@id/btn_testing_next"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="22dp"
         android:text="Next"
-        android:textSize="28dp"
+        android:textSize="28dp" />
+
+    <Button
+        android:id="@+id/btn_testing_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="92dp"
+        android:text="Hint"
+        android:textSize="28dp" />
 
 
 
