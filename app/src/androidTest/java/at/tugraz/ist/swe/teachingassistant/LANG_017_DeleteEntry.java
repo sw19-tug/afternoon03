@@ -1,5 +1,15 @@
 package at.tugraz.ist.swe.teachingassistant;
 
+
+import static android.support.test.espresso.Espresso.*;
+import static android.support.test.espresso.action.ViewActions.click;
+
+import static org.hamcrest.CoreMatchers.anything;
+
+import static android.support.test.espresso.matcher.ViewMatchers.withId; //is needed..
+
+
+import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -14,7 +24,7 @@ import java.util.Vector;
 @RunWith(AndroidJUnit4.class)
 public class LANG_017_DeleteEntry {
     @Rule
-    public ActivityTestRule<LearningListActivity> learingListActivity = new ActivityTestRule<LearningListActivity>(LearningListActivity.class, false, false);
+    public ActivityTestRule<VocabularyActivity> activity = new ActivityTestRule<VocabularyActivity>(VocabularyActivity.class, false, false);
 
     @Before
     public void setup() {
@@ -29,6 +39,9 @@ public class LANG_017_DeleteEntry {
         vocabularManager.addVocab(word1, word2, null);
         vocabularManager.addVocab(word3, word4, null);
         vocabularManager.addVocab(word5, word6, null);
+        Intent intent = new Intent();
+        activity.launchActivity(intent);
+
     }
 
     @Test
@@ -36,6 +49,19 @@ public class LANG_017_DeleteEntry {
         VocabularManager manager = VocabularManager.getInstance();
         manager.clear();
         Assert.assertEquals(manager.getVocabs().size(), 0);
+    }
+
+
+    @Test
+    public void deleteAllInView()
+    {
+
+        VocabularManager manager = VocabularManager.getInstance();
+        onData(anything()).inAdapterView(withId(R.id.first_language_list)).atPosition(0).onChildView(withId(R.id.delete_btn)).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.first_language_list)).atPosition(0).onChildView(withId(R.id.delete_btn)).perform(click());
+        onData(anything()).inAdapterView(withId(R.id.first_language_list)).atPosition(0).onChildView(withId(R.id.delete_btn)).perform(click());
+        Assert.assertEquals(0,manager.getVocabs().size());
+
     }
 
     @Test
