@@ -11,13 +11,18 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
+import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withSpinnerText;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.AllOf.allOf;
 import static org.junit.Assert.assertNotSame;
 
 /**
@@ -50,6 +55,16 @@ public class LANG_004_LearningList {
 
         mActivityRule.launchActivity(intent);
     }
+    @Test
+    public void testFilterSpinnerReset()
+    {
+
+        onView(allOf(withId(R.id.spinner), withSpinnerText("Filter"))).perform(click());
+        onData(allOf(is(instanceOf(String.class)))).atPosition(1).perform(click());
+        onView(withId(R.id.btn_alphabetical)).perform(click());
+        onView(allOf(withId(R.id.spinner), withSpinnerText("Filter"))).perform(click());
+
+    }
 
     @Test
     public void testFilterSpinner()
@@ -71,7 +86,7 @@ public class LANG_004_LearningList {
         onView(withId(R.id.btn_changeLanguage)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_changeLanguage)).check(matches((isClickable())));
         String language = withId(R.id.languageTitle).toString();
-        onView(withId(R.id.btn_changeLanguage)).perform(ViewActions.click());
+        onView(withId(R.id.btn_changeLanguage)).perform(click());
         String languageAfterClick = withId(R.id.languageTitle).toString();
         assertNotSame(language, languageAfterClick);
     }
