@@ -33,15 +33,7 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 
 public class LANG_005_Testing {
-    @Rule
-//    public ActivityTestRule<SelectTestingActivity> activityRuleSelect = new ActivityTestRule<>(SelectTestingActivity.class);
-    public ActivityTestRule<TestingActivity> activityRule = new ActivityTestRule<>(TestingActivity.class);
-
-//    public ActivityTestRule<SelectTestingActivity> getActivityRuleSelect(){ return activityRuleSelect;}
-    public ActivityTestRule<TestingActivity> getActivityRule()
-    {
-        return activityRule;
-    }
+    private int vocabSize;
 
     @Before
     public void setupTest() throws Exception {
@@ -52,22 +44,22 @@ public class LANG_005_Testing {
         Word word4 = new Word("second_trans", "fi");
         Word word5 = new Word("third", "en");
         Word word6 = new Word("third_trans", "fi");
-        vocabulary.addVocab(word1, word2, null);
-        vocabulary.addVocab(word3, word4, null);
+        vocabulary.addVocab(word1, word2, "tag");
+        vocabulary.addVocab(word3, word4, "tags");
         vocabulary.addVocab(word5, word6, null);
+        if (vocabulary.getVocabs().size() >= 1) {
+            TestingManager testingManager = TestingManager.getInstance();
+            testingManager.setTestingVocabs(vocabulary.getVocabs());
+            vocabSize = 3;
+        }
 
-
-        TestingManager testingManager = TestingManager.getInstance();
-        testingManager.setTestingVocabs(vocabulary.getVocabs());
-
+        ActivityTestRule<TestingActivity> activityRule = new ActivityTestRule<>(TestingActivity.class);
         Intent intent = new Intent();
         activityRule.launchActivity(intent);
     }
 
     @Test
     public void checkInterfaceTest() throws Exception {
-
-
         onView(withId(R.id.tv_progress)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_fraction_progress)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_providedLanguage)).check(matches(isDisplayed()));
@@ -81,30 +73,13 @@ public class LANG_005_Testing {
     @Test
     public void checkTestFeedbackInterface() throws Exception {
 
-
-        onView(withId(R.id.btn_testing_next)).perform(click());
-
+        for (int i = 0; i < vocabSize; i++) {
+            onView(withId(R.id.btn_testing_next)).perform(click());
+        }
 
         onView(withId(R.id.tv_test_result)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_user_info)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_exit_testing)).check(matches(isClickable()));
         onView(withId(R.id.btn_continue_testing)).check(matches((isClickable())));
     }
-
-    @Test
-    public void correctResponseTest() throws Exception {
-
-    }
-
-    @Test
-    public void incorrectResponseTest() throws Exception {
-
-    }
-
-    @Test
-    public void endingTest() throws Exception {
-
-    }
-
-
 }
