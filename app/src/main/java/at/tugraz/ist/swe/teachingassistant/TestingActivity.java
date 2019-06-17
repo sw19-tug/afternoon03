@@ -9,10 +9,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TestingActivity extends Activity {
 
     public Vocab currentVocab = null;
     public int hintCounter = 0;
+    private Timer timer;
+    private boolean running = false;
+    public long seconds = 0;
+    public int msHelper = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +40,38 @@ public class TestingActivity extends Activity {
         hintButton();
         nextButton();
 
+        startTimer();
+
     }
+
+    private void updateTimerText() {
+        TextView timeView = (TextView) findViewById(R.id.tv_time);
+        timeView.setText("Time: " + seconds + "s");
+    }
+
+    private Runnable timerTick = new Runnable() {
+        @Override
+        public void run() {
+            seconds++;
+            updateTimerText();
+        }
+    };
+
+    private void startTimer() {
+        timer = new Timer();
+        running = true;
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                runTimer();
+            }
+        }, 0, 1000);
+    }
+
+    private void runTimer() {
+        this.runOnUiThread(timerTick);
+    }
+
 
     private void nextButton() {
         final Button button = (Button) findViewById(R.id.btn_testing_next);
@@ -50,6 +91,7 @@ public class TestingActivity extends Activity {
                             break;
                         case 2:
                             //show score
+                            timer.cancel();
                             setContentView(R.layout.test_feedback_interface);
                             Button continueButton = (Button) findViewById(R.id.btn_continue_testing);
                             TextView continueText = (TextView) findViewById(R.id.tv_user_info);
@@ -61,12 +103,14 @@ public class TestingActivity extends Activity {
                             continueTestingButton();
                             TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
                             TextView pointsText = (TextView) findViewById(R.id.tv_test_points);
-                            progressCounter.setText("Answers: "+Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
+                            TextView timeText = (TextView) findViewById(R.id.tv_test_result_time);
+                            progressCounter.setText("Answers: " + Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
                             float score = testingManager.getScore();
                             float testSize = testingManager.getActiveSize();
                             float percentage = score / testSize * 100;
                             double rounded = Math.round(percentage * 100.0) / 100.0;
-                            pointsText.setText("Points: "+ rounded + "/100");
+                            pointsText.setText("Points: " + rounded + "/100");
+                            timeText.setText("Time: " + seconds + " s");
                             break;
                     }
                 }
@@ -114,6 +158,10 @@ public class TestingActivity extends Activity {
                     finish();
             }
         });
+    }
+
+    public void stopTimer() {
+        timer.cancel();
     }
 
     private void updateInterface() {
