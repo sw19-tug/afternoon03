@@ -15,20 +15,21 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lv_test_type"
+        android:id="@+id/lv_available_vocabs"
         android:layout_below="@id/tv_advanced_info"
         android:layout_marginTop="10dp"
-
+        android:clickable="true"
         />
 
     <Button
         android:id="@+id/btn_start_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:text="Start Test"
-        android:layout_below="@id/lv_test_type"
-        />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="24dp"
+        android:text="Start Test" />
 
 
 </RelativeLayout>

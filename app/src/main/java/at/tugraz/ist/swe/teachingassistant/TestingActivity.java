@@ -19,15 +19,9 @@ public class TestingActivity extends Activity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.testing_activity);
-
-        VocabularManager vocabManager = VocabularManager.getInstance();
         TestingManager testingManager = TestingManager.getInstance();
-
-        testingManager.setTestingVocabs(vocabManager.getVocabs());
-
         testingManager.buildRandomTest();
         updateInterface();
-
 
         nextButton();
 

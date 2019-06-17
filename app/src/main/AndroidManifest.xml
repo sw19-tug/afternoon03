@@ -11,9 +11,11 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".AdvancedTestingActivity"></activity>
         <activity android:name=".LearningInterfaceActivity" />
         <activity android:name=".LearningListActivity" />
-        <activity android:name=".TestingActivity"/>
+        <activity android:name=".TestingActivity" />
+        <activity android:name=".SelectTestingActivity" />
         <activity
             android:name=".ExportDialog"
             android:theme="@android:style/Theme.Holo.Dialog" />
@@ -24,19 +26,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".AddVocabActivity"></activity>
+        <activity android:name=".AddVocabActivity" />
         <activity
             android:name=".ImportActivity"
             android:excludeFromRecents="true"
             android:label="TA - Importer"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name=".ExportActivity"
             android:excludeFromRecents="true"
             android:label="@string/export_title"
-            android:theme="@style/Theme.AppCompat.Dialog"></activity>
+            android:theme="@style/Theme.AppCompat.Dialog" />
         <activity android:name=".VocabularyActivity" />
-        <activity android:name=".EditActivity"></activity>
+        <activity android:name=".EditActivity" />
     </application>
 
 </manifest>
