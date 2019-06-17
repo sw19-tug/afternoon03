@@ -69,6 +69,7 @@ public class LANG_004_LearningInterface {
         onView(withId(R.id.seekBar)).perform(ViewActions.swipeLeft());
         onView(withId(R.id.seekBar)).perform(ViewActions.click());
     }
+
     @Test
     public void testChangeRating()
     {
@@ -76,7 +77,7 @@ public class LANG_004_LearningInterface {
         VocabularManager vocabulary = VocabularManager.getInstance();
         Vector<Vocab> vocabs = vocabulary.getVocabs();
         int rating = vocabs.get(0).getRating();
-        assertEquals(1, rating);
+        assertEquals(2, rating);
     }
 
     @Test

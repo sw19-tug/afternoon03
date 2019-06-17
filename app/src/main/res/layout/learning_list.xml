@@ -31,7 +31,7 @@
         android:layout_below="@+id/btn_alphabetical"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
 
         android:hint="Search for tags (Comma separated)"
         android:imeOptions="actionDone"
@@ -45,7 +45,7 @@
         android:layout_below="@+id/input_tags"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
 
         android:hint="Search for words"
         android:imeOptions="actionDone"
