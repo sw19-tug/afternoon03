@@ -23,13 +23,9 @@ import static at.tugraz.ist.swe.teachingassistant.Globals.*;
 public class FileSelectActivity extends AppCompatActivity
 {
     private File privateRootDir;
-    private File externalRootDir;
     private File shareDir;
-    private File importDir;
     File[] shareFiles;
-    File[] importFiles;
     ArrayList<String> shareFilenames  = new ArrayList<String>();
-    ArrayList<String> importFilenames  = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -40,14 +36,10 @@ public class FileSelectActivity extends AppCompatActivity
         Intent resultIntent = new Intent(ACTION_RETURN_FILE);
 
         privateRootDir = getFilesDir();
-        externalRootDir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
 
         shareDir = new File(privateRootDir, "files");
-        importDir = new File(externalRootDir.getAbsolutePath());
 
         shareFiles = shareDir.listFiles();
-        importFiles = importDir.listFiles();
-
 
         setResult(Activity.RESULT_CANCELED, null);
 
@@ -57,25 +49,7 @@ public class FileSelectActivity extends AppCompatActivity
         {
             for (File file : shareFiles)
             {
-                shareFilenames.add(file.getAbsolutePath());
-            }
-
-            try
-            {
-                String caller_activity = getCallingActivity().getClassName();
-
-                if (caller_activity.equals(ImportActivity.class.toString()))
-                {
-                    for (File file : shareFiles)
-                    {
-                        importFilenames.add(file.getAbsolutePath());
-                    }
-                }
-
-            }
-            catch (NullPointerException e)
-            {
-                Log.e("FILE SELECT", e.getMessage());
+                shareFilenames.add(shareDir.getName() + "/" + file.getName());
             }
         }
 
@@ -83,7 +57,6 @@ public class FileSelectActivity extends AppCompatActivity
         ListView listView = (ListView) findViewById(R.id.share_list);
         listView.setAdapter(adapter);
         configureListViewItems();
-
     }
 
     private void configureListViewItems() {

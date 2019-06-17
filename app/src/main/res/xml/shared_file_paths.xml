@@ -3,6 +3,5 @@
 
     <root-path name="root" path="" />
     <files-path name="files" path="files/" />
-    <external-path name="external" path="Android/data/com.dev2qa.example/cache/" />
     <external-files-path name="external_files" path="external_files/" />
 </paths>
