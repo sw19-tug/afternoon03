@@ -1,6 +1,7 @@
 package at.tugraz.ist.swe.teachingassistant;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.filters.LargeTest;
@@ -34,26 +35,31 @@ import static org.junit.Assert.assertEquals;
 @LargeTest
 public class LANG_002_Test {
 
-public ListView listview;
-View child0;
-
     @Rule
     public ActivityTestRule<LearningListActivity> activityRule = new ActivityTestRule<>(LearningListActivity.class);
 
-    public ActivityTestRule<LearningListActivity> getActivityRule()
-    {
+    public ActivityTestRule<LearningListActivity> getActivityRule() {
         return activityRule;
     }
 
     @Before
     public void setUpList() {
         VocabularManager vocabulary = VocabularManager.getInstance();
+        vocabulary.clearVocabs();
         Word word1 = new Word("en_test", "en");
         Word word2 = new Word("fi_test", "fi");
-        Word word3 = new Word("en_test2","en");
-        Word word4 = new Word("fi_test2","fi");
-        vocabulary.addVocab(word1, word2);
-        vocabulary.addVocab(word3, word4);
+        Word word3 = new Word("en_test2", "en");
+        Word word4 = new Word("fi_test2", "fi");
+        vocabulary.getWordsFromLanguageRatingString("en", 1);
+
+        vocabulary.addVocab(word1, word2,null);
+        vocabulary.addVocab(word3, word4,null);
+
+        Intent intent = new Intent();
+        intent.putExtra("current_lang", "en");
+        intent.putExtra("position", 0);
+
+        activityRule.launchActivity(intent);
     }
 
     @Test
@@ -64,7 +70,7 @@ View child0;
     }
 
     @Test
-    public void testLearningInterfaceVisible(){
+    public void testLearningInterfaceVisible() {
         onView(withId(R.id.vocabList)).check(matches(isDisplayed()));
         onView(withId(R.id.learningTitle)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_changeLanguage)).check(matches(isDisplayed()));
@@ -75,12 +81,12 @@ View child0;
     public void testListHasItems() {
 
         ListView listview = (ListView) activityRule.getActivity().findViewById(R.id.vocabList);
-        assertThat(listview.getCount(), is(1));
+        assertThat(listview.getCount(), is(2));
     }
 
 
     @Test
-    public void testChangeLanguageButtonList(){
+    public void testChangeLanguageButtonList() {
         String language;
         TextView languageTextView = (TextView) activityRule.getActivity().findViewById(R.id.languageTitle);
         language = ((TextView) languageTextView).getText().toString();

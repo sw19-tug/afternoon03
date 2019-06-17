@@ -1,28 +1,42 @@
 package at.tugraz.ist.swe.teachingassistant;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static java.lang.System.exit;
+public class EditActivity extends AppCompatActivity
+{
 
-public class AddVocabActivity extends AppCompatActivity {
+    private String first_lang;
+    private String second_lang;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_vocab);
+        setContentView(R.layout.activity_edit);
+
+
+        first_lang = getIntent().getExtras().getString("first_lang");
+        second_lang = getIntent().getExtras().getString("second_lang");
 
         addVocabViewButton();
+
+        EditText first_language = (EditText) findViewById(R.id.et_first_lang);
+        first_language.setText(first_lang);
+        EditText second_language = (EditText) findViewById(R.id.et_second_lang);
+        second_language.setText(second_lang);
+
     }
 
-    private void addVocabViewButton() {
+    private void addVocabViewButton()
+    {
         Button AddListViewButton = (Button) findViewById(R.id.save_translation);
-        AddListViewButton.setOnClickListener(new View.OnClickListener() {
+        AddListViewButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
 
             public void onClick(View v)
@@ -32,15 +46,14 @@ public class AddVocabActivity extends AppCompatActivity {
                 EditText first_language = (EditText) findViewById(R.id.et_first_lang);
                 EditText second_language = (EditText) findViewById(R.id.et_second_lang);
                 EditText tags = (EditText) findViewById(R.id.et_tags);
-                if(!(first_language.getText().toString().isEmpty() || second_language.getText().toString().isEmpty()))
+                if (!(first_language.getText().toString().isEmpty() || second_language.getText().toString().isEmpty()))
                 {
                     Word word1 = new Word(first_language.getText().toString(), "en");
                     Word word2 = new Word(second_language.getText().toString(), "fi");
-                    vocabulary.addVocab(word1, word2, tags.getText().toString());
-                    Toast.makeText(getApplicationContext(), "succeed: " + first_language.getText() + " " + second_language.getText(), Toast.LENGTH_LONG).show();
+                    vocabulary.editVocabByWord(first_lang,second_lang,word1,word2,tags.getText().toString());
+                    Toast.makeText(getApplicationContext(), "edit: " + first_language.getText() + " " + second_language.getText(), Toast.LENGTH_LONG).show();
                     finish();
-                }
-                else
+                } else
                 {
                     Toast.makeText(getApplicationContext(), "please enter both languages", Toast.LENGTH_LONG).show();
 
@@ -49,3 +62,4 @@ public class AddVocabActivity extends AppCompatActivity {
         });
     }
 }
+

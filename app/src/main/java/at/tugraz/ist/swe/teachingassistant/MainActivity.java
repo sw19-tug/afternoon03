@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
         configureExportDialog();
         configureImportDialog();
         configureLearningButton();
+        configureTestingButton();
     }
 
     private void configureAddListViewButton()
@@ -87,6 +88,24 @@ public class MainActivity extends AppCompatActivity
             {
                 Intent intent = new Intent(MainActivity.this, LearningListActivity.class);
                 startActivity(intent);
+            }
+        });
+
+    }
+
+
+    private void configureTestingButton() {
+        Button AddListViewButton = (Button) findViewById(R.id.btn_testing);
+        AddListViewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!VocabularManager.getInstance().emptyVocabCheck()) {
+                    Intent intent = new Intent(MainActivity.this, TestingActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "No vocabs found for test", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
