@@ -3,6 +3,7 @@ package at.tugraz.ist.swe.teachingassistant;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,14 +22,14 @@ import static at.tugraz.ist.swe.teachingassistant.Globals.*;
 
 public class FileSelectActivity extends AppCompatActivity
 {
-    // The path to the root of this app's internal storage
     private File privateRootDir;
-    // The path to the "share" subdirectory
+    private File externalRootDir;
     private File shareDir;
-    // Array of files in the images subdirectory
+    private File importDir;
     File[] shareFiles;
-    // Array of filenames corresponding to imageFiles
+    File[] importFiles;
     ArrayList<String> shareFilenames  = new ArrayList<String>();
+    ArrayList<String> importFilenames  = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -38,11 +39,15 @@ public class FileSelectActivity extends AppCompatActivity
 
         Intent resultIntent = new Intent(ACTION_RETURN_FILE);
 
-        File privateRootDir = getFilesDir();
+        privateRootDir = getFilesDir();
+        externalRootDir = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
 
         shareDir = new File(privateRootDir, "files");
+        importDir = new File(externalRootDir.getAbsolutePath());
 
         shareFiles = shareDir.listFiles();
+        importFiles = importDir.listFiles();
+
 
         setResult(Activity.RESULT_CANCELED, null);
 
@@ -53,6 +58,24 @@ public class FileSelectActivity extends AppCompatActivity
             for (File file : shareFiles)
             {
                 shareFilenames.add(file.getAbsolutePath());
+            }
+
+            try
+            {
+                String caller_activity = getCallingActivity().getClassName();
+
+                if (caller_activity.equals(ImportActivity.class.toString()))
+                {
+                    for (File file : shareFiles)
+                    {
+                        importFilenames.add(file.getAbsolutePath());
+                    }
+                }
+
+            }
+            catch (NullPointerException e)
+            {
+                Log.e("FILE SELECT", e.getMessage());
             }
         }
 

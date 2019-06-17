@@ -11,12 +11,13 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.io.*;
-import java.lang.reflect.Type;
 import java.util.Vector;
+
+import static at.tugraz.ist.swe.teachingassistant.Globals.IMPORT_CODE;
 
 public class ImportActivity extends AppCompatActivity
 {
-    private static final int READ_REQUEST_CODE = 42;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,7 +27,10 @@ public class ImportActivity extends AppCompatActivity
         setContentView(R.layout.import_activity);
         this.setFinishOnTouchOutside(false);
 
-        configureImportButton();
+
+        performFileSearch();
+        finish();
+        //configureImportButton();
 
     }
 
@@ -44,7 +48,6 @@ public class ImportActivity extends AppCompatActivity
 
         CancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), R.string.TOAST_IMPORT_CANCEL, Toast.LENGTH_SHORT).show();
                 finish();
@@ -79,31 +82,16 @@ public class ImportActivity extends AppCompatActivity
 
         startActivityForResult(intent, READ_REQUEST_CODE);*/
         Intent intent = new Intent(this, FileSelectActivity.class);
+        startActivityForResult(intent, IMPORT_CODE);
     }
 
-    private String readTextFromUri(Uri uri) throws IOException {
-        InputStream inputStream = getContentResolver().openInputStream(uri);
-        BufferedReader reader = new BufferedReader(new InputStreamReader(
-            inputStream));
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        inputStream.close();
-        reader.close();
-        return stringBuilder.toString();
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent resultData) {
 
-        if (requestCode == READ_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            // The document selected by the user won't be returned in the intent.
-            // Instead, a URI to that document will be contained in the return intent
-            // provided to this method as a parameter.
-            // Pull that URI using resultData.getData().
+        Toast.makeText(getApplicationContext(), "Export Success", Toast.LENGTH_LONG).show();
+        if (requestCode == IMPORT_CODE && resultCode == Activity.RESULT_OK) {
             Uri uri = null;
             if (resultData != null) {
                 uri = resultData.getData();
@@ -121,6 +109,19 @@ public class ImportActivity extends AppCompatActivity
         }
     }
 
+    private String readTextFromUri(Uri uri) throws IOException {
+        InputStream inputStream = getContentResolver().openInputStream(uri);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(
+            inputStream));
+        StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            stringBuilder.append(line);
+        }
+        inputStream.close();
+        reader.close();
+        return stringBuilder.toString();
+    }
 
 
 
