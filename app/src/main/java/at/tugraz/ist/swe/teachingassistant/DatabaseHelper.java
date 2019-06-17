@@ -46,7 +46,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public long insert(int size, int correct) {
+    public long insert(int size, int correct, int time) {
         // get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -59,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(StoredTest.COLUMN_DATE, formattedDate);
         values.put(StoredTest.COLUMN_SIZE, size);
         values.put(StoredTest.COLUMN_CORRECT, correct);
+        values.put(StoredTest.COLUMN_TIME, time);
 
         // insert row
         long id = db.insert(StoredTest.TABLE_NAME, null, values);
@@ -88,6 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 test.setDate(dateString);
                 test.setCorrect(cursor.getInt(cursor.getColumnIndex(StoredTest.COLUMN_CORRECT)));
                 test.setSize(cursor.getInt(cursor.getColumnIndex(StoredTest.COLUMN_SIZE)));
+                test.setTime(cursor.getInt(cursor.getColumnIndex(StoredTest.COLUMN_TIME)));
 
                 tests.add(test);
             } while (cursor.moveToNext());
