@@ -36,8 +36,7 @@ public class LANG_005_Testing {
     @Rule
     public ActivityTestRule<TestingActivity> activityRule = new ActivityTestRule<>(TestingActivity.class);
 
-    public ActivityTestRule<TestingActivity> getActivityRule()
-    {
+    public ActivityTestRule<TestingActivity> getActivityRule() {
         return activityRule;
     }
 
@@ -50,7 +49,7 @@ public class LANG_005_Testing {
         Word word4 = new Word("second_trans", "fi");
         Word word5 = new Word("third", "en");
         Word word6 = new Word("third_trans", "fi");
-        vocabulary.addVocab(word1, word2,null);
+        vocabulary.addVocab(word1, word2, null);
         vocabulary.addVocab(word3, word4, null);
         vocabulary.addVocab(word5, word6, null);
 
@@ -74,10 +73,8 @@ public class LANG_005_Testing {
     @Test
     public void checkTestFeedbackInterface() throws Exception {
 
-
+        //activityRule.getActivity().setContentView(R.layout.test_feedback_interface);
         onView(withId(R.id.btn_testing_next)).perform(click());
-
-
         onView(withId(R.id.tv_test_result)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_user_info)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_exit_testing)).check(matches(isClickable()));
