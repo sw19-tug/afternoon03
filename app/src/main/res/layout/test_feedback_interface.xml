@@ -8,33 +8,32 @@
 
     <TextView
         android:id="@+id/tv_test_result"
-        android:layout_width="400dp"
+        android:layout_width="wrap_content"
         android:layout_height="51dp"
         android:layout_marginStart="98dp"
-        android:layout_marginTop="144dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="98dp"
         android:text="Score: X/10"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_test_points"
-        android:layout_width="400dp"
-        android:layout_height="51dp"
+        android:layout_width="wrap_content"
+        android:layout_height="47dp"
         android:layout_marginStart="98dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="98dp"
         android:text="Points"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_test_result"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_test_result" />
 
     <Button
         android:id="@+id/btn_exit_testing"
@@ -42,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="56dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="90dp"
         android:text="Exit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btn_continue_testing"
@@ -54,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="84dp"
-        android:layout_marginBottom="164dp"
+        android:layout_marginBottom="90dp"
         android:text="Continue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -62,12 +61,16 @@
     <TextView
         android:id="@+id/tv_user_info"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="144dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="8dp"
         android:text="Attempt your incorrect entries?"
+        android:textAlignment="center"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@+id/tv_test_result"
-        tools:layout_editor_absoluteX="94dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_test_points" />
 
 
 </android.support.constraint.ConstraintLayout>

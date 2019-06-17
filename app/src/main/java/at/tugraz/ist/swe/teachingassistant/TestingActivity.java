@@ -65,7 +65,8 @@ public class TestingActivity extends Activity {
                             float score = testingManager.getScore();
                             float testSize = testingManager.getActiveSize();
                             float percentage = score / testSize * 100;
-                            pointsText.setText("Points: "+Float.toString(percentage)+ "/100");
+                            double rounded = Math.round(percentage * 100.0) / 100.0;
+                            pointsText.setText("Points: "+ rounded + "/100");
                             break;
                     }
                 }
@@ -130,11 +131,5 @@ public class TestingActivity extends Activity {
         request_word.setText("");
         hintCounter = 0;
     }
-
-//    private void goToFeedbackInterface(){
-//        setContentView(R.layout.test_feedback_interface);
-//        TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
-//        progressCounter.setText(Integer.toString(testingManager.getScore() + 1) + "/" + testingManager.getActiveSize());
-//    }
 }
 
