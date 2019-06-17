@@ -101,7 +101,6 @@ public class LANG_002_Test {
     public void testClickListItem() {
         int mActivePosition = 0;
         ListView listview = (ListView) activityRule.getActivity().findViewById(R.id.vocabList);
-
         listview.performItemClick(
                 listview.getAdapter().getView(mActivePosition, null, null),
                 mActivePosition,

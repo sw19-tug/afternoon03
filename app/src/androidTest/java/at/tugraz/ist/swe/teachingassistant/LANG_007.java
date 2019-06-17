@@ -51,7 +51,7 @@ public class LANG_007 {
         DatabaseHelper db = new DatabaseHelper(InstrumentationRegistry.getTargetContext());
         int beforeCount = db.getTotalCount();
         Log.i("Before count: ",Integer.toString(beforeCount));
-        db.insert(12,10);
+        db.insert(12,10, 12);
         int afterCount = db.getTotalCount();
         Log.i("After count: ",Integer.toString(afterCount));
         for (StoredTest test: db.getAllNotes()) {

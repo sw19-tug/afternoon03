@@ -14,6 +14,7 @@
         <activity android:name=".LearningInterfaceActivity" />
         <activity android:name=".LearningListActivity" />
         <activity android:name=".TestingActivity"/>
+        <activity android:name=".LeaderboardActivity"/>
         <activity
                 android:name=".FileSelectActivity"
                 android:label="File Selector">

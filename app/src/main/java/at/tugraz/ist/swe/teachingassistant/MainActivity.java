@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity
         configureImportDialog();
         configureLearningButton();
         configureTestingButton();
+        configureLeaderboardButton();
     }
 
     private void configureAddListViewButton()
@@ -86,6 +87,21 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(MainActivity.this, LearningListActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void configureLeaderboardButton ()
+    {
+        Button AddListViewButton = (Button) findViewById(R.id.btn_leaderboard);
+        AddListViewButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
                 startActivity(intent);
             }
         });

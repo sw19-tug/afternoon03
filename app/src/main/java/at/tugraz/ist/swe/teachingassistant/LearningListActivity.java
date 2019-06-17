@@ -98,6 +98,8 @@ public class LearningListActivity extends AppCompatActivity implements AdapterVi
         AlphaSortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spinner_filter.setSelection(0);
+                spinner_sort.setSelection(0);
                 ArrayList<String> sortedVocabString = sortByTags();
                 Button tags = (Button) findViewById(R.id.btn_tags_sort);
                 tags.setText("Tag Sort " + sortingStateTags);
@@ -164,6 +166,8 @@ public class LearningListActivity extends AppCompatActivity implements AdapterVi
         TagsSortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                spinner_filter.setSelection(0);
+                spinner_sort.setSelection(0);
                 ArrayList<String> sortedVocab = sortByAlphabetical();
                 Button asc_dsc = (Button) findViewById(R.id.btn_alphabetical);
                 asc_dsc.setText("Alphabetical Sort " + sortingState);
@@ -195,7 +199,8 @@ public class LearningListActivity extends AppCompatActivity implements AdapterVi
         final EditText filterTagsInput = (EditText) findViewById(R.id.input_tags);
         filterTagsInput.setOnEditorActionListener(new EditText.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-
+                spinner_filter.setSelection(0);
+                spinner_sort.setSelection(0);
                 //Log.e("Action Event ", event.getCharacters());
                 Log.e("Action ID ", Integer.toString(actionId));
                 if (actionId == KeyEvent.KEYCODE_ENDCALL) {
