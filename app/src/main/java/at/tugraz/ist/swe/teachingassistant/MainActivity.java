@@ -19,7 +19,6 @@ import static at.tugraz.ist.swe.teachingassistant.Globals.*;
 public class MainActivity extends AppCompatActivity
 {
 
-    private final int SHARE_RETURN_CODE = 666;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -180,7 +179,7 @@ public class MainActivity extends AppCompatActivity
                 }
 
                 Intent shareIntent = new Intent(this, FileSelectActivity.class);
-                startActivityForResult(shareIntent, SHARE_RETURN_CODE);
+                startActivityForResult(shareIntent, SHARE_CODE);
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -189,7 +188,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode,
                                  Intent resultData) {
-        if (requestCode == SHARE_RETURN_CODE && resultCode == RESULT_OK)
+        if (requestCode == SHARE_CODE && resultCode == RESULT_OK)
         {
             String file_path = resultData.getStringExtra("file_name");
             Toast.makeText(getApplicationContext(), file_path, Toast.LENGTH_LONG).show();

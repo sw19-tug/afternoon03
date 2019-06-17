@@ -3,6 +3,7 @@ package at.tugraz.ist.swe.teachingassistant;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,13 +22,9 @@ import static at.tugraz.ist.swe.teachingassistant.Globals.*;
 
 public class FileSelectActivity extends AppCompatActivity
 {
-    // The path to the root of this app's internal storage
     private File privateRootDir;
-    // The path to the "share" subdirectory
     private File shareDir;
-    // Array of files in the images subdirectory
     File[] shareFiles;
-    // Array of filenames corresponding to imageFiles
     ArrayList<String> shareFilenames  = new ArrayList<String>();
 
     @Override
@@ -38,7 +35,7 @@ public class FileSelectActivity extends AppCompatActivity
 
         Intent resultIntent = new Intent(ACTION_RETURN_FILE);
 
-        File privateRootDir = getFilesDir();
+        privateRootDir = getFilesDir();
 
         shareDir = new File(privateRootDir, "files");
 
@@ -52,7 +49,7 @@ public class FileSelectActivity extends AppCompatActivity
         {
             for (File file : shareFiles)
             {
-                shareFilenames.add(file.getAbsolutePath());
+                shareFilenames.add(shareDir.getName() + "/" + file.getName());
             }
         }
 
@@ -60,7 +57,6 @@ public class FileSelectActivity extends AppCompatActivity
         ListView listView = (ListView) findViewById(R.id.share_list);
         listView.setAdapter(adapter);
         configureListViewItems();
-
     }
 
     private void configureListViewItems() {

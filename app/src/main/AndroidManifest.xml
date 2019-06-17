@@ -16,9 +16,6 @@
         <activity android:name=".TestingActivity"/>
         <activity android:name=".LeaderboardActivity"/>
         <activity
-            android:name=".ExportDialog"
-            android:theme="@android:style/Theme.Holo.Dialog" />
-        <activity
                 android:name=".FileSelectActivity"
                 android:label="File Selector">
             <intent-filter>

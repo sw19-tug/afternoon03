@@ -6,11 +6,11 @@ import android.content.Intent;
 import android.support.test.espresso.intent.rule.IntentsTestRule;
 import android.support.test.filters.LargeTest;
 import android.support.test.runner.AndroidJUnit4;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
@@ -19,7 +19,8 @@ import static android.support.test.espresso.intent.matcher.IntentMatchers.isInte
 import static android.support.test.espresso.matcher.ViewMatchers.*;
 import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static at.tugraz.ist.swe.teachingassistant.Globals.SHARE_CODE;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
@@ -42,9 +43,7 @@ public class LANG_009_ShareTest
     @Test
     public void checkShareActionClick()
     {
-        onView(withId(R.id.share_button)).check(matches(isDisplayed()));
-
-        Intent resultData = new Intent(Intent.ACTION_SEND);
+        Intent resultData = new Intent(activityRule.getActivity(), FileSelectActivity.class);
         resultData.setType(extension);
         Instrumentation.ActivityResult result =
             new Instrumentation.ActivityResult(Activity.RESULT_OK, resultData);
@@ -52,7 +51,8 @@ public class LANG_009_ShareTest
         intending(not(isInternal())).respondWith(result);
 
         onView(withId(R.id.share_button)).perform(click());
+        assertEquals(result.getResultCode(), Activity.RESULT_OK);
         assertEquals(extension, result.getResultData().getType());
-        assertTrue(activityRule.getActivity().isFinishing());
     }
+
 }
