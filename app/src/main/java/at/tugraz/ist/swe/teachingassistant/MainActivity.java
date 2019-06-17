@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity
         configureImportDialog();
         configureLearningButton();
         configureTestingButton();
+        configureLeaderboardButton();
     }
 
     private void configureAddListViewButton()
@@ -93,6 +94,21 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    private void configureLeaderboardButton ()
+    {
+        Button AddListViewButton = (Button) findViewById(R.id.btn_leaderboard);
+        AddListViewButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainActivity.this, LeaderboardActivity.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
 
     private void configureTestingButton() {
         Button AddListViewButton = (Button) findViewById(R.id.btn_testing);
@@ -116,6 +132,15 @@ public class MainActivity extends AppCompatActivity
     {
         super.onStart();
         VocabularManager manager = VocabularManager.getInstance();
+        Word word1 = new Word("a", "en");
+        Word word2 = new Word("a", "fi");
+        Word word3 = new Word("second", "en");
+        Word word4 = new Word("second_trans", "fi");
+        Word word5 = new Word("third", "en");
+        Word word6 = new Word("third_trans", "fi");
+        manager.addVocab(word1, word2,null);
+        manager.addVocab(word3, word4,null);
+        manager.addVocab(word5, word6,null);
     }
 
     @Override

@@ -21,8 +21,7 @@ public class TestingActivity extends Activity {
     public int hintCounter = 0;
     private Timer timer;
     private boolean running = false;
-    public long seconds = 0;
-    public int msHelper = 0;
+    public int seconds = 0;
     public DatabaseHelper db;
 
     @Override
@@ -141,7 +140,7 @@ public class TestingActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 TestingManager testingManager = TestingManager.getInstance();
-                db.insert(testingManager.getActiveSize(),testingManager.getScore());
+                db.insert(testingManager.getActiveSize(), testingManager.getScore(), seconds);
                 button.setVisibility(View.INVISIBLE);
             }
         });

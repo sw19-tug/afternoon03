@@ -9,12 +9,14 @@ public class StoredTest {
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_SIZE = "size";
     public static final String COLUMN_CORRECT = "correct";
+    public static final String COLUMN_TIME = "time";
 
 
     private int id;
     private String date;
     private int size;
     private int correct;
+    private int time;
 
 
     // Create table SQL query
@@ -23,7 +25,8 @@ public class StoredTest {
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
                     + COLUMN_DATE + " TEXT,"
                     + COLUMN_SIZE + " INTEGER,"
-                    + COLUMN_CORRECT + " INTEGER"
+                    + COLUMN_CORRECT + " INTEGER,"
+                    + COLUMN_TIME + " INTEGER"
                     + ")";
 
     public StoredTest() {
@@ -51,6 +54,9 @@ public class StoredTest {
     public int getCorrect() {
         return correct;
     }
+    public int getTime() {
+        return time;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -66,5 +72,9 @@ public class StoredTest {
 
     public void setCorrect(int correct) {
         this.correct = correct;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 }

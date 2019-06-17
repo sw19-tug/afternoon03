@@ -97,16 +97,6 @@ public class LANG_002_Test {
         assertEquals(language, "Finnish");
     }
 
-    @Test
-    public void testClickListItem() {
-        int mActivePosition = 0;
-        listview.performItemClick(
-                listview.getAdapter().getView(mActivePosition, null, null),
-                mActivePosition,
-                listview.getAdapter().getItemId(mActivePosition));
-        onView(withId(R.id.btn_changeLanguageInterface)).check(matches(isDisplayed()));
-    }
-
     @After
     public void clearVocab()
     {
