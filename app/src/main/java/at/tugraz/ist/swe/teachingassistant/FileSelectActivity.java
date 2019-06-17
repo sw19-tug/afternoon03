@@ -35,28 +35,24 @@ public class FileSelectActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_select);
-        // Set up an Intent to send back to apps that request a file
+
         Intent resultIntent = new Intent(ACTION_RETURN_FILE);
-        // Get the files/ subdirectory of internal storage
+
         File privateRootDir = getFilesDir();
-        // Get the files/images subdirectory;
+
         shareDir = new File(privateRootDir, "files");
-        // Get the files in the images subdirectory
+
         shareFiles = shareDir.listFiles();
-        // Set the Activity's result to null to begin with
+
         setResult(Activity.RESULT_CANCELED, null);
-        /*
-         * Display the file names in the ListView fileListView.
-         * Back the ListView with the array imageFilenames, which
-         * you can create by iterating through imageFiles and
-         * calling File.getAbsolutePath() for each File
-         */
+
         shareFilenames.clear();
+
         if(shareFiles != null)
         {
             for (File file : shareFiles)
             {
-                shareFilenames.add(shareDir.getName() + "/" + file.getName());
+                shareFilenames.add(file.getAbsolutePath());
             }
         }
 
@@ -75,6 +71,7 @@ public class FileSelectActivity extends AppCompatActivity
                 Intent data = new Intent();
 
                 data.putExtra("file_name", shareFiles != null ? shareFiles[position].getAbsolutePath() : "");
+
                 setResult(RESULT_OK, data);
                 finish();
             }
