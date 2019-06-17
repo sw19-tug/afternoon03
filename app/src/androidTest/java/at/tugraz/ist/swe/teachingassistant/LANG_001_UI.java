@@ -65,7 +65,7 @@ public class LANG_001_UI {
 
 
         //check button says save translation
-        onView(withId(R.id.save_translation)).check(matches(withText("save Translation")));
+        onView(withId(R.id.save_translation)).check(matches(withText("Save Translation")));
 
 
 

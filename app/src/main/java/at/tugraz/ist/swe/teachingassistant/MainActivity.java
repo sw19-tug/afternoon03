@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onStart();
         VocabularManager manager = VocabularManager.getInstance();
+
     }
 
     @Override
