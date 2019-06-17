@@ -24,19 +24,13 @@ import static at.tugraz.ist.swe.teachingassistant.Globals.FILE_PROVIDER_AUTHORIT
 
 public class ExportActivity extends AppCompatActivity
 {
-    static private String mimeType;
-    static private String fileExtension;
-    private static final int WRITE_REQUEST_CODE = 43;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.export_activity);
 
-            this.setFinishOnTouchOutside(false);
-        mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
-        fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
+        this.setFinishOnTouchOutside(false);
 
         configureExportButton();
     }

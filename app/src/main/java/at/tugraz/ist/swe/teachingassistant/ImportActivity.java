@@ -17,15 +17,11 @@ import java.util.Vector;
 public class ImportActivity extends AppCompatActivity
 {
     private static final int READ_REQUEST_CODE = 42;
-    private String fileExtension;
-    private String mimeType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
-        fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
 
         setContentView(R.layout.import_activity);
         this.setFinishOnTouchOutside(false);

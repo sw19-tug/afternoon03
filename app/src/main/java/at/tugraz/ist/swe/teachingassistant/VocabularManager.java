@@ -208,10 +208,6 @@ public class VocabularManager {
         return false;
     }
 
-    public void clearVocabs()
-    {
-        vocabs.clear();
-    }
 
     public int export(String filename){
         return 0;
