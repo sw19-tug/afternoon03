@@ -23,6 +23,7 @@ public class TestingActivity extends Activity {
     private boolean running = false;
     public long seconds = 0;
     public int msHelper = 0;
+    public DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class TestingActivity extends Activity {
 
         hintButton();
         nextButton();
+        db = new DatabaseHelper(this);
 
         startTimer();
 
@@ -100,6 +102,7 @@ public class TestingActivity extends Activity {
                                 continueText.setVisibility(View.INVISIBLE);
                             }
                             exitTestingButton();
+                            voidSaveButton();
                             continueTestingButton();
                             TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
                             TextView pointsText = (TextView) findViewById(R.id.tv_test_points);
@@ -129,6 +132,17 @@ public class TestingActivity extends Activity {
                     text.setText(text.getText().toString() + currentVocab.getTranslationByLanguage("fi").substring(hintCounter, hintCounter + 1));
                 }
                 hintCounter++;
+            }
+        });
+    }
+
+    private void voidSaveButton() {
+        final Button button = (Button) findViewById(R.id.btn_save_test);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TestingManager testingManager = TestingManager.getInstance();
+                db.insert(testingManager.getActiveSize(),testingManager.getScore());
+                button.setVisibility(View.INVISIBLE);
             }
         });
     }

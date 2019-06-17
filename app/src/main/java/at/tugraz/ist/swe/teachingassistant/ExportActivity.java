@@ -5,96 +5,76 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.ParcelFileDescriptor;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-import com.google.gson.Gson;
 
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.OutputStream;
+
+import static at.tugraz.ist.swe.teachingassistant.Globals.FILE_EXTENSION;
+import static at.tugraz.ist.swe.teachingassistant.Globals.FILE_PROVIDER_AUTHORITY;
 
 public class ExportActivity extends AppCompatActivity
 {
-    static private String mimeType;
-    static private String fileExtension;
-    private static final int WRITE_REQUEST_CODE = 43;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.export_activity);
 
-            this.setFinishOnTouchOutside(false);
-        mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
-        fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
+        this.setFinishOnTouchOutside(false);
 
         configureExportButton();
     }
 
     private void createFile(String fileName) {
-        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        /*Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+     //   String path = Environment.get().getPath()
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         intent.setType(mimeType);
         intent.putExtra(Intent.EXTRA_TITLE, fileName + fileExtension);
-        startActivityForResult(intent, WRITE_REQUEST_CODE);
-    }
+        startActivityForResult(intent, WRITE_REQUEST_CODE);*/
+        JsonHandler jsonHandler = new JsonHandler();
 
+        String string_to_export = jsonHandler.vocabularToJsonString();
+        String file_name = fileName + FILE_EXTENSION;
+        File file_path = new File(this.getFilesDir(), "files");
+        try
+        {
+            if(!file_path.exists())
+            {
+                file_path.mkdir();
+            }
+            File file = new File(file_path, file_name);
 
+            if(!file.exists())
+            {
+                file.createNewFile();
+            }
 
-    public String vocabularToJsonString()
-    {
-        Gson gson = new Gson();
-        VocabularManager manager = VocabularManager.getInstance();
-        String jsonString = gson.toJson(manager.getVocabs());
-        Log.e("JSON", jsonString);
-        return jsonString;
-    }
+            OutputStream os = new FileOutputStream(file);
+            os.flush();
+            os.write(string_to_export.getBytes());
+            os.close();
+            Uri contentUri = FileProvider.getUriForFile(getApplicationContext(), FILE_PROVIDER_AUTHORITY, file);
+            Log.d("EXPORT", "File successfully created ... " + contentUri.getPath());
 
-    private void alterDocument(Uri uri, String content_string) {
-        try {
-            ParcelFileDescriptor pfd = getApplicationContext().getContentResolver().
-                openFileDescriptor(uri, "w");
-            FileOutputStream fileOutputStream =
-                new FileOutputStream(pfd.getFileDescriptor());
-            fileOutputStream.write(content_string.getBytes());
-            fileOutputStream.close();
-            pfd.close();
             Toast.makeText(getApplicationContext(), "Export Success", Toast.LENGTH_LONG).show();
+        } catch (Exception e)
+        {
 
-        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "Export FAILED", Toast.LENGTH_LONG).show();
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode,
-                                 Intent resultData) {
-
-        if (requestCode == WRITE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            Uri uri = null;
-            if (resultData != null) {
-                uri = resultData.getData();
-                if(uri != null)
-                {
-                    Log.d("EXPORT", "Uri: " + uri.toString());
-                }
-                String content = vocabularToJsonString();
-                alterDocument(uri, content);
-            } else
-            {
-                Log.e("EXPORT", "Write REQUEST FAILED");
-
-            }
-            return;
-        }
-        Log.e("EXPORT", "end result");
     }
 
     private void configureExportButton() {
