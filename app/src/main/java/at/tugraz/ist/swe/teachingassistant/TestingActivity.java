@@ -13,6 +13,7 @@ public class TestingActivity extends Activity {
 
     public Vocab currentVocab = null;
     public int hintCounter = 0;
+    public DatabaseHelper db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class TestingActivity extends Activity {
 
         hintButton();
         nextButton();
-
+        db = new DatabaseHelper(this);
     }
 
     private void nextButton() {
@@ -52,6 +53,7 @@ public class TestingActivity extends Activity {
                             //show score
                             setContentView(R.layout.test_feedback_interface);
                             exitTestingButton();
+                            voidSaveButton();
                             continueTestingButton();
                             TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
                             progressCounter.setText(Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
@@ -69,10 +71,21 @@ public class TestingActivity extends Activity {
             public void onClick(View v) {
 
                 EditText text = (EditText) findViewById(R.id.et_requestedWord);
-                if (hintCounter + 1 < currentVocab.getTranslationByLanguage("fi").length()){
-                    text.setText(text.getText().toString()+currentVocab.getTranslationByLanguage("fi").substring(hintCounter, hintCounter + 1));
+                if (hintCounter + 1 < currentVocab.getTranslationByLanguage("fi").length()) {
+                    text.setText(text.getText().toString() + currentVocab.getTranslationByLanguage("fi").substring(hintCounter, hintCounter + 1));
                 }
                 hintCounter++;
+            }
+        });
+    }
+
+    private void voidSaveButton() {
+        final Button button = (Button) findViewById(R.id.btn_save_test);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                TestingManager testingManager = TestingManager.getInstance();
+                db.insert(testingManager.getActiveSize(),testingManager.getScore());
+                button.setVisibility(View.INVISIBLE);
             }
         });
     }
