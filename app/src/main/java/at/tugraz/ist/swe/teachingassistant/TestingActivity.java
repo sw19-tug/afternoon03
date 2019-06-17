@@ -52,11 +52,23 @@ public class TestingActivity extends Activity {
                         case 2:
                             //show score
                             setContentView(R.layout.test_feedback_interface);
+                            Button continueButton = (Button) findViewById(R.id.btn_continue_testing);
+                            TextView continueText = (TextView) findViewById(R.id.tv_user_info);
+                            if (testingManager.getScore() == testingManager.getActiveSize()) {
+                                continueButton.setVisibility(View.INVISIBLE);
+                                continueText.setVisibility(View.INVISIBLE);
+                            }
                             exitTestingButton();
                             voidSaveButton();
                             continueTestingButton();
                             TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
-                            progressCounter.setText(Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
+                            TextView pointsText = (TextView) findViewById(R.id.tv_test_points);
+                            progressCounter.setText("Answers: "+Integer.toString(testingManager.getScore()) + "/" + testingManager.getActiveSize());
+                            float score = testingManager.getScore();
+                            float testSize = testingManager.getActiveSize();
+                            float percentage = score / testSize * 100;
+                            double rounded = Math.round(percentage * 100.0) / 100.0;
+                            pointsText.setText("Points: "+ rounded + "/100");
                             break;
                     }
                 }
@@ -132,11 +144,5 @@ public class TestingActivity extends Activity {
         request_word.setText("");
         hintCounter = 0;
     }
-
-//    private void goToFeedbackInterface(){
-//        setContentView(R.layout.test_feedback_interface);
-//        TextView progressCounter = (TextView) findViewById(R.id.tv_test_result);
-//        progressCounter.setText(Integer.toString(testingManager.getScore() + 1) + "/" + testingManager.getActiveSize());
-//    }
 }
 

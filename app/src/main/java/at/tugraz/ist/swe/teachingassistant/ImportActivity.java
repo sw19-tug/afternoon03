@@ -9,8 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.lang.reflect.Type;
@@ -19,15 +17,11 @@ import java.util.Vector;
 public class ImportActivity extends AppCompatActivity
 {
     private static final int READ_REQUEST_CODE = 42;
-    private String fileExtension;
-    private String mimeType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mimeType =  getApplicationContext().getResources().getText(R.string.mimeType).toString();
-        fileExtension =  getApplicationContext().getResources().getText(R.string.file_extension).toString();
 
         setContentView(R.layout.import_activity);
         this.setFinishOnTouchOutside(false);
@@ -60,11 +54,9 @@ public class ImportActivity extends AppCompatActivity
 
     public void importVocabulary(String jsonString)
     {
-        Gson gson = new Gson();
-        Type vocabVector = new TypeToken<Vector<Vocab>>() {
-        }.getType();
+        JsonHandler jsonHandler = new JsonHandler();
+        Vector<Vocab> vocabs = jsonHandler.vocabularyFromJsonString(jsonString);
 
-        Vector<Vocab> vocabs = gson.fromJson(jsonString, vocabVector);
         if(vocabs != null)
         {
             VocabularManager manager = VocabularManager.getInstance();
@@ -79,13 +71,14 @@ public class ImportActivity extends AppCompatActivity
      */
     public void performFileSearch() {
 
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+      /*  Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 
         intent.addCategory(Intent.CATEGORY_OPENABLE);
 
         intent.setType(mimeType);
 
-        startActivityForResult(intent, READ_REQUEST_CODE);
+        startActivityForResult(intent, READ_REQUEST_CODE);*/
+        Intent intent = new Intent(this, FileSelectActivity.class);
     }
 
     private String readTextFromUri(Uri uri) throws IOException {

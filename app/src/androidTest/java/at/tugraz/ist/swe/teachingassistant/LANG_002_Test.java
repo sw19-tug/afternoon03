@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -94,5 +95,22 @@ public class LANG_002_Test {
         onView(withId(R.id.btn_changeLanguage)).perform(ViewActions.click());
         language = ((TextView) languageTextView).getText().toString();
         assertEquals(language, "Finnish");
+    }
+
+    @Test
+    public void testClickListItem() {
+        int mActivePosition = 0;
+        listview.performItemClick(
+                listview.getAdapter().getView(mActivePosition, null, null),
+                mActivePosition,
+                listview.getAdapter().getItemId(mActivePosition));
+        onView(withId(R.id.btn_changeLanguageInterface)).check(matches(isDisplayed()));
+    }
+
+    @After
+    public void clearVocab()
+    {
+        VocabularManager vocabulary = VocabularManager.getInstance();
+        vocabulary.clearVocabs();
     }
 }
