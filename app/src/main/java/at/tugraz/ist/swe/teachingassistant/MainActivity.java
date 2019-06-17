@@ -1,10 +1,7 @@
 package at.tugraz.ist.swe.teachingassistant;
 
-import android.app.Activity;
-import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Environment;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +14,6 @@ import android.widget.Toast;
 
 import java.io.*;
 
-import static android.support.v4.content.FileProvider.getUriForFile;
 import static at.tugraz.ist.swe.teachingassistant.Globals.*;
 
 public class MainActivity extends AppCompatActivity
@@ -101,7 +97,6 @@ public class MainActivity extends AppCompatActivity
     {
         super.onStart();
         VocabularManager manager = VocabularManager.getInstance();
-        //vocabulary.printVocab();
     }
 
     @Override
@@ -175,11 +170,7 @@ public class MainActivity extends AppCompatActivity
             Log.e("SHARE", "FILE DOESNT EXISTS, should not happen");
             return;
         }
-        /*
-         * Most file-related method calls need to be in
-         * try-catch blocks.
-         */
-        // Use the FileProvider to get a content URI
+
         try {
             Uri fileUri = FileProvider.getUriForFile(MainActivity.this, FILE_PROVIDER_AUTHORITY, fileToShare);
             if (fileUri != null) {
