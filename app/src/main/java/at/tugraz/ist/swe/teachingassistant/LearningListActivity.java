@@ -268,37 +268,16 @@ public class LearningListActivity extends AppCompatActivity implements AdapterVi
     }
 
     public ArrayList<String> filterByWord(String filterWordInput) {
-        VocabularManager vocabulary = VocabularManager.getInstance();
-        ArrayList<String> tagsList = new ArrayList<>();
-        for (Vocab vocab : vocabulary.getVocabs()) {
-            String[] tags = vocab.getTags().split(",");
-            for (String tag : tags) {
-                if (!tagsList.contains(tag)) {
-                    tagsList.add(tag);
-                }
-            }
-        }
-        ArrayList<String> filteredTagsList = new ArrayList<>();
-        String filterInput = filterTagsInput;
-        ArrayList<Vocab> allVocabs = new ArrayList<Vocab>(vocabulary.getVocabs());
         ArrayList<String> filteredVocabs = new ArrayList<>();
-        if (filterInput.isEmpty()) {
-            filteredVocabs = vocabulary.getWordsFromLanguageString(currentLang);
-        } else {
-            for (String tag : tagsList) {
-                if (tag.contains(filterInput)) {
-                    filteredTagsList.add(tag);
-                }
-            }
-            Log.e("Tags List: ", filteredTagsList.toString());
-            for (Vocab vocab : allVocabs) {
-                if (vocab.getTags().length() > 0) {
-                    for (String tag : filteredTagsList) {
-                        if (vocab.getTags().contains(tag)) {
-                            String selectedWord = vocab.getTranslationByLanguage(currentLang);
-                            filteredVocabs.add(selectedWord);
-                        }
-                    }
+        VocabularManager vocabulary = VocabularManager.getInstance();
+        if (filterWordInput.isEmpty()) {
+            return vocabulary.getWordsFromLanguageString(currentLang);
+        }
+        for (Vocab vocab : vocabulary.getVocabs()) {
+            for (Word word : vocab.getTranslation_table()) {
+                if (word.getText().contains(filterWordInput)) {
+                    filteredVocabs.add(vocab.getTranslationByLanguage(currentLang));
+                    break;
                 }
             }
         }
