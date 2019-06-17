@@ -10,7 +10,7 @@
         android:id="@+id/vocabList"
         android:layout_width="354dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/input_tags"
+        android:layout_below="@+id/input_words"
         android:layout_marginLeft="30dp"
         android:layout_marginTop="15dp"
         android:clickable="true" />
@@ -33,7 +33,21 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
 
-        android:hint="Enter tag(s) spaced with commas"
+        android:hint="Search for tags (Comma separated)"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textSize="20dp" />
+    <EditText
+        android:id="@+id/input_words"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/input_tags"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="30dp"
+
+        android:hint="Search for words"
         android:imeOptions="actionDone"
         android:inputType="text"
         android:maxLines="1"
