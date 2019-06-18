@@ -100,8 +100,8 @@ public class MainActivity extends AppCompatActivity {
         AddListViewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!VocabularManager.getInstance().emptyVocabCheck()) {
-                    Intent intent = new Intent(MainActivity.this, TestingActivity.class);
+                if(!VocabularManager.getInstance().emptyVocabCheck()) {
+                    Intent intent = new Intent(MainActivity.this, SelectTestingActivity.class);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "No vocabs found for test", Toast.LENGTH_LONG).show();
