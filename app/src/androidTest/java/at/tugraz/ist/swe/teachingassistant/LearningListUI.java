@@ -6,10 +6,14 @@ import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.widget.ListView;
 
+import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.util.ArrayList;
 
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
@@ -31,7 +35,7 @@ import static org.junit.Assert.assertNotSame;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(AndroidJUnit4.class)
-public class LANG_004_LearningList {
+public class LearningListUI {
     @Rule
     public ActivityTestRule<LearningListActivity> mActivityRule = new ActivityTestRule<LearningListActivity>(LearningListActivity.class,false,false);
 
@@ -95,6 +99,64 @@ public class LANG_004_LearningList {
     public void testListHasItems() {
         ListView listview = (ListView) mActivityRule.getActivity().findViewById(R.id.vocabList);
         assertThat(listview.getCount(), is(3));
+    }
+
+    @After
+    public void tearDown()
+    {
+        VocabularManager vocabularManager = VocabularManager.getInstance();
+        vocabularManager.clearVocabs();
+    }
+
+    @Test
+    public void sortAlphabeticalTest() throws Exception
+    {
+        ArrayList<String> sortedVocabs = mActivityRule.getActivity().sortByAlphabetical();
+        Assert.assertEquals("a", sortedVocabs.get(0));
+        Assert.assertEquals("t", sortedVocabs.get(1));
+        Assert.assertEquals("z", sortedVocabs.get(2));
+
+        sortedVocabs = mActivityRule.getActivity().sortByAlphabetical();
+        Assert.assertEquals("z", sortedVocabs.get(0));
+        Assert.assertEquals("t", sortedVocabs.get(1));
+        Assert.assertEquals("a", sortedVocabs.get(2));
+
+        sortedVocabs = mActivityRule.getActivity().sortByAlphabetical();
+        Assert.assertEquals("t", sortedVocabs.get(0));
+        Assert.assertEquals("a", sortedVocabs.get(1));
+        Assert.assertEquals("z", sortedVocabs.get(2));
+
+    }
+    @Test
+    public void sortTagsTest() throws Exception {
+        ArrayList<String> sortedVocabs = mActivityRule.getActivity().sortByTags();
+        Assert.assertEquals( "t", sortedVocabs.get(0));
+        Assert.assertEquals( "a", sortedVocabs.get(1));
+        Assert.assertEquals( "z", sortedVocabs.get(2));
+
+        sortedVocabs = mActivityRule.getActivity().sortByTags();
+        Assert.assertEquals( "z", sortedVocabs.get(0));
+        Assert.assertEquals("a", sortedVocabs.get(1));
+        Assert.assertEquals( "t", sortedVocabs.get(2));
+
+        sortedVocabs = mActivityRule.getActivity().sortByTags();
+        Assert.assertEquals("t", sortedVocabs.get(0));
+        Assert.assertEquals("a", sortedVocabs.get(1));
+        Assert.assertEquals("z", sortedVocabs.get(2));
+    }
+
+    @Test
+    public void filterTagsTest() throws Exception {
+        ArrayList<String> filterVocabs = mActivityRule.getActivity().filterByTags("b");
+        Assert.assertEquals(1, filterVocabs.size());
+        Assert.assertEquals("a", filterVocabs.get(0));
+        filterVocabs = mActivityRule.getActivity().filterByTags("k");
+        Assert.assertEquals(0, filterVocabs.size());
+        filterVocabs = mActivityRule.getActivity().filterByTags("");
+        Assert.assertEquals(3, filterVocabs.size());
+        Assert.assertEquals("t", filterVocabs.get(0));
+        Assert.assertEquals("a", filterVocabs.get(1));
+        Assert.assertEquals("z", filterVocabs.get(2));
     }
 
 }
