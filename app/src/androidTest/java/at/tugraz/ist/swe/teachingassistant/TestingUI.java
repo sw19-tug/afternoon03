@@ -32,7 +32,7 @@ import static org.hamcrest.Matchers.not;
  */
 @RunWith(AndroidJUnit4.class)
 
-public class LANG_005_Testing {
+public class TestingUI {
     private int vocabSize;
 
     @Before

@@ -36,13 +36,6 @@ public class ExportActivity extends AppCompatActivity
     }
 
     private void createFile(String fileName) {
-        /*Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
-     //   String path = Environment.get().getPath()
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-
-        intent.setType(mimeType);
-        intent.putExtra(Intent.EXTRA_TITLE, fileName + fileExtension);
-        startActivityForResult(intent, WRITE_REQUEST_CODE);*/
         JsonHandler jsonHandler = new JsonHandler();
 
         String string_to_export = jsonHandler.vocabularToJsonString();

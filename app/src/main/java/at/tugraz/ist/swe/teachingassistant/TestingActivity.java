@@ -91,7 +91,6 @@ public class TestingActivity extends Activity {
                             updateInterface();
                             break;
                         case 2:
-                            //show score
                             timer.cancel();
                             setContentView(R.layout.test_feedback_interface);
                             Button continueButton = (Button) findViewById(R.id.btn_continue_testing);

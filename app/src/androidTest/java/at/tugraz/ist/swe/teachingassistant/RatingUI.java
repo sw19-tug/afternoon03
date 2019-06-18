@@ -9,9 +9,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.Vector;
 
 @RunWith(MockitoJUnitRunner.class)
-public class EditEntity_UnitTest
+public class RatingUI
 {
-
     @Before
     public void setup() {
         VocabularManager vocabularManager = VocabularManager.getInstance();

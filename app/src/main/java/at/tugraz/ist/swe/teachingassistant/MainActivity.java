@@ -209,7 +209,6 @@ public class MainActivity extends AppCompatActivity
         try {
             Uri fileUri = FileProvider.getUriForFile(MainActivity.this, FILE_PROVIDER_AUTHORITY, fileToShare);
             if (fileUri != null) {
-                // Grant temporary read permission to the content URI
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 shareIntent.putExtra(Intent.EXTRA_STREAM, fileUri);

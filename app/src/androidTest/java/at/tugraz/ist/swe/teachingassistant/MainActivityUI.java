@@ -24,7 +24,7 @@ import static at.tugraz.ist.swe.teachingassistant.Globals.SHARE_CODE;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LANG_009_ShareTest
+public class MainActivityUI
 {
 
     private String extension = ".tast";

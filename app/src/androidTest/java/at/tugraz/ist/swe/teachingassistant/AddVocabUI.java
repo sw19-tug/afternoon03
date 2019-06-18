@@ -40,56 +40,23 @@ public class AddVocabUI {
         return activityRule;
     }
 
-
-    //@Rule
-   // public ActivityTestRule<VocabularyActivity> activityRule2 = new ActivityTestRule<>(VocabularyActivity.class);
-
     @Before
     public void initValidString() {
-        // Specify a valid string.
         stringToBetyped = "Espresso";
     }
 
     @Test
     public void changeText_sameActivity() {
-
-
-        //test if every view is there
         onView(withId(R.id.et_first_lang)).check(matches(isDisplayed()));
         onView(withId(R.id.save_translation)).check(matches(isDisplayed()));
         onView(withId(R.id.et_second_lang)).check(matches(isDisplayed()));
 
-        //button is clickable
         onView(withId(R.id.save_translation)).check(matches(isClickable()));
-       // onView(withId(R.id.button)).check(matches(isClickable()));
-
-
-        //check button says save translation
         onView(withId(R.id.save_translation)).check(matches(withText("Save Translation")));
-
-
-
         onView(withId(R.id.et_first_lang)).perform(typeText("hello"),closeSoftKeyboard());
         onView(withId(R.id.et_second_lang)).perform(typeText("hullu"),closeSoftKeyboard());
 
         onView(withId(R.id.save_translation)).perform(click());
-
-
-
-        //here the other activity should start !!
-        //onView(withId(R.id.button)).check(matches(isDisplayed()));
-
-       /* activityRule.finishActivity();
-
-
-        Intent intent = new Intent(activityRule.getActivity(),VocabularyActivity.class);
-        activityRule.launchActivity(intent); *7
-
-        //launchActivity<VocabularyActivity>();
-
-
-     */
-
     }
     @Test
     public void emptyInput()
