@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if(!VocabularManager.getInstance().emptyVocabCheck()) {
-                    Intent intent = new Intent(MainActivity.this, TestingActivity.class);
+                    Intent intent = new Intent(MainActivity.this, SelectTestingActivity.class);
                     startActivity(intent);
                 }
                 else{
