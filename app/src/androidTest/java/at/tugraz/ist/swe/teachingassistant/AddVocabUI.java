@@ -28,7 +28,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LANG_001_UI {
+public class AddVocabUI {
 
     private String stringToBetyped;
 

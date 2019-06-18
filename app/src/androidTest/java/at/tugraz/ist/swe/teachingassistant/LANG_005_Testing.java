@@ -33,29 +33,30 @@ import static org.hamcrest.Matchers.not;
 @RunWith(AndroidJUnit4.class)
 
 public class LANG_005_Testing {
-    @Rule
-    public ActivityTestRule<TestingActivity> activityRule = new ActivityTestRule<>(TestingActivity.class);
-
-    public ActivityTestRule<TestingActivity> getActivityRule() {
-        return activityRule;
-    }
+    private int vocabSize;
 
     @Before
     public void setupTest() throws Exception {
         VocabularManager vocabulary = VocabularManager.getInstance();
+        vocabulary.clearVocabs();
         Word word1 = new Word("first", "en");
         Word word2 = new Word("first_trans", "fi");
         Word word3 = new Word("second", "en");
         Word word4 = new Word("second_trans", "fi");
         Word word5 = new Word("third", "en");
         Word word6 = new Word("third_trans", "fi");
-        vocabulary.addVocab(word1, word2, null);
-        vocabulary.addVocab(word3, word4, null);
+        vocabulary.addVocab(word1, word2, "tag");
+        vocabulary.addVocab(word3, word4, "tags");
         vocabulary.addVocab(word5, word6, null);
+        if (vocabulary.getVocabs().size() >= 1) {
+            TestingManager testingManager = TestingManager.getInstance();
+            testingManager.setTestingVocabs(vocabulary.getVocabs());
+            vocabSize = 3;
+        }
 
+        ActivityTestRule<TestingActivity> activityRule = new ActivityTestRule<>(TestingActivity.class);
         Intent intent = new Intent();
         activityRule.launchActivity(intent);
-
     }
 
     @Test
@@ -73,28 +74,13 @@ public class LANG_005_Testing {
     @Test
     public void checkTestFeedbackInterface() throws Exception {
 
-        //activityRule.getActivity().setContentView(R.layout.test_feedback_interface);
-        onView(withId(R.id.btn_testing_next)).perform(click());
+        for (int i = 0; i < vocabSize; i++) {
+            onView(withId(R.id.btn_testing_next)).perform(click());
+        }
+
         onView(withId(R.id.tv_test_result)).check(matches(isDisplayed()));
         onView(withId(R.id.tv_user_info)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_exit_testing)).check(matches(isClickable()));
         onView(withId(R.id.btn_continue_testing)).check(matches((isClickable())));
     }
-
-    @Test
-    public void correctResponseTest() throws Exception {
-
-    }
-
-    @Test
-    public void incorrectResponseTest() throws Exception {
-
-    }
-
-    @Test
-    public void endingTest() throws Exception {
-
-    }
-
-
 }
