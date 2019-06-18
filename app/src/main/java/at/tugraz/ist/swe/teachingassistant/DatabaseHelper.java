@@ -3,14 +3,11 @@ package at.tugraz.ist.swe.teachingassistant;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
