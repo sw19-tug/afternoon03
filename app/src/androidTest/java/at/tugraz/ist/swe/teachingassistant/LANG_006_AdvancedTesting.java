@@ -2,6 +2,7 @@ package at.tugraz.ist.swe.teachingassistant;
 
 import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
+import android.widget.ListView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,11 +12,12 @@ import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static junit.framework.TestCase.assertTrue;
 
 public class LANG_006_AdvancedTesting {
 
     private int vocabSize;
-
+    ActivityTestRule<AdvancedTestingActivity> activityRule = new ActivityTestRule<>(AdvancedTestingActivity.class);
     @Before
     public void setupTest() throws Exception {
         VocabularManager vocabulary = VocabularManager.getInstance();
@@ -34,7 +36,7 @@ public class LANG_006_AdvancedTesting {
             vocabSize = 3;
         }
 
-        ActivityTestRule<AdvancedTestingActivity> activityRule = new ActivityTestRule<>(AdvancedTestingActivity.class);
+
         Intent intent = new Intent();
         activityRule.launchActivity(intent);
     }
@@ -45,7 +47,11 @@ public class LANG_006_AdvancedTesting {
 
 
         onView(withId(R.id.tv_advanced_info)).check(matches(isDisplayed()));
-//        onView(withId(R.id.lv_available_vocabs)).check(matches(isDisplayed()));
-//        onView(withId(R.id.btn_start_test)).check(matches(isDisplayed()));
+        //onView(withId(R.id.lv_available_vocabs)).check(matches(isDisplayed()));
+        onView(withId(R.id.btn_start_test)).check(matches(isDisplayed()));
+        assertTrue(activityRule.getActivity().findViewById(R.id.lv_available_vocabs).isClickable());
+        //ListView available_vocabs = (ListView) activityRule.getActivity().findViewById(R.id.lv_available_vocabs);
+        //assertTrue(available_vocabs.getAdapter().getCount() >= 3 );
+
     }
 }
