@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Vector;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
@@ -25,12 +26,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(StoredTest.CREATE_TABLE);
-
+        db.execSQL(StoredVocab.CREATE_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + StoredTest.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + StoredVocab.TABLE_NAME);
+
+        // Create tables again
         onCreate(db);
     }
 
@@ -38,7 +42,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        java.util.Date c =Calendar.getInstance().getTime();
+        // `id` and `timestamp` will be inserted automatically.
+        // no need to add them
+        java.util.Date c = Calendar.getInstance().getTime();
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
         String formattedDate = df.format(c);
         values.put(StoredTest.COLUMN_DATE, formattedDate);
@@ -49,6 +55,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         long id = db.insert(StoredTest.TABLE_NAME, null, values);
         db.close();
         return id;
+    }
+
+    public long insertVocab(Vocab vocab) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(StoredVocab.C_RATING, vocab.getRating());
+        values.put(StoredVocab.C_TAGS, vocab.getTags());
+        values.put(StoredVocab.C_ENWORD, vocab.getTranslationByLanguage("en"));
+        values.put(StoredVocab.C_FIWORD, vocab.getTranslationByLanguage("fi"));
+        long id = db.insert(StoredVocab.TABLE_NAME, null, values);
+        db.close();
+        return id;
+    }
+
+    public void deleteVocabs() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM " + StoredVocab.TABLE_NAME);
     }
 
 
@@ -76,6 +99,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return tests;
+    }
+
+    public List<Vocab> getAllVocabs() {
+        List<Vocab> vocabs = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + StoredVocab.TABLE_NAME + " ORDER BY id ASC";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Vocab vocab = new Vocab();
+
+                Word word1 = new Word(cursor.getString(cursor.getColumnIndex(StoredVocab.C_ENWORD)), "en");
+                Word word2 = new Word(cursor.getString(cursor.getColumnIndex(StoredVocab.C_FIWORD)), "fi");
+                vocab.setTags(cursor.getString(cursor.getColumnIndex(StoredVocab.C_TAGS)));
+                vocab.setRating(cursor.getInt(cursor.getColumnIndex(StoredVocab.C_RATING)));
+                Vector<Word> words = new Vector<>();
+                words.add(word1);
+                words.add(word2);
+                vocab.setTranslation_table(words);
+                vocabs.add(vocab);
+            } while (cursor.moveToNext());
+        }
+        db.close();
+        return vocabs;
     }
 
     public int getTotalCount() {

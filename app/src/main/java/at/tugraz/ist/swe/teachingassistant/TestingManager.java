@@ -8,6 +8,7 @@ import java.util.Vector;
 
 public class TestingManager {
     private static TestingManager instance;
+    private static Vector<String> availableTests;
 
     private Vector<Vocab> testingVocabs;
     private Vector<Vocab> incorrectVocabs;
@@ -24,6 +25,9 @@ public class TestingManager {
     public static TestingManager getInstance() {
         if (instance == null) {
             instance = new TestingManager();
+            availableTests = new Vector<>();
+            availableTests.add("Random Test");
+            availableTests.add("Custom Random Test");
         }
 
         return instance;
@@ -31,6 +35,35 @@ public class TestingManager {
 
     public void setTestingVocabs(Vector<Vocab> vocabs){
         rootVocabs = vocabs;
+    }
+
+    public Vector<Vocab> getRootVocabs () {
+        if(rootVocabs == null)
+            rootVocabs = new Vector<>();
+        return rootVocabs;
+    }
+
+    public void clearRootVocab(){
+        if (rootVocabs != null)
+            rootVocabs.clear();
+    }
+
+    public boolean addVocabToRoot(Vocab vocabToAdd){
+        if(rootVocabs == null)
+            rootVocabs = new Vector<>();
+        if(!checkVocabAlreadyPresent(vocabToAdd)) {
+            rootVocabs.add(vocabToAdd);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean checkVocabAlreadyPresent(Vocab vocabToCheck){
+        for (Vocab vocab : rootVocabs){
+            if (vocab == vocabToCheck)
+                return true;
+        }
+        return false;
     }
 
     public void buildRandomTest(){
@@ -52,6 +85,14 @@ public class TestingManager {
     public int getCurrentPosition() {return current_position;}
 
     public int getScore() {return score;}
+
+    public ArrayList<String> getAvailableTests() {
+        ArrayList<String> testTypes = new ArrayList<>();
+        for (String testType : availableTests) {
+            testTypes.add(testType);
+        }
+        return testTypes;
+    }
 
     public void setContinueTesting() {
         score = 0;
@@ -82,4 +123,5 @@ public class TestingManager {
         return 0;
     }
     public int getSizeOfIncorrectVocabs(){return incorrectVocabs.size();}
+
 }

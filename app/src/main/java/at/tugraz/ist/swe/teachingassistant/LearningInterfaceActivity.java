@@ -15,6 +15,8 @@ public class LearningInterfaceActivity extends AppCompatActivity {
     private String currentLang;
     private Integer current_position;
     private VocabularManager vocabulary;
+    private DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +32,7 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         configureNextButton();
         configurePreviousButton();
         configureSeekBar();
+        db = new DatabaseHelper(this);
     }
 
     private void configureChangeLanguageButton() {
@@ -44,14 +47,15 @@ public class LearningInterfaceActivity extends AppCompatActivity {
             }
         });
     }
+
     private void configureNextButton() {
         Button buttonChangeLanguage = (Button) findViewById(R.id.btn_next);
         buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ArrayList<String> words =  vocabulary.getWordsFromChangedLanguageString(currentLang);
-                if(current_position != (words.size() - 1))
-                current_position += 1;
+                ArrayList<String> words = vocabulary.getWordsFromChangedLanguageString(currentLang);
+                if (current_position != (words.size() - 1))
+                    current_position += 1;
                 changeCurrentWord();
 
             }
@@ -63,50 +67,50 @@ public class LearningInterfaceActivity extends AppCompatActivity {
         buttonChangeLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(current_position != 0)
-                current_position -= 1;
+                if (current_position != 0)
+                    current_position -= 1;
                 changeCurrentWord();
             }
         });
     }
 
-    private void changeCurrentWord(){
+    private void changeCurrentWord() {
 
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setProgress(vocabulary.getChangedVocabs().get(current_position).getRating());
 
         TextView currentWord = (TextView) findViewById(R.id.currentWord);
-        ArrayList<String> words =  vocabulary.getWordsFromChangedLanguageString(currentLang);
+        ArrayList<String> words = vocabulary.getWordsFromChangedLanguageString(currentLang);
         currentWord.setText(words.get(current_position));
     }
 
 
-
-    private void configureSeekBar()
-    {
+    private void configureSeekBar() {
         SeekBar seekBar = (SeekBar) findViewById(R.id.seekBar);
         seekBar.setProgress(vocabulary.getChangedVocabs().get(current_position).getRating());
-        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener()
-        {
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int rating = 0;
+
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
-            {
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 rating = progress;
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar)
-            {}
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar)
-            {
+            public void onStopTrackingTouch(SeekBar seekBar) {
                 VocabularManager vocabulary = VocabularManager.getInstance();
                 Vector<Vocab> vocabs = vocabulary.getChangedVocabs();
 
-                vocabulary.changeRatingOfVocabInVocabs(vocabs.get(current_position),rating);
+                vocabulary.changeRatingOfVocabInVocabs(vocabs.get(current_position), rating);
                 vocabs.get(current_position).setRating(rating);
+                db.deleteVocabs();
+                for (Vocab vocab : vocabulary.getVocabs()) {
+                    db.insertVocab(vocab);
+                }
             }
         });
 
