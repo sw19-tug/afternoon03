@@ -14,7 +14,7 @@ import static junit.framework.TestCase.assertTrue;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(MockitoJUnitRunner.class)
-public class AddVocabUnitTest {
+public class AddVocab_UnitTest {
 
     @Test
     public void addVocabCorrect() throws Exception

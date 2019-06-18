@@ -12,10 +12,8 @@ import org.junit.runner.RunWith;
 import java.util.Vector;
 
 @RunWith(AndroidJUnit4.class)
-public class LANG_018_EditEntry
+public class EditEntity_UnitTest
 {
-    @Rule
-    public ActivityTestRule<LearningListActivity> learingListActivity = new ActivityTestRule<LearningListActivity>(LearningListActivity.class, false, false);
 
     @Before
     public void setup() {

@@ -15,10 +15,7 @@ import java.util.ArrayList;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(MockitoJUnitRunner.class)
-public class LearningListUnitTest {
-
-
-
+public class LearningList_UnitTest {
 
     @Before
     public void setUp()

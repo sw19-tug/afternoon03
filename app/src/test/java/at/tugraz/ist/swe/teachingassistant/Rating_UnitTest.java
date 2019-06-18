@@ -19,7 +19,7 @@ import static org.junit.Assert.assertEquals;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 @RunWith(MockitoJUnitRunner.class)
-public class LANG_004_UnitTest {
+public class Rating_UnitTest {
 
     @Mock
     Context mockContext;
