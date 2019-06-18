@@ -44,9 +44,6 @@ public class ImportActivity extends AppCompatActivity
     }
 
 
-    /**
-     * Fires an intent to spin up the "file chooser" UI and select an image.
-     */
     public void performFileSearch() {
         Intent intent = new Intent(this, FileSelectActivity.class);
         startActivityForResult(intent, IMPORT_CODE);
@@ -104,7 +101,4 @@ public class ImportActivity extends AppCompatActivity
         reader.close();
         return stringBuilder.toString();
     }
-
-
-
 }

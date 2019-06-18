@@ -25,7 +25,7 @@ import static org.junit.Assert.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LANG_008_ImportTest
+public class ImportUI
 {
 
     private String stringToBetyped;

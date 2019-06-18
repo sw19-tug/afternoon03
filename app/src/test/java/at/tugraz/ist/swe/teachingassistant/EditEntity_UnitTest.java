@@ -1,21 +1,16 @@
 package at.tugraz.ist.swe.teachingassistant;
 
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Vector;
 
-@RunWith(AndroidJUnit4.class)
-public class LANG_018_EditEntry
+@RunWith(MockitoJUnitRunner.class)
+public class EditEntity_UnitTest
 {
-    @Rule
-    public ActivityTestRule<LearningListActivity> learingListActivity = new ActivityTestRule<LearningListActivity>(LearningListActivity.class, false, false);
 
     @Before
     public void setup() {

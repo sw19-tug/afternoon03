@@ -3,6 +3,7 @@ package at.tugraz.ist.swe.teachingassistant;
 import android.content.Context;
 import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.annotation.UiThreadTest;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
@@ -25,15 +26,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.Assert.assertEquals;
 
-
-/**
- * Instrumented test, which will execute on an Android device.
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class LANG_002_Test {
+public class LearningInterfaceUI {
 
     @Rule
     public ActivityTestRule<LearningListActivity> activityRule = new ActivityTestRule<>(LearningListActivity.class);
@@ -64,7 +59,6 @@ public class LANG_002_Test {
 
     @Test
     public void useAppContext() {
-        // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
         assertEquals("at.tugraz.ist.swe.teachingassistant", appContext.getPackageName());
     }
@@ -72,7 +66,6 @@ public class LANG_002_Test {
     @Test
     public void testLearningInterfaceVisible() {
         onView(withId(R.id.vocabList)).check(matches(isDisplayed()));
-        //onView(withId(R.id.learningTitle)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_changeLanguage)).check(matches(isDisplayed()));
         onView(withId(R.id.languageTitle)).check(matches(isDisplayed()));
     }
@@ -97,7 +90,7 @@ public class LANG_002_Test {
         assertEquals(language, "Finnish");
     }
 
-    @Test
+    @UiThreadTest
     public void testClickListItem() {
         int mActivePosition = 0;
         ListView listview = (ListView) activityRule.getActivity().findViewById(R.id.vocabList);

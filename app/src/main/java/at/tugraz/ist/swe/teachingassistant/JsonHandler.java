@@ -15,7 +15,6 @@ public class JsonHandler
         Gson gson = new Gson();
         VocabularManager manager = VocabularManager.getInstance();
         String jsonString = gson.toJson(manager.getVocabs());
-        Log.e("JSON", jsonString);
         return jsonString;
     }
 

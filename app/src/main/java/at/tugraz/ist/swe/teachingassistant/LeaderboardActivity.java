@@ -10,7 +10,6 @@ import java.util.List;
 
 public class LeaderboardActivity extends AppCompatActivity {
     private ArrayAdapter adapter;
-    private final int SHARE_RETURN_CODE = 666;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

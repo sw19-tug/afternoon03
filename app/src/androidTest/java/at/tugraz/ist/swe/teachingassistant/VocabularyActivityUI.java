@@ -22,7 +22,7 @@ import org.junit.runner.RunWith;
 import java.util.Vector;
 
 @RunWith(AndroidJUnit4.class)
-public class LANG_017_DeleteEntry {
+public class VocabularyActivityUI {
     @Rule
     public ActivityTestRule<VocabularyActivity> activity = new ActivityTestRule<VocabularyActivity>(VocabularyActivity.class, false, false);
 
@@ -55,7 +55,6 @@ public class LANG_017_DeleteEntry {
     @Test
     public void deleteAllInView()
     {
-
         VocabularManager manager = VocabularManager.getInstance();
         onData(anything()).inAdapterView(withId(R.id.first_language_list)).atPosition(0).onChildView(withId(R.id.delete_btn)).perform(click());
         onData(anything()).inAdapterView(withId(R.id.first_language_list)).atPosition(0).onChildView(withId(R.id.delete_btn)).perform(click());

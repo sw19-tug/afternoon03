@@ -19,7 +19,7 @@ import static java.lang.Thread.sleep;
 import static junit.framework.TestCase.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
-public class LANG_014 {
+public class LeaderboardUI {
 
     @Rule
     public ActivityTestRule<LeaderboardActivity> activity = new ActivityTestRule<LeaderboardActivity>(LeaderboardActivity.class, false, false);

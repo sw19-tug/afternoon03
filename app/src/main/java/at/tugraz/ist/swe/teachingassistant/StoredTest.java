@@ -1,6 +1,5 @@
 package at.tugraz.ist.swe.teachingassistant;
 
-import java.util.Date;
 
 public class StoredTest {
     public static final String TABLE_NAME = "tests";
@@ -19,7 +18,6 @@ public class StoredTest {
     private int time;
 
 
-    // Create table SQL query
     public static final String CREATE_TABLE =
             "CREATE TABLE " + TABLE_NAME + "("
                     + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"

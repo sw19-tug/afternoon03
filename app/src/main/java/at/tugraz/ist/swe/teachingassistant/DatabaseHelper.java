@@ -3,25 +3,19 @@ package at.tugraz.ist.swe.teachingassistant;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.content.Context;
 import android.content.ContentValues;
 import android.database.Cursor;
 
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Vector;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-
-    // Database Version
     private static final int DATABASE_VERSION = 1;
 
-    // Database Name
     private static final String DATABASE_NAME = "test_db";
 
 
@@ -29,18 +23,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // create notes table
         db.execSQL(StoredTest.CREATE_TABLE);
         db.execSQL(StoredVocab.CREATE_TABLE);
     }
 
-    // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + StoredTest.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + StoredVocab.TABLE_NAME);
 
@@ -49,7 +39,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public long insert(int size, int correct, int time) {
-        // get writable database as we want to write data
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -63,11 +52,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         values.put(StoredTest.COLUMN_CORRECT, correct);
         values.put(StoredTest.COLUMN_TIME, time);
 
-        // insert row
         long id = db.insert(StoredTest.TABLE_NAME, null, values);
-        // close db connection
         db.close();
-        // return newly inserted row id
         return id;
     }
 
@@ -92,13 +78,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<StoredTest> getAllNotes() {
         List<StoredTest> tests = new ArrayList<>();
 
-        // Select All Query
         String selectQuery = "SELECT  * FROM " + StoredTest.TABLE_NAME + " ORDER BY " +
                 StoredTest.COLUMN_DATE + " DESC";
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
-        // looping through all rows and adding to list
+
         if (cursor.moveToFirst()) {
             do {
                 StoredTest test = new StoredTest();
@@ -112,9 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 tests.add(test);
             } while (cursor.moveToNext());
         }
-        // close db connection
         db.close();
-        // return notes list
         return tests;
     }
 
@@ -150,7 +133,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         int count = cursor.getCount();
         cursor.close();
 
-        // return count
         return count;
     }
 }

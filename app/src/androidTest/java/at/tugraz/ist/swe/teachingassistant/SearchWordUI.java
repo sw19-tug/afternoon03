@@ -12,7 +12,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 
 @RunWith(AndroidJUnit4.class)
-public class LANG_010_word_search {
+public class SearchWordUI {
 
     @Rule
     public ActivityTestRule<LearningListActivity> activityRule = new ActivityTestRule<>(LearningListActivity.class);
