@@ -12,7 +12,7 @@
         android:layout_height="51dp"
         android:layout_marginStart="98dp"
         android:layout_marginEnd="98dp"
-        android:text="Add Vocabulary"
+        android:text="Vocabulary"
         android:textAlignment="center"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"

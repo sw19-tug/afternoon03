@@ -33,13 +33,9 @@ public class VocabularyActivity extends AppCompatActivity
     {
         super.onResume();
         VocabularManager vocabulary = VocabularManager.getInstance();
-        ArrayAdapter adapter_first_language = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString("en"));
-        ListView listView_first_language = (ListView) findViewById(R.id.first_language_list);
-        listView_first_language.setAdapter(adapter_first_language);
-        ArrayAdapter adapter_second_language = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,vocabulary.getWordsFromLanguageString("fi"));
-        ListView listView_second_language = (ListView) findViewById(R.id.second_language_list);
-        listView_second_language.setAdapter(adapter_second_language);
-
+        VocabularyListAdapter mainAdapter = new VocabularyListAdapter(this,vocabulary.getWordsFromLanguageString("en"),vocabulary.getWordsFromLanguageString("fi"));
+        ListView listView = (ListView) findViewById(R.id.first_language_list);
+        listView.setAdapter(mainAdapter);
     }
 
 

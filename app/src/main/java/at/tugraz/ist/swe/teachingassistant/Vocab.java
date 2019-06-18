@@ -3,8 +3,22 @@ package at.tugraz.ist.swe.teachingassistant;
 import java.util.Vector;
 
 public class Vocab {
-    //rating
     private Vector<Word> translation_table;
+    private int rating_ = 1;
+
+    private String tags;
+
+    public String getTags()
+    {
+        return tags;
+    }
+
+    public void setTags(String tags)
+    {
+        if (tags != null) {
+            this.tags = tags;
+        }
+    }
 
     public Vocab() {
     }
@@ -27,12 +41,14 @@ public class Vocab {
         translation_table = translations;
     }
 
-    public int getRating() { return -1; }
-
-    public void setRating(int rating){}
-    public int changeRating()
+    public int getRating()
     {
-        return -1;
+        return rating_;
+    }
+
+    public void setRating(int rating)
+    {
+        rating_ = rating;
     }
 }
 
