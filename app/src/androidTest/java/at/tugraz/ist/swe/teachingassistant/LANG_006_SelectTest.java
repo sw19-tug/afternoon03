@@ -66,6 +66,7 @@ public class LANG_006_SelectTest {
         onView(withId(R.id.tv_test_type_select)).check(matches(isDisplayed()));
         onView(withId(R.id.lv_test_type)).check(matches(isDisplayed()));
         ListView testtypes = (ListView) activityRule.getActivity().findViewById(R.id.lv_test_type);
+        assertTrue(testtypes.isClickable());
         assertTrue(testtypes.getAdapter().getCount() >= 2 );
 
     }

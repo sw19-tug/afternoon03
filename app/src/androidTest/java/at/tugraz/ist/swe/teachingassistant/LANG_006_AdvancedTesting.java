@@ -2,6 +2,7 @@ package at.tugraz.ist.swe.teachingassistant;
 
 import android.content.Intent;
 import android.support.test.rule.ActivityTestRule;
+import android.util.Log;
 import android.widget.ListView;
 
 import org.junit.Before;
@@ -43,15 +44,8 @@ public class LANG_006_AdvancedTesting {
 
     @Test
     public void checkSelectTestInterface() throws Exception {
-
-
-
         onView(withId(R.id.tv_advanced_info)).check(matches(isDisplayed()));
-        //onView(withId(R.id.lv_available_vocabs)).check(matches(isDisplayed()));
         onView(withId(R.id.btn_start_test)).check(matches(isDisplayed()));
         assertTrue(activityRule.getActivity().findViewById(R.id.lv_available_vocabs).isClickable());
-        //ListView available_vocabs = (ListView) activityRule.getActivity().findViewById(R.id.lv_available_vocabs);
-        //assertTrue(available_vocabs.getAdapter().getCount() >= 3 );
-
     }
 }
