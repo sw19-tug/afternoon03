@@ -1,6 +1,5 @@
 package at.tugraz.ist.swe.teachingassistant;
 
-import java.util.Date;
 
 public class StoredTest {
     public static final String TABLE_NAME = "tests";

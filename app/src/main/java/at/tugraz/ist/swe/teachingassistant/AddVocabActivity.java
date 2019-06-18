@@ -7,8 +7,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import static java.lang.System.exit;
-
 public class AddVocabActivity extends AppCompatActivity {
 
     @Override

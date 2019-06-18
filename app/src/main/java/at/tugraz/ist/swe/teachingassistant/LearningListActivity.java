@@ -61,11 +61,6 @@ public class LearningListActivity extends AppCompatActivity implements AdapterVi
         super.onResume();
         spinner_filter.setSelection(0);
         spinner_sort.setSelection(0);
-        /*VocabularManager vocabulary = VocabularManager.getInstance();
-        ArrayAdapter adapter_language_list = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, vocabulary.getWordsFromLanguageString(currentLang));
-        ListView listView_first_language = (ListView) findViewById(R.id.vocabList);
-        listView_first_language.setAdapter(adapter_language_list);*/
-
     }
 
     private void configureAddListViewButton() {
